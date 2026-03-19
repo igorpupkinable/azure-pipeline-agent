@@ -200,7 +200,6 @@
             "rsync",
             "shellcheck",
             "sphinxsearch",
-            "sqlite3",
             "ssh",
             "sshpass",
             "subversion",
@@ -347,9 +346,6 @@
             "command": "yarn"
         }
     ],
-     "postgresql": {
-        "version": "14"
-    },
     "pwsh": {
         "version": "7.4"
     }

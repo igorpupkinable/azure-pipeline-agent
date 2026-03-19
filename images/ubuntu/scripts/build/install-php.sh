@@ -40,17 +40,14 @@ for version in $php_versions; do
         php$version-memcache \
         php$version-memcached \
         php$version-mongodb \
-        php$version-mysql \
         php$version-odbc \
         php$version-opcache \
-        php$version-pgsql \
         php$version-phpdbg \
         php$version-pspell \
         php$version-readline \
         php$version-redis \
         php$version-snmp \
         php$version-soap \
-        php$version-sqlite3 \
         php$version-sybase \
         php$version-tidy \
         php$version-xdebug \

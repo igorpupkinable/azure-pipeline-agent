@@ -224,15 +224,6 @@ $netCoreTools = $installedSoftware.AddHeader(".NET Tools")
 $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotNetCoreSdkVersions), "^\d+\.\d+\.\d")
 $netCoreTools.AddNodes($(Get-DotnetTools))
 
-# Databases
-$databasesTools = $installedSoftware.AddHeader("Databases")
-$databasesTools.AddToolVersion("sqlite3", $(Get-SqliteVersion))
-$databasesTools.AddNode($(Build-PostgreSqlSection))
-$databasesTools.AddNode($(Build-MySQLSection))
-if (-not $(Test-IsUbuntu24)) {
-    $databasesTools.AddNode($(Build-MSSQLToolsSection))
-}
-
 # Cached Tools
 $cachedTools = $installedSoftware.AddHeader("Cached Tools")
 $cachedTools.AddToolVersionsList("Go", $(Get-ToolcacheGoVersions), "^\d+\.\d+")

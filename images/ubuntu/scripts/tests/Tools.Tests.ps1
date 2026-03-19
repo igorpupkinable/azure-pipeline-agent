@@ -37,7 +37,7 @@ Describe "Rust" {
     It "Rustfmt is installed" {
         "rustfmt --version" | Should -ReturnZeroExitCode
     }
-    
+
     It "cargo" {
         "cargo --version" | Should -ReturnZeroExitCode
     }
@@ -173,18 +173,6 @@ Describe "Mono" -Skip:(Test-IsUbuntu24) {
 
     It "nuget" {
         "nuget" | Should -ReturnZeroExitCode
-    }
-}
-
-Describe "MSSQLCommandLineTools" -Skip:((-not (Test-IsUbuntu22))) {
-    It "sqlcmd" {
-        "sqlcmd -?" | Should -ReturnZeroExitCode
-    }
-}
-
-Describe "SqlPackage" -Skip:((-not (Test-IsUbuntu22))) {
-    It "sqlpackage" {
-        "sqlpackage /version" | Should -ReturnZeroExitCode
     }
 }
 
