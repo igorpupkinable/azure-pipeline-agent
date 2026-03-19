@@ -110,7 +110,6 @@ $tools.AddToolVersion("Sphinx Open Source Search Server", $(Get-SphinxVersion))
 $tools.AddToolVersion("yamllint", $(Get-YamllintVersion))
 $tools.AddToolVersion("yq", $(Get-YqVersion))
 $tools.AddToolVersion("zstd", $(Get-ZstdVersion))
-$tools.AddToolVersion("Ninja", $(Get-NinjaVersion))
 
 # CLI Tools
 $cliTools = $installedSoftware.AddHeader("CLI Tools")
