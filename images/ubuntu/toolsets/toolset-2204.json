@@ -248,28 +248,8 @@
             "command": "gulp"
         },
         {
-            "name": "n",
-            "command": "n"
-        },
-        {
-            "name": "parcel",
-            "command": "parcel"
-        },
-        {
             "name": "typescript",
             "command": "tsc"
-        },
-        {
-            "name": "newman",
-            "command": "newman"
-        },
-        {
-            "name": "webpack",
-            "command": "webpack"
-        },
-        {
-            "name": "webpack-cli",
-            "command": "webpack-cli"
         },
         {
             "name": "yarn",

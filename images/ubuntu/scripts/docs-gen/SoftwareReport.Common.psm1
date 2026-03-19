@@ -122,11 +122,6 @@ function Get-YarnVersion {
     return $yarnVersion
 }
 
-function Get-ParcelVersion {
-    $parcelVersion = parcel --version
-    return $parcelVersion
-}
-
 function Get-PipVersion {
     $pipVersion = pip --version | Get-StringPart -Part 1
     return $pipVersion

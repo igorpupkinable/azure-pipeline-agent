@@ -84,15 +84,6 @@ function Get-MediainfoVersion {
     return $mediainfoVersion
 }
 
-function Get-NewmanVersion {
-    return $(newman --version)
-}
-
-function Get-NVersion {
-    $nVersion = (n --version).Replace('v', '')
-    return $nVersion
-}
-
 function Get-NvmVersion {
     $nvmVersion = bash -c "source /etc/skel/.nvm/nvm.sh && nvm --version"
     return $nvmVersion
