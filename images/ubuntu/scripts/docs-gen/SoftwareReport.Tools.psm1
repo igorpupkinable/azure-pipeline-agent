@@ -78,11 +78,6 @@ function Get-DockerBuildxVersion {
     return $buildxVersion
 }
 
-function Get-DockerAmazonECRCredHelperVersion {
-    $ecrVersion = docker-credential-ecr-login -v | Select-String "Version:" | Get-StringPart -Part 1
-    return $ecrVersion
-}
-
 function Get-GitVersion {
     $gitVersion = git --version | Get-StringPart -Part -1
     return $gitVersion

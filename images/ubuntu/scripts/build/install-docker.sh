@@ -2,7 +2,6 @@
 ################################################################################
 ##  File:  install-docker.sh
 ##  Desc:  Install docker onto the image
-##  Supply chain security: amazon-ecr-credential-helper - dynamic checksum validation
 ################################################################################
 
 # Source the helpers for use with the script
@@ -76,18 +75,6 @@ if ! is_ubuntu22; then
     docker pull ghcr.io/github/gh-aw-firewall/squid:latest
     docker pull ghcr.io/github/github-mcp-server:latest
 fi
-
-# Download amazon-ecr-credential-helper
-aws_latest_release_url="https://api.github.com/repos/awslabs/amazon-ecr-credential-helper/releases/latest"
-aws_helper_url=$(curl -fsSL "${aws_latest_release_url}" | jq -r '.body' | awk -F'[()]' '/linux-amd64/ {print $2}')
-aws_helper_binary_path=$(download_with_retry "$aws_helper_url")
-
-# Supply chain security - amazon-ecr-credential-helper
-aws_helper_external_hash=$(get_checksum_from_url "${aws_helper_url}.sha256" "docker-credential-ecr-login" "SHA256")
-use_checksum_comparison "$aws_helper_binary_path" "$aws_helper_external_hash"
-
-# Install amazon-ecr-credential-helper
-install "$aws_helper_binary_path" "/usr/bin/docker-credential-ecr-login"
 
 # Cleanup custom repositories
 rm $GPG_KEY

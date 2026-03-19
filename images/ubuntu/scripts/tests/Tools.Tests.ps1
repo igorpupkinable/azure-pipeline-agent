@@ -57,10 +57,6 @@ Describe "Docker" {
             "docker compose version --short" | Should -ReturnZeroExitCode
         }
     }
-
-    It "docker-credential-ecr-login" {
-        "docker-credential-ecr-login -v" | Should -ReturnZeroExitCode
-    }
 }
 
 Describe "Ansible" {
