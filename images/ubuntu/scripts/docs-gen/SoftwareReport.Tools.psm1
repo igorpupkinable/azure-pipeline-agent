@@ -25,14 +25,6 @@ function Get-BicepVersion {
     return $Matches.Version
 }
 
-function Get-CodeQLBundleVersion {
-    $CodeQLVersionsWildcard = Join-Path $Env:AGENT_TOOLSDIRECTORY -ChildPath "CodeQL" | Join-Path -ChildPath "*"
-    $CodeQLVersionPath = Get-ChildItem $CodeQLVersionsWildcard | Select-Object -First 1 -Expand FullName
-    $CodeQLPath = Join-Path $CodeQLVersionPath -ChildPath "x64" | Join-Path -ChildPath "codeql" | Join-Path -ChildPath "codeql"
-    $CodeQLVersion = & $CodeQLPath version --quiet
-    return $CodeQLVersion
-}
-
 function Get-CMakeVersion {
     $cmakeVersion = cmake --version | Select-Object -First 1 | Get-StringPart -Part 2
     return $cmakeVersion

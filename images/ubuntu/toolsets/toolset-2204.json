@@ -45,14 +45,6 @@
                 "3.4.*",
                 "4.0.*"
             ]
-        },
-        {
-            "name": "CodeQL",
-            "platform" : "linux",
-            "arch": "x64",
-            "versions": [
-                "*"
-            ]
         }
     ],
     "powershellModules": [
