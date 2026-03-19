@@ -140,12 +140,6 @@ Describe "Homebrew" {
     }
 }
 
-Describe "Conda" {
-    It "conda" {
-        "conda --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Packer" {
     It "packer" {
         "packer --version" | Should -ReturnZeroExitCode

@@ -206,15 +206,6 @@ function Get-AptPackages {
     return ($output | Sort-Object Name)
 }
 
-function Build-PackageManagementEnvironmentTable {
-    return @(
-        [PSCustomObject] @{
-            "Name"  = "CONDA"
-            "Value" = $env:CONDA
-        }
-    )
-}
-
 function Get-SystemdVersion {
     $matchCollection = [regex]::Matches((systemctl --version | head -n 1), "\((.*?)\)")
     $result = foreach ($match in $matchCollection) {$match.Groups[1].Value}
