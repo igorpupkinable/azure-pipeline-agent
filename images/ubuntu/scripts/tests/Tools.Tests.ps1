@@ -118,12 +118,6 @@ Describe "Zstd" {
     }
 }
 
-Describe "Vcpkg" {
-    It "vcpkg" {
-        "vcpkg version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Git" {
     It "git" {
         "git --version" | Should -ReturnZeroExitCode

@@ -56,7 +56,6 @@ if (-not $(Test-IsUbuntu24)) {
 }
 $packageManagement.AddToolVersion("Pip", $(Get-PipVersion))
 $packageManagement.AddToolVersion("Pip3", $(Get-Pip3Version))
-$packageManagement.AddToolVersion("Vcpkg", $(Get-VcpkgVersion))
 $packageManagement.AddToolVersion("Yarn", $(Get-YarnVersion))
 $packageManagement.AddHeader("Environment variables").AddTable($(Build-PackageManagementEnvironmentTable))
 $packageManagement.AddHeader("Homebrew note").AddNote(@'

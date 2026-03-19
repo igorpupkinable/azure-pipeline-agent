@@ -132,11 +132,6 @@ function Get-Pip3Version {
     return $pip3Version
 }
 
-function Get-VcpkgVersion {
-    $commitId = git -C "/usr/local/share/vcpkg" rev-parse --short HEAD
-    return "(build from commit $commitId)"
-}
-
 function Get-GHCVersion {
     $(ghc --version) -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.version
@@ -216,10 +211,6 @@ function Build-PackageManagementEnvironmentTable {
         [PSCustomObject] @{
             "Name"  = "CONDA"
             "Value" = $env:CONDA
-        },
-        [PSCustomObject] @{
-            "Name"  = "VCPKG_INSTALLATION_ROOT"
-            "Value" = $env:VCPKG_INSTALLATION_ROOT
         }
     )
 }

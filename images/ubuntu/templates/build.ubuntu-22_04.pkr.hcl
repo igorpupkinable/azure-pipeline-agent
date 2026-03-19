@@ -118,7 +118,6 @@ build {
       "${path.root}/../scripts/build/install-bazel.sh",
       "${path.root}/../scripts/build/install-ruby.sh",
       "${path.root}/../scripts/build/install-packer.sh",
-      "${path.root}/../scripts/build/install-vcpkg.sh",
       "${path.root}/../scripts/build/configure-dpkg.sh",
       "${path.root}/../scripts/build/install-yq.sh",
       "${path.root}/../scripts/build/install-pypy.sh",
