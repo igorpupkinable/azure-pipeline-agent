@@ -118,7 +118,6 @@ build {
       "${path.root}/../scripts/build/install-nvm.sh",
       "${path.root}/../scripts/build/install-nodejs.sh",
       "${path.root}/../scripts/build/install-bazel.sh",
-      "${path.root}/../scripts/build/install-oras-cli.sh",
       "${path.root}/../scripts/build/install-ruby.sh",
       "${path.root}/../scripts/build/install-sbt.sh",
       "${path.root}/../scripts/build/install-packer.sh",

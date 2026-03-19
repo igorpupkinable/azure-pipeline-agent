@@ -118,7 +118,6 @@ $cliTools.AddToolVersion("GitHub CLI", $(Get-GitHubCliVersion))
 if (Test-IsUbuntu22) {
     $cliTools.AddToolVersion("Netlify CLI", $(Get-NetlifyCliVersion))
     $cliTools.AddToolVersion("OpenShift CLI", $(Get-OCCliVersion))
-    $cliTools.AddToolVersion("ORAS CLI", $(Get-ORASCliVersion))
     $cliTools.AddToolVersion("Vercel CLI", $(Get-VerselCliversion))
 }
 

@@ -138,11 +138,6 @@ function Get-OCCliVersion {
     return $ocVersion
 }
 
-function Get-ORASCliVersion {
-    $orasVersion = oras version | Select-String "^Version:" | Get-StringPart -Part 1
-    return $orasVersion
-}
-
 function Get-VerselCliversion {
     $result = Get-CommandResult "vercel --version" -Multiline
     return $result.Output | Select-Object -Skip 1 -First 1
