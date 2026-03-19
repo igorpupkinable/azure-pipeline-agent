@@ -3,15 +3,11 @@ Describe "Toolset" {
 
     $toolsExecutables = @{
         Python = @{
-            tools = @("python", "bin/pip")
+            tools = @("python")
             command = "--version"
         }
         node = @{
             tools = @("bin/node", "bin/npm")
-            command = "--version"
-        }
-        PyPy = @{
-            tools = @("bin/python", "bin/pip")
             command = "--version"
         }
     }

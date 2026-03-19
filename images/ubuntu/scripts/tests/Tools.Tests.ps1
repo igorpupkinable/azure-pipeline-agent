@@ -128,7 +128,7 @@ Describe "nvm" {
 }
 
 Describe "Python" {
-    $testCases = @("python", "pip", "python3", "pip3") | ForEach-Object { @{PythonCommand = $_} }
+    $testCases = @("python", "python3") | ForEach-Object { @{PythonCommand = $_} }
 
     It "<PythonCommand>" -TestCases $testCases {
         "$PythonCommand --version" | Should -ReturnZeroExitCode

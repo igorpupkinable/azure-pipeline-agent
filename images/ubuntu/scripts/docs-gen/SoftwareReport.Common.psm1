@@ -117,16 +117,6 @@ function Get-YarnVersion {
     return $yarnVersion
 }
 
-function Get-PipVersion {
-    $pipVersion = pip --version | Get-StringPart -Part 1
-    return $pipVersion
-}
-
-function Get-Pip3Version {
-    $pip3Version = pip3 --version | Get-StringPart -Part 1
-    return $pip3Version
-}
-
 function Get-GHCVersion {
     $(ghc --version) -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.version

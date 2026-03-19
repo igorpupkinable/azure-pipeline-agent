@@ -52,8 +52,6 @@ $packageManagement.AddToolVersion("Npm", $(Get-NpmVersion))
 if (-not $(Test-IsUbuntu24)) {
     $packageManagement.AddToolVersion("NuGet", $(Get-NuGetVersion))
 }
-$packageManagement.AddToolVersion("Pip", $(Get-PipVersion))
-$packageManagement.AddToolVersion("Pip3", $(Get-Pip3Version))
 $packageManagement.AddToolVersion("Yarn", $(Get-YarnVersion))
 $packageManagement.AddHeader("Environment variables").AddTable($(Build-PackageManagementEnvironmentTable))
 $packageManagement.AddHeader("Homebrew note").AddNote(@'
@@ -99,7 +97,6 @@ $netCoreTools.AddNodes($(Get-DotnetTools))
 $cachedTools = $installedSoftware.AddHeader("Cached Tools")
 $cachedTools.AddToolVersionsList("Node.js", $(Get-ToolcacheNodeVersions), "^\d+")
 $cachedTools.AddToolVersionsList("Python", $(Get-ToolcachePythonVersions), "^\d+\.\d+")
-$cachedTools.AddToolVersionsList("PyPy", $(Get-ToolcachePyPyVersions), "^\d+\.\d+")
 
 # PowerShell Tools
 $powerShellTools = $installedSoftware.AddHeader("PowerShell Tools")
