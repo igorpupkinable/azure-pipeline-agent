@@ -175,21 +175,6 @@ function Get-GHCVersion {
     return $Matches.version
 }
 
-function Get-GHCupVersion {
-    $(ghcup --version) -match "version (?<version>\d+(\.\d+){2,})" | Out-Null
-    return $Matches.version
-}
-
-function Get-CabalVersion {
-    $(cabal --version | Out-String) -match "cabal-install version (?<version>\d+\.\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
-function Get-StackVersion {
-    $(stack --version | Out-String) -match "Version (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
 function Get-PowerShellModules {
     [Array] $result = @()
 
