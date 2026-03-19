@@ -120,11 +120,6 @@ function Get-GemVersion {
     return $Matches.version
 }
 
-function Get-MinicondaVersion {
-    $condaVersion = conda --version | Get-StringPart -Part 1
-    return $condaVersion
-}
-
 function Get-HelmVersion {
     $(helm version) -match 'Version:"v(?<version>\d+\.\d+\.\d+)"' | Out-Null
     return $Matches.version

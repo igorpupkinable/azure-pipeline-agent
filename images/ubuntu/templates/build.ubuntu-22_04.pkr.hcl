@@ -119,7 +119,6 @@ build {
       "${path.root}/../scripts/build/install-haskell.sh",
       "${path.root}/../scripts/build/install-heroku.sh",
       "${path.root}/../scripts/build/install-oc-cli.sh",
-      "${path.root}/../scripts/build/install-miniconda.sh",
       "${path.root}/../scripts/build/install-mono.sh",
       "${path.root}/../scripts/build/install-nginx.sh",
       "${path.root}/../scripts/build/install-nvm.sh",
