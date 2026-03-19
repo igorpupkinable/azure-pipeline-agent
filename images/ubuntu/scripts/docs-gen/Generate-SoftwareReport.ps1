@@ -14,7 +14,6 @@ Import-Module (Join-Path $PSScriptRoot "SoftwareReport.CachedTools.psm1") -Disab
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Common.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Helpers.psm1") -DisableNameChecking
 Import-Module "$PSScriptRoot/../helpers/Common.Helpers.psm1" -DisableNameChecking
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Java.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Tools.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.WebServers.psm1") -DisableNameChecking
 
@@ -141,8 +140,6 @@ if (Test-IsUbuntu22) {
     $cliTools.AddToolVersion("Vercel CLI", $(Get-VerselCliversion))
 }
 
-# Java
-$installedSoftware.AddHeader("Java").AddTable($(Get-JavaVersionsTable))
 
 # Haskell Tools
 $haskellTools = $installedSoftware.AddHeader("Haskell Tools")
