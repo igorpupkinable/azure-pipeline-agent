@@ -17,8 +17,3 @@ function Get-ToolcacheNodeVersions {
     $toolcachePath = Join-Path $env:AGENT_TOOLSDIRECTORY "node"
     return Get-ChildItem $toolcachePath -Name | Sort-Object { [Version] $_ }
 }
-
-function Get-ToolcacheGoVersions {
-    $toolcachePath = Join-Path $env:AGENT_TOOLSDIRECTORY "go"
-    return Get-ChildItem $toolcachePath -Name | Sort-Object { [Version] $_ }
-}

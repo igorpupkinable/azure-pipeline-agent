@@ -14,10 +14,6 @@ Describe "Toolset" {
             tools = @("bin/python", "bin/pip")
             command = "--version"
         }
-        go = @{
-            tools = @("bin/go")
-            command = "version"
-        }
     }
 
     foreach ($tool in $tools) {

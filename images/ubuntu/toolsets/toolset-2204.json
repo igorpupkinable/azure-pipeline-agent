@@ -26,16 +26,6 @@
             "versions": [
                 "22.*"
             ]
-        },
-        {
-            "name": "go",
-            "url" : "https://raw.githubusercontent.com/actions/go-versions/main/versions-manifest.json",
-            "arch": "x64",
-            "platform" : "linux",
-            "versions": [
-                "1.25.*"
-            ],
-            "default": "1.24.*"
         }
     ],
     "powershellModules": [

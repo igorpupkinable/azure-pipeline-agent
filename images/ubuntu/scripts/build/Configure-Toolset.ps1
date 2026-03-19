@@ -40,12 +40,7 @@ function Add-GlobalEnvironmentVariable {
 $ErrorActionPreference = "Stop"
 
 Write-Host "Configure toolcache tools environment..."
-$toolEnvConfigs = @{
-    go = @{
-        command          = "ln -s {0}/bin/* /usr/bin/"
-        variableTemplate = "GOROOT_{0}_{1}_X64"
-    }
-}
+$toolEnvConfigs = @{}
 
 # Get toolcache content from toolset
 $tools = (Get-ToolsetContent).toolcache | Where-Object { $toolEnvConfigs.Keys -contains $_.name }
