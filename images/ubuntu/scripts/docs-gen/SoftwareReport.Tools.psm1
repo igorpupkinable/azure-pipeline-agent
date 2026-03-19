@@ -108,11 +108,6 @@ function Get-HerokuVersion {
     return $herokuVersion
 }
 
-function Get-SVNVersion {
-    $svnVersion = svn --version | Select-Object -First 1 | Get-StringPart -Part 2
-    return $svnVersion
-}
-
 function Get-KustomizeVersion {
     $kustomizeVersion = kustomize version --short | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "v"
     return $kustomizeVersion

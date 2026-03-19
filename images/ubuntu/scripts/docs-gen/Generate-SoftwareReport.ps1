@@ -127,9 +127,6 @@ $tools.AddToolVersion("Podman", $(Get-PodManVersion))
 $tools.AddToolVersion("Pulumi", $(Get-PulumiVersion))
 $tools.AddToolVersion("Skopeo", $(Get-SkopeoVersion))
 $tools.AddToolVersion("Sphinx Open Source Search Server", $(Get-SphinxVersion))
-if (Test-IsUbuntu22) {
-    $tools.AddToolVersion("SVN", $(Get-SVNVersion))
-}
 $tools.AddToolVersion("yamllint", $(Get-YamllintVersion))
 $tools.AddToolVersion("yq", $(Get-YqVersion))
 $tools.AddToolVersion("zstd", $(Get-ZstdVersion))
