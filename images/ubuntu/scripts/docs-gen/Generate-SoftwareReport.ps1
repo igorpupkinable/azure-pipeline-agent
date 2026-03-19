@@ -15,7 +15,6 @@ Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Common.psm1") -DisableNam
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Helpers.psm1") -DisableNameChecking
 Import-Module "$PSScriptRoot/../helpers/Common.Helpers.psm1" -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Tools.psm1") -DisableNameChecking
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.WebServers.psm1") -DisableNameChecking
 
 # Restore file owner in user profile
 sudo chown -R ${env:USER}: $env:HOME
@@ -149,8 +148,6 @@ $cachedTools.AddToolVersionsList("Ruby", $(Get-ToolcacheRubyVersions), "^\d+\.\d
 $powerShellTools = $installedSoftware.AddHeader("PowerShell Tools")
 $powerShellTools.AddToolVersion("PowerShell", $(Get-PowershellVersion))
 $powerShellTools.AddHeader("PowerShell Modules").AddNodes($(Get-PowerShellModules))
-
-$installedSoftware.AddHeader("Web Servers").AddTable($(Build-WebServersTable))
 
 $installedSoftware.AddHeader("Installed apt packages").AddTable($(Get-AptPackages))
 
