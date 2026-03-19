@@ -52,7 +52,6 @@ $packageManagement.AddToolVersion("Npm", $(Get-NpmVersion))
 if (-not $(Test-IsUbuntu24)) {
     $packageManagement.AddToolVersion("NuGet", $(Get-NuGetVersion))
 }
-$packageManagement.AddHeader("Environment variables").AddTable($(Build-PackageManagementEnvironmentTable))
 $packageManagement.AddHeader("Homebrew note").AddNote(@'
 Location: /home/linuxbrew
 Note: Homebrew is pre-installed on image but not added to PATH.
