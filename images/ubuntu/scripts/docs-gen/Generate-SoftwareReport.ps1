@@ -116,7 +116,6 @@ $cliTools.AddToolVersion("Azure CLI", $(Get-AzureCliVersion))
 $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
 $cliTools.AddToolVersion("GitHub CLI", $(Get-GitHubCliVersion))
 if (Test-IsUbuntu22) {
-    $cliTools.AddToolVersion("Netlify CLI", $(Get-NetlifyCliVersion))
     $cliTools.AddToolVersion("OpenShift CLI", $(Get-OCCliVersion))
 }
 

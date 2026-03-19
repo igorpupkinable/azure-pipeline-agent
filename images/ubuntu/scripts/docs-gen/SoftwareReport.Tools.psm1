@@ -128,11 +128,6 @@ function Get-GitHubCliVersion {
     return $ghVersion
 }
 
-function Get-NetlifyCliVersion {
-    $netlifyVersion = netlify --version | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "/"
-    return $netlifyVersion
-}
-
 function Get-OCCliVersion {
     $ocVersion = oc version  -o=json | jq -r '.releaseClientVersion'
     return $ocVersion

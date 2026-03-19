@@ -282,10 +282,6 @@
             "command": "webpack-cli"
         },
         {
-            "name": "netlify-cli",
-            "command": "netlify"
-        },
-        {
             "name": "lerna",
             "command": "lerna"
         },
