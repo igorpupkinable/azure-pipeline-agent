@@ -50,8 +50,6 @@ $languageAndRuntime.AddToolVersion("Node.js", $(Get-NodeVersion))
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 $languageAndRuntime.AddToolVersion("Python", $(Get-PythonVersion))
 $languageAndRuntime.AddToolVersion("Ruby", $(Get-RubyVersion))
-$languageAndRuntime.AddToolVersion("Swift", $(Get-SwiftVersion))
-
 
 # Package Management
 $packageManagement = $installedSoftware.AddHeader("Package Management")

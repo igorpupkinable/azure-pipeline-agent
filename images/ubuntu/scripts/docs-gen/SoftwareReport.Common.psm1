@@ -97,11 +97,6 @@ function Get-RubyVersion {
     return $rubyVersion
 }
 
-function Get-SwiftVersion {
-    $swiftVersion = swift --version | Out-String | Get-StringPart -Part 2
-    return $swiftVersion
-}
-
 function Get-KotlinVersion {
     $kotlinVersion = kotlin -version | Out-String | Get-StringPart -Part 2
     return $kotlinVersion
