@@ -122,12 +122,6 @@ Describe "Mono" -Skip:(Test-IsUbuntu24) {
     }
 }
 
-Describe "R" -Skip:((-not (Test-IsUbuntu22))) {
-    It "r" {
-        "R --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Sbt" -Skip:((-not (Test-IsUbuntu22))) {
     It "sbt" {
         "sbt --version" | Should -ReturnZeroExitCode

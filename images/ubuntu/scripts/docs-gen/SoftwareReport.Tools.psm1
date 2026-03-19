@@ -220,11 +220,6 @@ function Get-PulumiVersion {
     return $pulumiVersion
 }
 
-function Get-RVersion {
-    $rVersion = (Get-CommandResult "R --version | grep 'R version'").Output |  Get-StringPart -Part 2
-    return $rVersion
-}
-
 function Get-SphinxVersion {
     $sphinxVersion = searchd -h | Select-Object -First 1 | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "-"
     return $sphinxVersion
