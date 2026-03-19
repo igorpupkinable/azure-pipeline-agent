@@ -137,7 +137,6 @@ build {
       "${path.root}/../scripts/build/install-pulumi.sh",
       "${path.root}/../scripts/build/install-ruby.sh",
       "${path.root}/../scripts/build/install-rlang.sh",
-      "${path.root}/../scripts/build/install-rust.sh",
       "${path.root}/../scripts/build/install-julia.sh",
       "${path.root}/../scripts/build/install-sbt.sh",
       "${path.root}/../scripts/build/install-terraform.sh",

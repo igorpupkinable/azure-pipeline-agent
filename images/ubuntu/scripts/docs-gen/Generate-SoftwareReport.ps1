@@ -16,7 +16,6 @@ Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Databases.psm1") -Disable
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Helpers.psm1") -DisableNameChecking
 Import-Module "$PSScriptRoot/../helpers/Common.Helpers.psm1" -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Java.psm1") -DisableNameChecking
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Rust.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Tools.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.WebServers.psm1") -DisableNameChecking
 
@@ -181,25 +180,6 @@ $haskellTools.AddToolVersion("Cabal", $(Get-CabalVersion))
 $haskellTools.AddToolVersion("GHC", $(Get-GHCVersion))
 $haskellTools.AddToolVersion("GHCup", $(Get-GHCupVersion))
 $haskellTools.AddToolVersion("Stack", $(Get-StackVersion))
-
-# Rust Tools
-Initialize-RustEnvironment
-$rustTools = $installedSoftware.AddHeader("Rust Tools")
-$rustTools.AddToolVersion("Cargo", $(Get-CargoVersion))
-$rustTools.AddToolVersion("Rust", $(Get-RustVersion))
-$rustTools.AddToolVersion("Rustdoc", $(Get-RustdocVersion))
-$rustTools.AddToolVersion("Rustup", $(Get-RustupVersion))
-
-# Packages
-$rustToolsPackages = $rustTools.AddHeader("Packages")
-if (Test-IsUbuntu22) {
-    $rustToolsPackages.AddToolVersion("Bindgen", $(Get-BindgenVersion))
-    $rustToolsPackages.AddToolVersion("Cargo audit", $(Get-CargoAuditVersion))
-    $rustToolsPackages.AddToolVersion("Cargo clippy", $(Get-CargoClippyVersion))
-    $rustToolsPackages.AddToolVersion("Cargo outdated", $(Get-CargoOutdatedVersion))
-    $rustToolsPackages.AddToolVersion("Cbindgen", $(Get-CbindgenVersion))
-}
-$rustToolsPackages.AddToolVersion("Rustfmt", $(Get-RustfmtVersion))
 
 # .NET Tools
 $netCoreTools = $installedSoftware.AddHeader(".NET Tools")
