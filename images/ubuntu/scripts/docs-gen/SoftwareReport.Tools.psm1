@@ -84,8 +84,3 @@ function Get-AzureDevopsVersion {
     $azdevopsVersion = (az version | ConvertFrom-Json).extensions.'azure-devops'
     return $azdevopsVersion
 }
-
-function Get-YqVersion {
-    $yqVersion = $(yq -V) | Get-StringPart -Part 3
-    return $yqVersion.TrimStart("v").Trim()
-}

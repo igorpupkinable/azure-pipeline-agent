@@ -80,7 +80,6 @@ $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
 $tools.AddToolVersion("nvm", $(Get-NvmVersion))
 $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
-$tools.AddToolVersion("yq", $(Get-YqVersion))
 
 # CLI Tools
 $cliTools = $installedSoftware.AddHeader("CLI Tools")

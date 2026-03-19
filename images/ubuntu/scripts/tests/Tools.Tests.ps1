@@ -134,9 +134,3 @@ Describe "Python" {
         "$PythonCommand --version" | Should -ReturnZeroExitCode
     }
 }
-
-Describe "yq" {
-    It "yq" {
-        "yq -V" | Should -ReturnZeroExitCode
-    }
-}
