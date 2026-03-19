@@ -178,12 +178,6 @@ Describe "Packer" {
     }
 }
 
-Describe "Pulumi" {
-    It "pulumi" {
-        "pulumi version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "nvm" {
     It "nvm" {
         "source /etc/skel/.nvm/nvm.sh && nvm --version" | Should -ReturnZeroExitCode

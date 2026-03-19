@@ -148,11 +148,6 @@ function Get-VerselCliversion {
     return $result.Output | Select-Object -Skip 1 -First 1
 }
 
-function Get-PulumiVersion {
-    $pulumiVersion = pulumi version | Get-StringPart -Part 0 -Delimiter "v"
-    return $pulumiVersion
-}
-
 function Get-SphinxVersion {
     $sphinxVersion = searchd -h | Select-Object -First 1 | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "-"
     return $sphinxVersion
