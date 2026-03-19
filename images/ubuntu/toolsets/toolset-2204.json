@@ -267,9 +267,6 @@
     "rubygems": [
         {"name": "fastlane"}
     ],
-    "selenium": {
-        "version": "4"
-    },
     "node": {
         "default": "20"
     },
