@@ -95,11 +95,6 @@ function Get-SphinxVersion {
     return $sphinxVersion
 }
 
-function Get-ZstdVersion {
-    $zstdVersion = zstd --version | Get-StringPart -Part 1 -Delimiter "v" | Get-StringPart -Part 0 -Delimiter ","
-    return "$zstdVersion"
-}
-
 function Get-YqVersion {
     $yqVersion = $(yq -V) | Get-StringPart -Part 3
     return $yqVersion.TrimStart("v").Trim()

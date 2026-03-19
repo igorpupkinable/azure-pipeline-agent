@@ -87,7 +87,6 @@ $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
 $tools.AddToolVersion("Packer", $(Get-PackerVersion))
 $tools.AddToolVersion("Sphinx Open Source Search Server", $(Get-SphinxVersion))
 $tools.AddToolVersion("yq", $(Get-YqVersion))
-$tools.AddToolVersion("zstd", $(Get-ZstdVersion))
 
 # CLI Tools
 $cliTools = $installedSoftware.AddHeader("CLI Tools")

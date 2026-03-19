@@ -99,16 +99,6 @@ Describe "Mono" -Skip:(Test-IsUbuntu24) {
     }
 }
 
-Describe "Zstd" {
-    It "zstd" {
-        "zstd --version" | Should -ReturnZeroExitCode
-    }
-
-    It "pzstd" {
-        "pzstd --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Git" {
     It "git" {
         "git --version" | Should -ReturnZeroExitCode
