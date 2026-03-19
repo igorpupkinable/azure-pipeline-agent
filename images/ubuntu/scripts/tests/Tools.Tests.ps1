@@ -188,13 +188,6 @@ Describe "Sbt" -Skip:((-not (Test-IsUbuntu22))) {
     }
 }
 
-Describe "Selenium" {
-    It "Selenium is installed" {
-        $seleniumPath = Join-Path "/usr/share/java" "selenium-server.jar"
-        $seleniumPath | Should -Exist
-    }
-}
-
 Describe "Terraform" -Skip:((-not (Test-IsUbuntu22))) {
     It "terraform" {
         "terraform --version" | Should -ReturnZeroExitCode

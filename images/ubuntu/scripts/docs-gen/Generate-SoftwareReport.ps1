@@ -203,22 +203,6 @@ if (Test-IsUbuntu22) {
 }
 $rustToolsPackages.AddToolVersion("Rustfmt", $(Get-RustfmtVersion))
 
-# Browsers and Drivers
-$browsersTools = $installedSoftware.AddHeader("Browsers and Drivers")
-$browsersTools.AddToolVersion("Google Chrome", $(Get-ChromeVersion))
-$browsersTools.AddToolVersion("ChromeDriver", $(Get-ChromeDriverVersion))
-$browsersTools.AddToolVersion("Chromium", $(Get-ChromiumVersion))
-$browsersTools.AddToolVersion("Microsoft Edge", $(Get-EdgeVersion))
-$browsersTools.AddToolVersion("Microsoft Edge WebDriver", $(Get-EdgeDriverVersion))
-
-$browsersTools.AddToolVersion("Selenium server", $(Get-SeleniumVersion))
-$browsersTools.AddToolVersion("Mozilla Firefox", $(Get-FirefoxVersion))
-$browsersTools.AddToolVersion("Geckodriver", $(Get-GeckodriverVersion))
-
-
-# Environment variables
-$browsersTools.AddHeader("Environment variables").AddTable($(Build-BrowserWebdriversEnvironmentTable))
-
 # .NET Tools
 $netCoreTools = $installedSoftware.AddHeader(".NET Tools")
 $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotNetCoreSdkVersions), "^\d+\.\d+\.\d")

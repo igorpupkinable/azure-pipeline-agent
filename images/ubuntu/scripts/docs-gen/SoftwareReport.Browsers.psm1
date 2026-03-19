@@ -32,29 +32,3 @@ function Get-EdgeDriverVersion {
     $edgeDriverVersion = msedgedriver --version | Get-StringPart -Part 3
     return $edgeDriverVersion
 }
-
-function Get-SeleniumVersion {
-    $fullSeleniumVersion = (Get-ChildItem "/usr/share/java/selenium-server-*").Name -replace "selenium-server-"
-    return $fullSeleniumVersion
-}
-
-function Build-BrowserWebdriversEnvironmentTable {
-    return @(
-        [PSCustomObject] @{
-            "Name"  = "CHROMEWEBDRIVER"
-            "Value" = $env:CHROMEWEBDRIVER
-        },
-        [PSCustomObject] @{
-            "Name"  = "EDGEWEBDRIVER"
-            "Value" = $env:EDGEWEBDRIVER
-        },
-        [PSCustomObject] @{
-            "Name"  = "GECKOWEBDRIVER"
-            "Value" = $env:GECKOWEBDRIVER
-        },
-        [PSCustomObject] @{
-            "Name"  = "SELENIUM_JAR_PATH"
-            "Value" = $env:SELENIUM_JAR_PATH
-        }
-    )
-}
