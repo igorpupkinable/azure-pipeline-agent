@@ -288,28 +288,6 @@ Describe "yq" {
     }
 }
 
-Describe "Kotlin" {
-    It "kapt" {
-        "kapt -version" | Should -ReturnZeroExitCode
-    }
-
-    It "kotlin" {
-        "kotlin -version" | Should -ReturnZeroExitCode
-    }
-
-    It "kotlinc" {
-        "kotlinc -version" | Should -ReturnZeroExitCode
-    }
-
-    It "kotlinc-jvm" {
-        "kotlinc-jvm -version" | Should -ReturnZeroExitCode
-    }
-
-    It "kotlinc-js" {
-        "kotlinc-js -help" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Ninja" {
     BeforeAll {
         New-item -Path "/tmp/ninjaproject" -ItemType Directory -Force

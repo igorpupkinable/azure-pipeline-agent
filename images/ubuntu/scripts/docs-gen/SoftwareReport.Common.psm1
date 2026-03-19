@@ -97,11 +97,6 @@ function Get-RubyVersion {
     return $rubyVersion
 }
 
-function Get-KotlinVersion {
-    $kotlinVersion = kotlin -version | Out-String | Get-StringPart -Part 2
-    return $kotlinVersion
-}
-
 function Get-JuliaVersion {
     $juliaVersion = julia --version | Get-StringPart -Part 2
     return $juliaVersion
