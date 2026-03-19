@@ -16,12 +16,6 @@ Describe "GitHub CLI" {
     }
 }
 
-Describe "Google Cloud CLI" {
-    It "Google Cloud CLI" {
-        "gcloud --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "OC CLI" -Skip:((-not (Test-IsUbuntu22))) {
     It "OC CLI" {
         "oc version" | Should -ReturnZeroExitCode

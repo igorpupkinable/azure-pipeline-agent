@@ -94,10 +94,6 @@ function Get-GitFTPVersion {
     return $gitftpVersion
 }
 
-function Get-GoogleCloudCLIVersion {
-    return (gcloud --version | Select-Object -First 1) | Get-StringPart -Part 3
-}
-
 function Get-HavegedVersion {
     $havegedVersion = dpkg-query --showformat='${Version}' --show haveged | Get-StringPart -Part 0 -Delimiter "-"
     return $havegedVersion
