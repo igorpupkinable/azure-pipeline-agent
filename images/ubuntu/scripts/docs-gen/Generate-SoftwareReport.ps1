@@ -10,7 +10,6 @@ $global:ErrorActionPreference = "Stop"
 $global:ErrorView = "NormalView"
 Set-StrictMode -Version Latest
 
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Android.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.CachedTools.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Common.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Databases.psm1") -DisableNameChecking
@@ -222,11 +221,6 @@ $powerShellTools.AddToolVersion("PowerShell", $(Get-PowershellVersion))
 $powerShellTools.AddHeader("PowerShell Modules").AddNodes($(Get-PowerShellModules))
 
 $installedSoftware.AddHeader("Web Servers").AddTable($(Build-WebServersTable))
-
-$androidTools = $installedSoftware.AddHeader("Android")
-$androidTools.AddTable($(Build-AndroidTable))
-
-$androidTools.AddHeader("Environment variables").AddTable($(Build-AndroidEnvironmentTable))
 
 $installedSoftware.AddHeader("Installed apt packages").AddTable($(Get-AptPackages))
 
