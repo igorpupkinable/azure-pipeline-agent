@@ -166,10 +166,6 @@ function Get-PackerVersion {
     return $packerVersion
 }
 
-function Get-TerraformVersion {
-    return (terraform version | Select-String "^Terraform").Line.Replace('v','') | Get-StringPart -Part 1
-}
-
 function Get-JqVersion {
     $jqVersion = jq --version | Get-StringPart -Part 1 -Delimiter "-"
     return $jqVersion

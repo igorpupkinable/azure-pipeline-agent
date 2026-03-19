@@ -128,12 +128,6 @@ Describe "Sbt" -Skip:((-not (Test-IsUbuntu22))) {
     }
 }
 
-Describe "Terraform" -Skip:((-not (Test-IsUbuntu22))) {
-    It "terraform" {
-        "terraform --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Zstd" {
     It "zstd" {
         "zstd --version" | Should -ReturnZeroExitCode
