@@ -128,11 +128,6 @@ function Get-MinikubeVersion {
     return $minikubeVersion
 }
 
-function Get-HGVersion {
-    $hgVersion = hg --version | Select-Object -First 1 | Get-StringPart -Part -1 | Get-StringPart -Part 0 -Delimiter ")"
-    return $hgVersion
-}
-
 function Get-LeiningenVersion {
     return "$(lein -v | Get-StringPart -Part 1)"
 }

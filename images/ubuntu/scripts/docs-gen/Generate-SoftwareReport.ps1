@@ -115,7 +115,6 @@ if (Test-IsUbuntu22) {
     $tools.AddToolVersion("Leiningen", $(Get-LeiningenVersion))
 }
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
-$tools.AddToolVersion("Mercurial", $(Get-HGVersion))
 $tools.AddToolVersion("Minikube", $(Get-MinikubeVersion))
 $tools.AddToolVersion("n", $(Get-NVersion))
 $tools.AddToolVersion("Newman", $(Get-NewmanVersion))

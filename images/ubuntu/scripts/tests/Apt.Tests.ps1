@@ -14,7 +14,6 @@ Describe "Apt" {
             "binutils"          { $toolName = "strings"; break }
             "coreutils"         { $toolName = "tr"; break }
             "net-tools"         { $toolName = "netstat"; break }
-            "mercurial"         { $toolName = "hg"; break }
             "findutils"         { $toolName = "find"; break }
             "systemd-coredump"  { $toolName = "coredumpctl"; break }
         }
