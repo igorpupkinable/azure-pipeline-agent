@@ -59,15 +59,6 @@ Describe "Docker" {
     }
 }
 
-Describe "Bazel" {
-    It "<ToolName>" -TestCases @(
-        @{ ToolName = "bazel" }
-        @{ ToolName = "bazelisk" }
-    ) {
-        "$ToolName --version"| Should -ReturnZeroExitCode
-    }
-}
-
 Describe "clang" {
     $testCases = (Get-ToolsetContent).clang.Versions | ForEach-Object { @{ClangVersion = $_} }
 

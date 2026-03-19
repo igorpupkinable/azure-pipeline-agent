@@ -9,17 +9,6 @@ function Get-AzCopyVersion {
     return "$azcopyVersion - available by ``azcopy`` and ``azcopy10`` aliases"
 }
 
-function Get-BazelVersion {
-    $bazelVersion = bazel --version | Select-String "bazel" | Get-StringPart -Part 1
-    return $bazelVersion
-}
-
-function Get-BazeliskVersion {
-    $result = Get-CommandResult "bazelisk version" -Multiline
-    $bazeliskVersion = $result.Output | Select-String "Bazelisk version:" | Get-StringPart -Part 2 | Get-StringPart -Part 0 -Delimiter "v"
-    return $bazeliskVersion
-}
-
 function Get-BicepVersion {
     (bicep --version | Out-String) -match  "bicep cli version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.Version
