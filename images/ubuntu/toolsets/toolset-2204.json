@@ -212,14 +212,6 @@
     },
     "node_modules": [
         {
-            "name": "grunt",
-            "command": "grunt"
-        },
-        {
-            "name": "gulp",
-            "command": "gulp"
-        },
-        {
             "name": "typescript",
             "command": "tsc"
         },
