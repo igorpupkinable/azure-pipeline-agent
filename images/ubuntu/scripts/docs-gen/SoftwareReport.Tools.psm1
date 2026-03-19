@@ -128,11 +128,6 @@ function Get-AzureDevopsVersion {
     return $azdevopsVersion
 }
 
-function Get-FastlaneVersion {
-    $fastlaneVersion = fastlane --version | Select-String "^fastlane [0-9]" | Get-StringPart -Part 1
-    return $fastlaneVersion
-}
-
 function Get-GitHubCliVersion {
     $ghVersion = gh --version | Select-String "gh version" | Get-StringPart -Part 2
     return $ghVersion

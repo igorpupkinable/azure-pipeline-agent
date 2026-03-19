@@ -210,14 +210,6 @@ Describe "Ruby" {
     It "<RubyCommand>" -TestCases $testCases {
         "$RubyCommand --version" | Should -ReturnZeroExitCode
     }
-
-    $gemTestCases = (Get-ToolsetContent).rubygems | ForEach-Object { @{gemName = $_.name} }
-
-    if ($gemTestCases) {
-        It "Gem <gemName> is installed" -TestCases $gemTestCases {
-            "gem list -i '^$gemName$'" | Should -OutputTextMatchingRegex "true"
-        }
-    }
 }
 
 Describe "yq" {

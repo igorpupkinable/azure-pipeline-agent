@@ -252,9 +252,6 @@
             "gfortran-12"
         ]
     },
-    "rubygems": [
-        {"name": "fastlane"}
-    ],
     "node": {
         "default": "20"
     },
