@@ -216,12 +216,6 @@ function Get-AptPackages {
     return ($output | Sort-Object Name)
 }
 
-function Get-PipxVersion {
-    $result = (Get-CommandResult "pipx --version").Output
-    $result -match "(?<version>\d+\.\d+\.\d+\.?\d*)" | Out-Null
-    return $Matches.Version
-}
-
 function Build-PackageManagementEnvironmentTable {
     return @(
         [PSCustomObject] @{
