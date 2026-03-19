@@ -15,9 +15,3 @@ Describe "GitHub CLI" {
         "gh --version" | Should -ReturnZeroExitCode
     }
 }
-
-Describe "OC CLI" -Skip:((-not (Test-IsUbuntu22))) {
-    It "OC CLI" {
-        "oc version" | Should -ReturnZeroExitCode
-    }
-}

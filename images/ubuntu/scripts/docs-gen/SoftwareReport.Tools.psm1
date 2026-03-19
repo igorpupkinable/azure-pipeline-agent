@@ -128,11 +128,6 @@ function Get-GitHubCliVersion {
     return $ghVersion
 }
 
-function Get-OCCliVersion {
-    $ocVersion = oc version  -o=json | jq -r '.releaseClientVersion'
-    return $ocVersion
-}
-
 function Get-SphinxVersion {
     $sphinxVersion = searchd -h | Select-Object -First 1 | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "-"
     return $sphinxVersion
