@@ -70,11 +70,6 @@ function Get-NvmVersion {
     return $nvmVersion
 }
 
-function Get-PackerVersion {
-    $packerVersion = (packer --version | Select-String "^Packer").Line.Replace('v','') | Get-StringPart -Part 1
-    return $packerVersion
-}
-
 function Get-JqVersion {
     $jqVersion = jq --version | Get-StringPart -Part 1 -Delimiter "-"
     return $jqVersion

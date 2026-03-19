@@ -113,7 +113,6 @@ build {
       "${path.root}/../scripts/build/install-mono.sh",
       "${path.root}/../scripts/build/install-nvm.sh",
       "${path.root}/../scripts/build/install-nodejs.sh",
-      "${path.root}/../scripts/build/install-packer.sh",
       "${path.root}/../scripts/build/configure-dpkg.sh",
       "${path.root}/../scripts/build/install-yq.sh",
       "${path.root}/../scripts/build/install-pypy.sh",

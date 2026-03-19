@@ -121,12 +121,6 @@ Describe "Homebrew" {
     }
 }
 
-Describe "Packer" {
-    It "packer" {
-        "packer --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "nvm" {
     It "nvm" {
         "source /etc/skel/.nvm/nvm.sh && nvm --version" | Should -ReturnZeroExitCode

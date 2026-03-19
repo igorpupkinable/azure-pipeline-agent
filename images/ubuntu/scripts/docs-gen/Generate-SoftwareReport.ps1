@@ -83,7 +83,6 @@ $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
 $tools.AddToolVersion("nvm", $(Get-NvmVersion))
 $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
-$tools.AddToolVersion("Packer", $(Get-PackerVersion))
 $tools.AddToolVersion("yq", $(Get-YqVersion))
 
 # CLI Tools
