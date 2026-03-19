@@ -94,7 +94,6 @@ $tools.AddToolVersion("zstd", $(Get-ZstdVersion))
 $cliTools = $installedSoftware.AddHeader("CLI Tools")
 $cliTools.AddToolVersion("Azure CLI", $(Get-AzureCliVersion))
 $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
-$cliTools.AddToolVersion("GitHub CLI", $(Get-GitHubCliVersion))
 
 # .NET Tools
 $netCoreTools = $installedSoftware.AddHeader(".NET Tools")
