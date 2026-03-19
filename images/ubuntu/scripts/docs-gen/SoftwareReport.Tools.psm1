@@ -38,21 +38,6 @@ function Get-CodeQLBundleVersion {
     return $CodeQLVersion
 }
 
-function Get-PodManVersion {
-    $podmanVersion = podman --version | Get-StringPart -Part 2
-    return $podmanVersion
-}
-
-function Get-BuildahVersion {
-    $buildahVersion = buildah --version | Get-StringPart -Part 2
-    return $buildahVersion
-}
-
-function Get-SkopeoVersion {
-    $skopeoVersion = skopeo --version | Get-StringPart -Part 2
-    return $skopeoVersion
-}
-
 function Get-CMakeVersion {
     $cmakeVersion = cmake --version | Select-Object -First 1 | Get-StringPart -Part 2
     return $cmakeVersion

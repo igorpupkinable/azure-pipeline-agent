@@ -172,9 +172,6 @@ Describe "Homebrew" {
     }
 }
 
-    }
-}
-
 Describe "Conda" {
     It "conda" {
         "conda --version" | Should -ReturnZeroExitCode
@@ -191,22 +188,6 @@ Describe "Pulumi" {
     It "pulumi" {
         "pulumi version" | Should -ReturnZeroExitCode
     }
-}
-
-Describe "Containers" {
-    $testCases = @("podman", "buildah", "skopeo") | ForEach-Object { @{ContainerCommand = $_} }
-
-    It "<ContainerCommand>" -TestCases $testCases {
-        "$ContainerCommand -v" | Should -ReturnZeroExitCode
-    }
-
-    # https://github.com/actions/runner-images/issues/7753
-    It "podman networking" -TestCases "podman CNI plugins" {
-        "podman network create -d bridge test-net" | Should -ReturnZeroExitCode
-        "podman network ls" | Should -Not -OutputTextMatchingRegex "Error"
-        "podman network rm test-net" | Should -ReturnZeroExitCode
-    }
-
 }
 
 Describe "nvm" {
