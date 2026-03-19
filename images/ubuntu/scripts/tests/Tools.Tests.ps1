@@ -184,12 +184,6 @@ Describe "Homebrew" {
     }
 }
 
-Describe "Julia" {
-    It "julia" {
-        "julia --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Kubernetes tools" {
     It "kind" {
         "kind version" | Should -ReturnZeroExitCode

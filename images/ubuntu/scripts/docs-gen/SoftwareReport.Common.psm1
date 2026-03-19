@@ -97,11 +97,6 @@ function Get-RubyVersion {
     return $rubyVersion
 }
 
-function Get-JuliaVersion {
-    $juliaVersion = julia --version | Get-StringPart -Part 2
-    return $juliaVersion
-}
-
 function Get-LernaVersion {
     $version = lerna -v
     return $version
