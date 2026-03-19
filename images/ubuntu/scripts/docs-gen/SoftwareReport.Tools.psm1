@@ -90,11 +90,6 @@ function Get-AzureDevopsVersion {
     return $azdevopsVersion
 }
 
-function Get-SphinxVersion {
-    $sphinxVersion = searchd -h | Select-Object -First 1 | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "-"
-    return $sphinxVersion
-}
-
 function Get-YqVersion {
     $yqVersion = $(yq -V) | Get-StringPart -Part 3
     return $yqVersion.TrimStart("v").Trim()
