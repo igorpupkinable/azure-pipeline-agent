@@ -194,10 +194,6 @@
         {
             "name": "typescript",
             "command": "tsc"
-        },
-        {
-            "name": "yarn",
-            "command": "yarn"
         }
     ],
     "pwsh": {

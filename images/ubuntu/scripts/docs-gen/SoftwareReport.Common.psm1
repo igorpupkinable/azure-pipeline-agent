@@ -112,11 +112,6 @@ function Get-NpmVersion {
     return $npmVersion
 }
 
-function Get-YarnVersion {
-    $yarnVersion = yarn --version
-    return $yarnVersion
-}
-
 function Get-GHCVersion {
     $(ghc --version) -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.version
