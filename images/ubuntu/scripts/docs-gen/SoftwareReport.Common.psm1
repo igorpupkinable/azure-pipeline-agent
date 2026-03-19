@@ -97,11 +97,6 @@ function Get-RubyVersion {
     return $rubyVersion
 }
 
-function Get-LernaVersion {
-    $version = lerna -v
-    return $version
-}
-
 function Get-HomebrewVersion {
     $result = Get-CommandResult "/home/linuxbrew/.linuxbrew/bin/brew --version"
     $result.Output -match "Homebrew (?<version>\d+\.\d+\.\d+)" | Out-Null
@@ -158,29 +153,6 @@ function Get-Pip3Version {
 function Get-VcpkgVersion {
     $commitId = git -C "/usr/local/share/vcpkg" rev-parse --short HEAD
     return "(build from commit $commitId)"
-}
-
-function Get-AntVersion {
-    $result = ant -version | Out-String
-    $result -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
-function Get-GradleVersion {
-    $gradleVersion = (gradle -v) -match "^Gradle \d" | Get-StringPart -Part 1
-    return $gradleVersion
-}
-
-function Get-MavenVersion {
-    $result = mvn -version | Out-String
-    $result -match "Apache Maven (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
-function Get-SbtVersion {
-    $result = Get-CommandResult "sbt -version"
-    $result.Output -match "sbt runner version: (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
 }
 
 function Get-GHCVersion {

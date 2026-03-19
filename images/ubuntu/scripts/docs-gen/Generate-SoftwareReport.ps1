@@ -71,16 +71,6 @@ run the eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" command
 to accomplish this.
 '@)
 
-# Project Management
-$projectManagement = $installedSoftware.AddHeader("Project Management")
-$projectManagement.AddToolVersion("Ant", $(Get-AntVersion))
-$projectManagement.AddToolVersion("Gradle", $(Get-GradleVersion))
-$projectManagement.AddToolVersion("Lerna", $(Get-LernaVersion))
-$projectManagement.AddToolVersion("Maven", $(Get-MavenVersion))
-if (Test-IsUbuntu22) {
-    $projectManagement.AddToolVersion("Sbt", $(Get-SbtVersion))
-}
-
 # Tools
 $tools = $installedSoftware.AddHeader("Tools")
 $tools.AddToolVersion("Ansible", $(Get-AnsibleVersion))
