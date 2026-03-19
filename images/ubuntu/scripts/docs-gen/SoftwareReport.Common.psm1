@@ -225,10 +225,6 @@ function Get-PipxVersion {
 function Build-PackageManagementEnvironmentTable {
     return @(
         [PSCustomObject] @{
-            "Name"  = "CONDA"
-            "Value" = $env:CONDA
-        },
-        [PSCustomObject] @{
             "Name"  = "VCPKG_INSTALLATION_ROOT"
             "Value" = $env:VCPKG_INSTALLATION_ROOT
         }
