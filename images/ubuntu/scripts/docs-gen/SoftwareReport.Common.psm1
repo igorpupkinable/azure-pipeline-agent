@@ -193,24 +193,6 @@ function Get-SbtVersion {
     return $Matches.version
 }
 
-function Get-PHPVersions {
-    $result = Get-CommandResult "apt list --installed" -Multiline
-    return $result.Output | Where-Object { $_ -match "^php\d+\.\d+/" } | ForEach-Object {
-        $_ -match "now (\d+:)?(?<version>\d+\.\d+\.\d+)" | Out-Null
-        $Matches.version
-    }
-}
-
-function Get-ComposerVersion {
-    $composerVersion = (composer --version) -replace " version" | Get-StringPart -Part 1
-    return $composerVersion
-}
-
-function Get-PHPUnitVersion {
-    $(phpunit --version | Out-String) -match "PHPUnit (?<version>\d+\.\d+\.\d+)\s" | Out-Null
-    return $Matches.version
-}
-
 function Get-GHCVersion {
     $(ghc --version) -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.version

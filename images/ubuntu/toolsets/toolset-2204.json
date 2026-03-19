@@ -259,11 +259,6 @@
             "gfortran-12"
         ]
     },
-    "php": {
-        "versions": [
-            "8.1"
-        ]
-    },
     "rubygems": [
         {"name": "fastlane"}
     ],

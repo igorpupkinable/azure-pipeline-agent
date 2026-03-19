@@ -164,13 +164,6 @@ if (Test-IsUbuntu22) {
 # Java
 $installedSoftware.AddHeader("Java").AddTable($(Get-JavaVersionsTable))
 
-# PHP Tools
-$phpTools = $installedSoftware.AddHeader("PHP Tools")
-$phpTools.AddToolVersionsListInline("PHP", $(Get-PHPVersions), "^\d+\.\d+")
-$phpTools.AddToolVersion("Composer", $(Get-ComposerVersion))
-$phpTools.AddToolVersion("PHPUnit", $(Get-PHPUnitVersion))
-$phpTools.AddNote("Both Xdebug and PCOV extensions are installed, but only Xdebug is enabled.")
-
 # Haskell Tools
 $haskellTools = $installedSoftware.AddHeader("Haskell Tools")
 $haskellTools.AddToolVersion("Cabal", $(Get-CabalVersion))
