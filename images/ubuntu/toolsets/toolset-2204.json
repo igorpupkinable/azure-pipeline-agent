@@ -274,10 +274,6 @@
             "command": "newman"
         },
         {
-            "name": "vercel",
-            "command": "vercel"
-        },
-        {
             "name": "webpack",
             "command": "webpack"
         },
