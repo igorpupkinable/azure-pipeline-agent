@@ -108,26 +108,6 @@ function Get-HerokuVersion {
     return $herokuVersion
 }
 
-function Get-KustomizeVersion {
-    $kustomizeVersion = kustomize version --short | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "v"
-    return $kustomizeVersion
-}
-
-function Get-KindVersion {
-    $kindVersion = kind version | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "v"
-    return $kindVersion
-}
-
-function Get-KubectlVersion {
-    $kubectlVersion = (kubectl version --client --output=json | ConvertFrom-Json).clientVersion.gitVersion.Replace('v','')
-    return $kubectlVersion
-}
-
-function Get-MinikubeVersion {
-    $minikubeVersion = minikube version --short | Get-StringPart -Part 0 -Delimiter "v"
-    return $minikubeVersion
-}
-
 function Get-MediainfoVersion {
     $mediainfoVersion = (mediainfo --version | Select-Object -Index 1 | Get-StringPart -Part 2).Replace('v', '')
     return $mediainfoVersion
