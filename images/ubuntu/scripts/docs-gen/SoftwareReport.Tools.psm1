@@ -185,10 +185,6 @@ function Get-AzureDevopsVersion {
     return $azdevopsVersion
 }
 
-function Get-AlibabaCloudCliVersion {
-    return $(aliyun version)
-}
-
 function Get-FastlaneVersion {
     $fastlaneVersion = fastlane --version | Select-String "^fastlane [0-9]" | Get-StringPart -Part 1
     return $fastlaneVersion

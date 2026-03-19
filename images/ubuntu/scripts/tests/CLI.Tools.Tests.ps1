@@ -10,12 +10,6 @@ Describe "Azure DevOps CLI" {
     }
 }
 
-Describe "Aliyun CLI" -Skip:((-not (Test-IsUbuntu22))) {
-    It "Aliyun CLI" {
-        "aliyun version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "GitHub CLI" {
     It "gh cli" {
         "gh --version" | Should -ReturnZeroExitCode

@@ -141,9 +141,6 @@ $tools.AddToolVersion("Ninja", $(Get-NinjaVersion))
 
 # CLI Tools
 $cliTools = $installedSoftware.AddHeader("CLI Tools")
-if (Test-IsUbuntu22) {
-    $cliTools.AddToolVersion("Alibaba Cloud CLI", $(Get-AlibabaCloudCliVersion))
-}
 $cliTools.AddToolVersion("Azure CLI", $(Get-AzureCliVersion))
 $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
 $cliTools.AddToolVersion("GitHub CLI", $(Get-GitHubCliVersion))
