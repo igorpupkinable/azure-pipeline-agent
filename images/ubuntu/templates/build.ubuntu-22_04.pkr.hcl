@@ -110,7 +110,6 @@ build {
       "${path.root}/../scripts/build/install-container-tools.sh",
       "${path.root}/../scripts/build/install-dotnetcore-sdk.sh",
       "${path.root}/../scripts/build/install-gcc-compilers.sh",
-      "${path.root}/../scripts/build/install-gfortran.sh",
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-git-lfs.sh",
       "${path.root}/../scripts/build/install-github-cli.sh",

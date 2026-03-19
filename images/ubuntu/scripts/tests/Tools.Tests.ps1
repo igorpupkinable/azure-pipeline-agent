@@ -100,14 +100,6 @@ Describe "gcc" {
     }
 }
 
-Describe "gfortran" {
-    $testCases = (Get-ToolsetContent).gfortran.Versions | ForEach-Object { @{GfortranVersion = $_} }
-
-    It "gfortran <GfortranVersion>" -TestCases $testCases {
-        "$GfortranVersion --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Mono" -Skip:(Test-IsUbuntu24) {
     It "mono" {
         "mono --version" | Should -ReturnZeroExitCode

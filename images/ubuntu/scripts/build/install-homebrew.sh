@@ -22,10 +22,4 @@ set_etc_environment_variable HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS 3650
 echo "Validate the installation reloading /etc/environment"
 reload_etc_environment
 
-gfortran=$(brew --prefix)/bin/gfortran
-# Remove gfortran symlink, not to conflict with system gfortran
-if [[ -e $gfortran ]]; then
-    rm $gfortran
-fi
-
 invoke_tests "Tools" "Homebrew"

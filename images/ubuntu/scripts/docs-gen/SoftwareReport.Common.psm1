@@ -16,14 +16,6 @@ function Get-CPPVersions {
     return $cppVersions
 }
 
-function Get-FortranVersions {
-    $result = Get-CommandResult "apt list --installed" -Multiline
-    $fortranVersions = $result.Output | Where-Object { $_ -match "^gfortran-\d\d\/" } | ForEach-Object {
-        & $_.Split("/")[0] --version | Select-Object -First 1 | Get-StringPart -Part 4
-    } | Sort-Object {[Version] $_}
-    return $fortranVersions
-}
-
 function Get-ClangToolVersions {
     param (
         [Parameter(Mandatory = $true)]

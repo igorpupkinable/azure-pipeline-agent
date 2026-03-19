@@ -245,13 +245,6 @@
             "g++-12"
         ]
     },
-    "gfortran": {
-        "versions": [
-            "gfortran-9",
-            "gfortran-10",
-            "gfortran-12"
-        ]
-    },
     "node": {
         "default": "20"
     },
