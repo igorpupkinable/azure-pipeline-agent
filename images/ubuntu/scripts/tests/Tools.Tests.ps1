@@ -141,14 +141,6 @@ Describe "Python" {
     }
 }
 
-Describe "Ruby" {
-    $testCases = @("ruby", "gem") | ForEach-Object { @{RubyCommand = $_} }
-
-    It "<RubyCommand>" -TestCases $testCases {
-        "$RubyCommand --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "yq" {
     It "yq" {
         "yq -V" | Should -ReturnZeroExitCode

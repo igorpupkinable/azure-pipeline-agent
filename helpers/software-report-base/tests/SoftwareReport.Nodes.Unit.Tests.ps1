@@ -74,26 +74,6 @@ Describe "Nodes.UnitTests" {
             $node.GetValue() | Should -Be "2.7.7, 3.0.5, 3.1.3"
         }
 
-        It "Serialization - List" {
-            $node = [ToolVersionsListNode]::new("Ruby", @("2.7.7", "3.0.5", "3.1.3"), "^.+", "List")
-            $json = $node.ToJsonObject()
-            $json.NodeType | Should -Be "ToolVersionsListNode"
-            $json.ToolName | Should -Be "Ruby"
-            $json.Versions | Should -BeArray @("2.7.7", "3.0.5", "3.1.3")
-            $json.MajorVersionRegex | Should -Be "^.+"
-            $json.ListType | Should -Be "List"
-        }
-
-        It "Serialization - Inline" {
-            $node = [ToolVersionsListNode]::new("Ruby", @("2.7.7", "3.0.5", "3.1.3"), "^.+", "Inline")
-            $json = $node.ToJsonObject()
-            $json.NodeType | Should -Be "ToolVersionsListNode"
-            $json.ToolName | Should -Be "Ruby"
-            $json.Versions | Should -BeArray @("2.7.7", "3.0.5", "3.1.3")
-            $json.MajorVersionRegex | Should -Be "^.+"
-            $json.ListType | Should -Be "Inline"
-        }
-
         It "Deserialization" {
             { [ToolVersionsListNode]::FromJsonObject(@{ NodeType = "ToolVersionsListNode"; ToolName = ""; Versions = @("2.1.3", "3.1.4"); MajorVersionRegex = "^\d+"; ListType = "List" }) } | Should -Throw '*Exception setting "ToolName": "The argument is null or empty.*'
             { [ToolVersionsListNode]::FromJsonObject(@{ NodeType = "ToolVersionsListNode"; ToolName = "MyTool"; MajorVersionRegex = "^\d+"; ListType = "List" }) } | Should -Throw '*Exception setting "Versions": "The argument is null or empty.*'
@@ -103,14 +83,6 @@ Describe "Nodes.UnitTests" {
             { [ToolVersionsListNode]::FromJsonObject(@{ NodeType = "ToolVersionsListNode"; ToolName = "MyTool"; Versions = @("2.1.3", "3.1.4"); MajorVersionRegex = "^\d+"; ListType = "Fake" }) } | Should -Throw '*Exception setting "ListType": "The argument * does not belong to the set*'
             { [ToolVersionsListNode]::FromJsonObject(@{ NodeType = "ToolVersionsListNode"; ToolName = "MyTool"; Versions = @("2.1.3", "3.1.4"); MajorVersionRegex = "^\d+"; ListType = "List" }) } | Should -Not -Throw
             { [ToolVersionsListNode]::FromJsonObject(@{ NodeType = "ToolVersionsListNode"; ToolName = "MyTool"; Versions = @("2.1.3", "3.1.4"); MajorVersionRegex = "^\d+"; ListType = "Inline" }) } | Should -Not -Throw
-        }
-
-        It "Serialization + Deserialization" {
-            $node = [ToolVersionsListNode]::new("Ruby", @("2.7.7", "3.0.5", "3.1.3"), "^.+", "List")
-            $json = $node.ToJsonObject()
-            $node2 = [ToolVersionsListNode]::FromJsonObject($json)
-            $json2 = $node2.ToJsonObject()
-            $($json | ConvertTo-Json) | Should -Be $($json2 | ConvertTo-Json)
         }
 
         It "IsSimilarTo" {

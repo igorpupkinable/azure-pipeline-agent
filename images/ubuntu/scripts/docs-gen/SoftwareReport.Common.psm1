@@ -84,11 +84,6 @@ function Get-PowershellVersion {
     return $pwshVersion
 }
 
-function Get-RubyVersion {
-    $rubyVersion = ruby --version | Out-String | Get-StringPart -Part 1
-    return $rubyVersion
-}
-
 function Get-HomebrewVersion {
     $result = Get-CommandResult "/home/linuxbrew/.linuxbrew/bin/brew --version"
     $result.Output -match "Homebrew (?<version>\d+\.\d+\.\d+)" | Out-Null

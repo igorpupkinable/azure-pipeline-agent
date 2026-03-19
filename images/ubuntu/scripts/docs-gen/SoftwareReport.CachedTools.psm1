@@ -1,8 +1,3 @@
-function Get-ToolcacheRubyVersions {
-    $toolcachePath = Join-Path $env:AGENT_TOOLSDIRECTORY "Ruby"
-    return Get-ChildItem $toolcachePath -Name | Sort-Object { [Version] $_ }
-}
-
 function Get-ToolcachePythonVersions {
     $toolcachePath = Join-Path $env:AGENT_TOOLSDIRECTORY "Python"
     return Get-ChildItem $toolcachePath -Name | Sort-Object { [Version] $_ }
