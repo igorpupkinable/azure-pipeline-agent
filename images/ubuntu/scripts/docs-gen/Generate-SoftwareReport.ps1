@@ -69,7 +69,6 @@ to accomplish this.
 
 # Tools
 $tools = $installedSoftware.AddHeader("Tools")
-$tools.AddToolVersion("Ansible", $(Get-AnsibleVersion))
 if (Test-IsUbuntu22) {
     $tools.AddToolVersion("apt-fast", $(Get-AptFastVersion))
 }

@@ -1,8 +1,3 @@
-function Get-AnsibleVersion {
-    $ansibleVersion = (ansible --version)[0] -replace "[^\d.]"
-    return $ansibleVersion
-}
-
 function Get-AptFastVersion {
     $versionFileContent = Get-Content (which apt-fast) -Raw
     $match = [Regex]::Match($versionFileContent, '# apt-fast v(.+)\n')

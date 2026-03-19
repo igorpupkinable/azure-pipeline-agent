@@ -59,12 +59,6 @@ Describe "Docker" {
     }
 }
 
-Describe "Ansible" {
-    It "Ansible" {
-        "ansible --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Bazel" {
     It "<ToolName>" -TestCases @(
         @{ ToolName = "bazel" }
