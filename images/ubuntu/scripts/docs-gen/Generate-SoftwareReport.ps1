@@ -111,9 +111,6 @@ $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("Kind", $(Get-KindVersion))
 $tools.AddToolVersion("Kubectl", $(Get-KubectlVersion))
 $tools.AddToolVersion("Kustomize", $(Get-KustomizeVersion))
-if (Test-IsUbuntu22) {
-    $tools.AddToolVersion("Leiningen", $(Get-LeiningenVersion))
-}
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
 $tools.AddToolVersion("Minikube", $(Get-MinikubeVersion))
 $tools.AddToolVersion("n", $(Get-NVersion))

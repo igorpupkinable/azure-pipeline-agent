@@ -128,10 +128,6 @@ function Get-MinikubeVersion {
     return $minikubeVersion
 }
 
-function Get-LeiningenVersion {
-    return "$(lein -v | Get-StringPart -Part 1)"
-}
-
 function Get-MediainfoVersion {
     $mediainfoVersion = (mediainfo --version | Select-Object -Index 1 | Get-StringPart -Part 2).Replace('v', '')
     return $mediainfoVersion
