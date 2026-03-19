@@ -194,21 +194,6 @@ function Get-AlibabaCloudCliVersion {
     return $(aliyun version)
 }
 
-function Get-AWSCliVersion {
-    $result = Get-CommandResult "aws --version"
-    $awsVersion = $result.Output | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "/"
-    return $awsVersion
-}
-
-function Get-AWSCliSessionManagerPluginVersion {
-    $result = (Get-CommandResult "session-manager-plugin --version").Output
-    return $result
-}
-
-function Get-AWSSAMVersion {
-    return $(sam --version | Get-StringPart -Part -1)
-}
-
 function Get-FastlaneVersion {
     $fastlaneVersion = fastlane --version | Select-String "^fastlane [0-9]" | Get-StringPart -Part 1
     return $fastlaneVersion

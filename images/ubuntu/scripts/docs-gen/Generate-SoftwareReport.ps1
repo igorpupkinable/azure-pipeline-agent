@@ -147,9 +147,6 @@ $cliTools = $installedSoftware.AddHeader("CLI Tools")
 if (Test-IsUbuntu22) {
     $cliTools.AddToolVersion("Alibaba Cloud CLI", $(Get-AlibabaCloudCliVersion))
 }
-$cliTools.AddToolVersion("AWS CLI", $(Get-AWSCliVersion))
-$cliTools.AddToolVersion("AWS CLI Session Manager Plugin", $(Get-AWSCliSessionManagerPluginVersion))
-$cliTools.AddToolVersion("AWS SAM CLI", $(Get-AWSSAMVersion))
 $cliTools.AddToolVersion("Azure CLI", $(Get-AzureCliVersion))
 $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
 $cliTools.AddToolVersion("GitHub CLI", $(Get-GitHubCliVersion))
