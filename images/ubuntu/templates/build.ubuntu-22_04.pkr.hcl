@@ -116,7 +116,6 @@ build {
       "${path.root}/../scripts/build/install-git-lfs.sh",
       "${path.root}/../scripts/build/install-github-cli.sh",
       "${path.root}/../scripts/build/install-haskell.sh",
-      "${path.root}/../scripts/build/install-heroku.sh",
       "${path.root}/../scripts/build/install-oc-cli.sh",
       "${path.root}/../scripts/build/install-mono.sh",
       "${path.root}/../scripts/build/install-nginx.sh",

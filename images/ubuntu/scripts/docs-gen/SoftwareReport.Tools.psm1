@@ -84,11 +84,6 @@ function Get-HavegedVersion {
     return $havegedVersion
 }
 
-function Get-HerokuVersion {
-    $herokuVersion = heroku version | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "/"
-    return $herokuVersion
-}
-
 function Get-MediainfoVersion {
     $mediainfoVersion = (mediainfo --version | Select-Object -Index 1 | Get-StringPart -Part 2).Replace('v', '')
     return $mediainfoVersion

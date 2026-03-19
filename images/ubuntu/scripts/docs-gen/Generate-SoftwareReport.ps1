@@ -98,9 +98,6 @@ $tools.AddToolVersion("Git", $(Get-GitVersion))
 $tools.AddToolVersion("Git LFS", $(Get-GitLFSVersion))
 $tools.AddToolVersion("Git-ftp", $(Get-GitFTPVersion))
 $tools.AddToolVersion("Haveged", $(Get-HavegedVersion))
-if (Test-IsUbuntu22) {
-    $tools.AddToolVersion("Heroku", $(Get-HerokuVersion))
-}
 $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
 $tools.AddToolVersion("n", $(Get-NVersion))

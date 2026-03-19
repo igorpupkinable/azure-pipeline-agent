@@ -160,12 +160,6 @@ Describe "Git-lfs" {
     }
 }
 
-Describe "Heroku" -Skip:((-not (Test-IsUbuntu22))) {
-    It "heroku" {
-        "heroku --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Homebrew" {
     It "homebrew" {
         "/home/linuxbrew/.linuxbrew/bin/brew --version" | Should -ReturnZeroExitCode
