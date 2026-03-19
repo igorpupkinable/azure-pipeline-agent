@@ -211,12 +211,7 @@
             }
         ]
     },
-    "pipx": [
-        {
-            "package": "yamllint",
-            "cmd": "yamllint"
-        }
-    ],
+    "pipx": [],
     "dotnet": {
         "versions": [
             "8.0",

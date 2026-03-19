@@ -128,10 +128,6 @@ function Get-SphinxVersion {
     return $sphinxVersion
 }
 
-function Get-YamllintVersion {
-    return $(yamllint --version) | Get-StringPart -Part 1
-}
-
 function Get-ZstdVersion {
     $zstdVersion = zstd --version | Get-StringPart -Part 1 -Delimiter "v" | Get-StringPart -Part 0 -Delimiter ","
     return "$zstdVersion"

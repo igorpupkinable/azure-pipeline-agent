@@ -95,7 +95,6 @@ $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
 $tools.AddToolVersion("Packer", $(Get-PackerVersion))
 $tools.AddToolVersion("Parcel", $(Get-ParcelVersion))
 $tools.AddToolVersion("Sphinx Open Source Search Server", $(Get-SphinxVersion))
-$tools.AddToolVersion("yamllint", $(Get-YamllintVersion))
 $tools.AddToolVersion("yq", $(Get-YqVersion))
 $tools.AddToolVersion("zstd", $(Get-ZstdVersion))
 
