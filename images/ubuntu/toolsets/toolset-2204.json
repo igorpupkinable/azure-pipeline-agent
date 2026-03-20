@@ -1,7 +1,4 @@
 {
-    "powershellModules": [
-        {"name": "MarkdownPS"}
-    ],
     "azureModules": [
         {
             "name": "az",
