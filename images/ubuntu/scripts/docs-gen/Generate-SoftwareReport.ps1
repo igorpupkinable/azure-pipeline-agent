@@ -10,7 +10,6 @@ $global:ErrorActionPreference = "Stop"
 $global:ErrorView = "NormalView"
 Set-StrictMode -Version Latest
 
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.CachedTools.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Common.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Helpers.psm1") -DisableNameChecking
 Import-Module "$PSScriptRoot/../helpers/Common.Helpers.psm1" -DisableNameChecking
