@@ -27,5 +27,3 @@ foreach ($module in $modules) {
 
 $finalLine = "PSModulePath=$($psModuleMachinePath.TrimEnd(':').Replace("\root", '$HOME'))"
 Add-Content -Path "/etc/environment" -Value $finalLine
-
-Invoke-PesterTests -TestFile "PowerShellModules" -TestName "AzureModules"

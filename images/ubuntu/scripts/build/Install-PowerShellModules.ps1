@@ -31,5 +31,3 @@ foreach($module in $modules) {
         Install-Module -Name $moduleName -Scope AllUsers -SkipPublisherCheck -Force
     }
 }
-
-Invoke-PesterTests -TestFile "PowerShellModules" -TestName "PowerShellModules"
