@@ -8,7 +8,12 @@ wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-mi
 dpkg -i packages-microsoft-prod.deb
 
 apt-get update
-apt-get install apt-transport-https ca-certificates curl software-properties-common
+echo Sources Updated
+# apt-get install apt-transport-https ca-certificates curl software-properties-common
+apt-get install ca-certificates
+apt-get install curl
+apt-get install apt-transport-https
+apt-get install software-properties-common
 
 # Install vital packages if missing
 apt-get install wget
