@@ -1,9 +1,6 @@
 {
     "powershellModules": [
-        {"name": "MarkdownPS"},
-        {"name": "Microsoft.Graph"},
-        {"name": "Pester"},
-        {"name": "PSScriptAnalyzer"}
+        {"name": "MarkdownPS"}
     ],
     "azureModules": [
         {
