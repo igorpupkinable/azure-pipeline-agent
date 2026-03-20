@@ -23,11 +23,6 @@ ENVPATH=${ENVPATH%"\""}
 replace_etc_environment_variable "PATH" "${ENVPATH}"
 echo "Updated /etc/environment: $(cat /etc/environment)"
 
-# Clean npm cache
-if npm --version; then
-    npm cache clean --force
-fi
-
 if is_ubuntu24; then
 # Prevent needrestart from restarting the provisioner service.
 # Currently only happens on Ubuntu 24.04, so make it conditional for the time being

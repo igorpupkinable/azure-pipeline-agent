@@ -102,11 +102,6 @@ function Get-HelmVersion {
     return $Matches.version
 }
 
-function Get-NpmVersion {
-    $npmVersion = npm --version
-    return $npmVersion
-}
-
 function Get-GHCVersion {
     $(ghc --version) -match "version (?<version>\d+\.\d+\.\d+)" | Out-Null
     return $Matches.version
