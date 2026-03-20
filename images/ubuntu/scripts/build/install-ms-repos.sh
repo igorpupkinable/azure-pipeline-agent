@@ -13,4 +13,4 @@ dpkg -i packages-microsoft-prod.deb
 # update
 apt-get install apt-transport-https ca-certificates curl software-properties-common
 apt-get update
-apt-get dist-upgrade
+# apt-get dist-upgrade
