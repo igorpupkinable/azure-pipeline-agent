@@ -3,26 +3,6 @@ function Get-AzCopyVersion {
     return "$azcopyVersion - available by ``azcopy`` and ``azcopy10`` aliases"
 }
 
-function Get-DockerComposeV2Version {
-    $composeVersion = docker compose version | Get-StringPart -Part 3 | Get-StringPart -Part 0 -Delimiter "v"
-    return $composeVersion
-}
-
-function Get-DockerClientVersion {
-    $dockerClientVersion = sudo docker version --format '{{.Client.Version}}'
-    return $dockerClientVersion
-}
-
-function Get-DockerServerVersion {
-    $dockerServerVersion = sudo docker version --format '{{.Server.Version}}'
-    return $dockerServerVersion
-}
-
-function Get-DockerBuildxVersion {
-    $buildxVersion = docker buildx version  | Get-StringPart -Part 1 | Get-StringPart -Part 0 -Delimiter "v"
-    return $buildxVersion
-}
-
 function Get-GitVersion {
     $gitVersion = git --version | Get-StringPart -Part -1
     return $gitVersion

@@ -48,24 +48,6 @@ function Get-PowerShellModules {
     return $result
 }
 
-function Get-CachedDockerImages {
-    $toolsetJson = Get-ToolsetContent
-    $images = $toolsetJson.docker.images
-    return $images
-}
-
-function Get-CachedDockerImagesTableData {
-    $allImages = sudo docker images --digests --format "*{{.Repository}}:{{.Tag}}|{{.Digest}} |{{.CreatedAt}}"
-    $allImages.Split("*") | Where-Object { $_ } | ForEach-Object {
-        $parts = $_.Split("|")
-        [PSCustomObject] @{
-            "Repository:Tag" = $parts[0]
-            "Digest"         = $parts[1]
-            "Created"        = $parts[2].split(' ')[0]
-        }
-    } | Sort-Object -Property "Repository:Tag"
-}
-
 function Get-AptPackages {
     $apt = (Get-ToolsetContent).Apt
     $output = @()

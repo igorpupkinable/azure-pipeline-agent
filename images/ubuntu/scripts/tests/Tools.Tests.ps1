@@ -9,50 +9,6 @@ Describe "azcopy" {
     }
 }
 
-Describe "Docker" {
-    It "docker client" {
-        $version=(Get-ToolsetContent).docker.components | Where-Object { $_.package -eq 'docker-ce-cli' } | Select-Object -ExpandProperty version
-        If ($version -ne "latest") {
-            $(sudo docker version --format '{{.Client.Version}}') | Should -BeLike "*$version*"
-        }else{
-            "sudo docker version --format '{{.Client.Version}}'" | Should -ReturnZeroExitCode
-        }
-    }
-
-    It "docker server" {
-        $version=(Get-ToolsetContent).docker.components | Where-Object { $_.package -eq 'docker-ce' } | Select-Object -ExpandProperty version
-        If ($version -ne "latest") {
-            $(sudo docker version --format '{{.Server.Version}}') | Should -BeLike "*$version*"
-        }else{
-            "sudo docker version --format '{{.Server.Version}}'" | Should -ReturnZeroExitCode
-        }
-    }
-
-    It "docker client/server versions match" {
-        $clientVersion = $(sudo docker version --format '{{.Client.Version}}')
-        $serverVersion = $(sudo docker version --format '{{.Server.Version}}')
-        $clientVersion | Should -Be $serverVersion
-    }
-
-    It "docker buildx" {
-        $version=(Get-ToolsetContent).docker.plugins | Where-Object { $_.plugin -eq 'buildx' } | Select-Object -ExpandProperty version
-        If ($version -ne "latest") {
-            $(docker buildx version) | Should -BeLike "*$version*"
-        }else{
-            "docker buildx" | Should -ReturnZeroExitCode
-        }
-    }
-
-    It "docker compose v2" {
-        $version=(Get-ToolsetContent).docker.plugins | Where-Object { $_.plugin -eq 'compose' } | Select-Object -ExpandProperty version
-        If ($version -ne "latest") {
-            $(docker compose version --short) | Should -BeLike "*$version*"
-        }else{
-            "docker compose version --short" | Should -ReturnZeroExitCode
-        }
-    }
-}
-
 Describe "gcc" {
     $testCases = (Get-ToolsetContent).gcc.Versions | ForEach-Object { @{GccVersion = $_} }
 
