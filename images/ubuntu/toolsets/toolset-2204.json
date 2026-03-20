@@ -1,5 +1,4 @@
 {
-    "toolcache": [],
     "powershellModules": [
         {"name": "MarkdownPS"},
         {"name": "Microsoft.Graph"},
