@@ -1,7 +1,7 @@
 #!/bin/bash -e
 ################################################################################
 ##  File:  configure-apt.sh
-##  Desc:  Configure apt, install jq packages.
+##  Desc:  Configure apt.
 ################################################################################
 
 source $HELPER_SCRIPTS/os.sh
@@ -47,5 +47,3 @@ else
 fi
 
 apt-get update
-# Install jq
-apt-get install jq

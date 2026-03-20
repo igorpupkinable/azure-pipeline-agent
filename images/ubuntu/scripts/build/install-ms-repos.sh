@@ -4,12 +4,13 @@
 ##  Desc:  Install official Microsoft package repos for the distribution
 ################################################################################
 
-os_label=$(lsb_release -rs)
-
-# Install Microsoft repository
-wget https://packages.microsoft.com/config/ubuntu/$os_label/packages-microsoft-prod.deb
+wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb
 dpkg -i packages-microsoft-prod.deb
 
 apt-get update
-apt-get install apt-transport-https ca-certificates curl software-properties-common wget
+apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+# Install vital packages if missing
+apt-get jq wget
+
 # apt-get dist-upgrade
