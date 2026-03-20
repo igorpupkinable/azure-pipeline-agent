@@ -37,13 +37,6 @@ $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 # Package Management
 $packageManagement = $installedSoftware.AddHeader("Package Management")
 $packageManagement.AddToolVersion("cpan", $(Get-CpanVersion))
-$packageManagement.AddToolVersion("Homebrew", $(Get-HomebrewVersion))
-$packageManagement.AddHeader("Homebrew note").AddNote(@'
-Location: /home/linuxbrew
-Note: Homebrew is pre-installed on image but not added to PATH.
-run the eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" command
-to accomplish this.
-'@)
 
 # Tools
 $tools = $installedSoftware.AddHeader("Tools")

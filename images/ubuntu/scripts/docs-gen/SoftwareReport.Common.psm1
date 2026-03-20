@@ -31,12 +31,6 @@ function Get-PowershellVersion {
     return $pwshVersion
 }
 
-function Get-HomebrewVersion {
-    $result = Get-CommandResult "/home/linuxbrew/.linuxbrew/bin/brew --version"
-    $result.Output -match "Homebrew (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
 function Get-CpanVersion {
     $result = Get-CommandResult "cpan --version" -ExpectedExitCode @(25, 255)
     $result.Output -match "version (?<version>\d+\.\d+) " | Out-Null

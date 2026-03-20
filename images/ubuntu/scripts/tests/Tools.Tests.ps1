@@ -72,9 +72,3 @@ Describe "Git-lfs" {
         "git-lfs --version" | Should -ReturnZeroExitCode
     }
 }
-
-Describe "Homebrew" {
-    It "homebrew" {
-        "/home/linuxbrew/.linuxbrew/bin/brew --version" | Should -ReturnZeroExitCode
-    }
-}
