@@ -16,32 +16,6 @@ function Get-CPPVersions {
     return $cppVersions
 }
 
-function Get-ClangToolVersions {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string] $ToolName,
-        [string] $VersionLineMatcher = "${ToolName} version",
-        [string] $VersionPattern = "\d+\.\d+\.\d+)"
-    )
-
-    $result = Get-CommandResult "apt list --installed" -Multiline
-    $toolVersions = $result.Output | Where-Object { $_ -match "^${ToolName}-\d+" } | ForEach-Object {
-        $clangCommand = ($_ -Split "/")[0]
-        Invoke-Expression "$clangCommand --version" | Where-Object { $_ -match "${VersionLineMatcher}" } | ForEach-Object {
-            $_ -match "${VersionLineMatcher} (?<version>${VersionPattern}" | Out-Null
-            $Matches.version
-            }
-        } | Sort-Object {[Version] $_}
-
-    return $toolVersions
-}
-
-
-function Get-ClangTidyVersions {
-    $clangVersions = Get-ClangToolVersions -ToolName "clang-tidy" -VersionLineMatcher "LLVM version" -VersionPattern "\d+\.\d+\.\d+)"
-    return $clangVersions
-}
-
 function Get-OpensslVersion {
     $opensslVersion = $(dpkg-query -W -f '${Version}' openssl)
     return $opensslVersion

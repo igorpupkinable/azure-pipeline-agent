@@ -158,12 +158,6 @@
             { "name": "nbgv", "test": "nbgv --version", "getversion" : "nbgv --version" }
         ]
     },
-    "clang": {
-        "versions": [
-            "15"
-        ],
-        "default_version": "14"
-    },
     "gcc": {
         "versions": [
             "g++-12"

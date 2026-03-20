@@ -59,18 +59,6 @@ Describe "Docker" {
     }
 }
 
-Describe "clang" {
-    $testCases = (Get-ToolsetContent).clang.Versions | ForEach-Object { @{ClangVersion = $_} }
-
-    It "clang <ClangVersion>" -TestCases $testCases {
-        "clang-$ClangVersion --version" | Should -ReturnZeroExitCode
-        "clang++-$ClangVersion --version" | Should -ReturnZeroExitCode
-        "clang-format-$ClangVersion --version" | Should -ReturnZeroExitCode
-        "clang-tidy-$ClangVersion --version" | Should -ReturnZeroExitCode
-        "run-clang-tidy-$ClangVersion --help" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Cmake" {
     It "cmake" {
         "cmake --version" | Should -ReturnZeroExitCode
