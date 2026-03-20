@@ -40,7 +40,6 @@ if (-not $(Test-IsUbuntu24)) {
     $languageAndRuntime.AddToolVersion("Mono", $(Get-MonoVersion))
     $languageAndRuntime.AddToolVersion("MSBuild", $(Get-MsbuildVersion))
 }
-$languageAndRuntime.AddToolVersion("Node.js", $(Get-NodeVersion))
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 $languageAndRuntime.AddToolVersion("Python", $(Get-PythonVersion))
 
@@ -77,7 +76,6 @@ $tools.AddToolVersion("Git-ftp", $(Get-GitFTPVersion))
 $tools.AddToolVersion("Haveged", $(Get-HavegedVersion))
 $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
-$tools.AddToolVersion("nvm", $(Get-NvmVersion))
 $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
 
 # CLI Tools
@@ -92,7 +90,6 @@ $netCoreTools.AddNodes($(Get-DotnetTools))
 
 # Cached Tools
 $cachedTools = $installedSoftware.AddHeader("Cached Tools")
-$cachedTools.AddToolVersionsList("Node.js", $(Get-ToolcacheNodeVersions), "^\d+")
 $cachedTools.AddToolVersionsList("Python", $(Get-ToolcachePythonVersions), "^\d+\.\d+")
 
 # PowerShell Tools

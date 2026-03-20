@@ -121,12 +121,6 @@ Describe "Homebrew" {
     }
 }
 
-Describe "nvm" {
-    It "nvm" {
-        "source /etc/skel/.nvm/nvm.sh && nvm --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Python" {
     $testCases = @("python", "python3") | ForEach-Object { @{PythonCommand = $_} }
 

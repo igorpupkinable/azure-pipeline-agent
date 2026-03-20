@@ -111,8 +111,6 @@ build {
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-git-lfs.sh",
       "${path.root}/../scripts/build/install-mono.sh",
-      "${path.root}/../scripts/build/install-nvm.sh",
-      "${path.root}/../scripts/build/install-nodejs.sh",
       "${path.root}/../scripts/build/configure-dpkg.sh",
       "${path.root}/../scripts/build/install-python.sh"
     ]

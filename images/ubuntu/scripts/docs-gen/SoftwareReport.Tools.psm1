@@ -65,11 +65,6 @@ function Get-MediainfoVersion {
     return $mediainfoVersion
 }
 
-function Get-NvmVersion {
-    $nvmVersion = bash -c "source /etc/skel/.nvm/nvm.sh && nvm --version"
-    return $nvmVersion
-}
-
 function Get-JqVersion {
     $jqVersion = jq --version | Get-StringPart -Part 1 -Delimiter "-"
     return $jqVersion

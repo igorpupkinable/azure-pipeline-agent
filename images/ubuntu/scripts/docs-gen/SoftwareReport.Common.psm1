@@ -58,11 +58,6 @@ function Get-NuGetVersion {
     return $nugetVersion
 }
 
-function Get-NodeVersion {
-    $nodeVersion = $(node --version).Substring(1)
-    return $nodeVersion
-}
-
 function Get-OpensslVersion {
     $opensslVersion = $(dpkg-query -W -f '${Version}' openssl)
     return $opensslVersion

@@ -9,15 +9,6 @@
             "versions": [
                 "3.14.*"
             ]
-        },
-        {
-            "name": "node",
-            "url" : "https://raw.githubusercontent.com/actions/node-versions/main/versions-manifest.json",
-            "platform" : "linux",
-            "arch": "x64",
-            "versions": [
-                "22.*"
-            ]
         }
     ],
     "powershellModules": [
@@ -179,15 +170,6 @@
             "g++-12"
         ]
     },
-    "node": {
-        "default": "20"
-    },
-    "node_modules": [
-        {
-            "name": "typescript",
-            "command": "tsc"
-        }
-    ],
     "pwsh": {
         "version": "7.4"
     }

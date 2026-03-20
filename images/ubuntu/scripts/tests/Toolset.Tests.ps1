@@ -6,10 +6,6 @@ Describe "Toolset" {
             tools = @("python")
             command = "--version"
         }
-        node = @{
-            tools = @("bin/node", "bin/npm")
-            command = "--version"
-        }
     }
 
     foreach ($tool in $tools) {
