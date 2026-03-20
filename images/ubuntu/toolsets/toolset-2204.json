@@ -1,12 +1,4 @@
 {
-    "azureModules": [
-        {
-            "name": "az",
-            "versions": [
-                "14.6.0"
-            ]
-        }
-    ],
     "apt": {
         "vital_packages": [
             "curl",
