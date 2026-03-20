@@ -49,9 +49,6 @@ to accomplish this.
 
 # Tools
 $tools = $installedSoftware.AddHeader("Tools")
-if (Test-IsUbuntu22) {
-    $tools.AddToolVersion("apt-fast", $(Get-AptFastVersion))
-}
 $tools.AddToolVersion("AzCopy", $(Get-AzCopyVersion))
 $tools.AddToolVersion("Docker Compose v2", $(Get-DockerComposeV2Version))
 $tools.AddToolVersion("Docker-Buildx", $(Get-DockerBuildxVersion))
@@ -59,7 +56,6 @@ $tools.AddToolVersion("Docker Client", $(Get-DockerClientVersion))
 $tools.AddToolVersion("Docker Server", $(Get-DockerServerVersion))
 $tools.AddToolVersion("Git", $(Get-GitVersion))
 $tools.AddToolVersion("Git LFS", $(Get-GitLFSVersion))
-$tools.AddToolVersion("Haveged", $(Get-HavegedVersion))
 $tools.AddToolVersion("jq", $(Get-JqVersion))
 $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
 

@@ -1,9 +1,3 @@
-function Get-AptFastVersion {
-    $versionFileContent = Get-Content (which apt-fast) -Raw
-    $match = [Regex]::Match($versionFileContent, '# apt-fast v(.+)\n')
-    return $match.Groups[1].Value
-}
-
 function Get-AzCopyVersion {
     $azcopyVersion = [string]$(azcopy --version) | Get-StringPart -Part 2
     return "$azcopyVersion - available by ``azcopy`` and ``azcopy10`` aliases"
@@ -38,11 +32,6 @@ function Get-GitLFSVersion {
     $result = Get-CommandResult "git-lfs --version"
     $gitlfsversion = $result.Output | Get-StringPart -Part 0 | Get-StringPart -Part 1 -Delimiter "/"
     return $gitlfsversion
-}
-
-function Get-HavegedVersion {
-    $havegedVersion = dpkg-query --showformat='${Version}' --show haveged | Get-StringPart -Part 0 -Delimiter "-"
-    return $havegedVersion
 }
 
 function Get-JqVersion {
