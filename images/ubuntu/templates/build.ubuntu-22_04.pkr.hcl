@@ -41,14 +41,8 @@ build {
     destination = "${var.image_folder}"
     sources     = [
       "${path.root}/../assets/post-gen",
-      "${path.root}/../scripts/tests",
-      "${path.root}/../scripts/docs-gen"
+      "${path.root}/../scripts/tests"
     ]
-  }
-
-  provisioner "file" {
-    destination = "${var.image_folder}/docs-gen/"
-    source      = "${path.root}/../../../helpers/software-report-base"
   }
 
   provisioner "file" {
@@ -59,7 +53,6 @@ build {
   provisioner "shell" {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     inline          = [
-      "mv ${var.image_folder}/docs-gen ${var.image_folder}/SoftwareReport",
       "mv ${var.image_folder}/post-gen ${var.image_folder}/post-generation"
     ]
   }
@@ -129,11 +122,6 @@ build {
     pause_before        = "5m0s"
     scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
     start_retry_timeout = "10m"
-  }
-
-  provisioner "shell" {
-    environment_vars = ["IMAGE_VERSION=${var.image_version}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    inline           = ["pwsh -File ${var.image_folder}/SoftwareReport/Generate-SoftwareReport.ps1 -OutputDirectory ${var.image_folder}", "pwsh -File ${var.image_folder}/tests/RunAll-Tests.ps1 -OutputDirectory ${var.image_folder}"]
   }
 
   provisioner "file" {
