@@ -18,7 +18,8 @@ build {
     scripts          = [
       "${path.root}/../scripts/build/install-ms-repos.sh",
       "${path.root}/../scripts/build/configure-apt-sources.sh",
-      "${path.root}/../scripts/build/configure-apt.sh"
+      "${path.root}/../scripts/build/configure-apt.sh",
+      "${path.root}/../scripts/build/install-apt-packages.sh"
     ]
   }
 

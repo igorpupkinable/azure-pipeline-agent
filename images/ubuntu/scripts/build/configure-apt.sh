@@ -14,6 +14,10 @@ systemctl stop apt-daily-upgrade.timer
 systemctl disable apt-daily-upgrade.timer
 systemctl disable apt-daily-upgrade.service
 
+# Do not consider recommended packages as a dependency for installing
+echo "APT::Install-Recommends \"false\";" > /etc/apt/apt.conf.d/30install-suggests
+echo "APT::Install-Suggests \"false\";" > /etc/apt/apt.conf.d/30install-suggests
+
 # Enable retry logic for apt up to 10 times
 echo "APT::Acquire::Retries \"10\";" > /etc/apt/apt.conf.d/80-retries
 
