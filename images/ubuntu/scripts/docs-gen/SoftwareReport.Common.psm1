@@ -42,22 +42,6 @@ function Get-ClangTidyVersions {
     return $clangVersions
 }
 
-function Get-MonoVersion {
-    $monoVersion = mono --version | Out-String | Get-StringPart -Part 4
-    return $monoVersion
-}
-
-function Get-MsbuildVersion {
-    $msbuildVersion = msbuild -version | Select-Object -Last 1
-    $monoVersion = Get-MonoVersion
-    return "$msbuildVersion (Mono $monoVersion)"
-}
-
-function Get-NuGetVersion {
-    $nugetVersion = nuget help | Select-Object -First 1 | Get-StringPart -Part 2
-    return $nugetVersion
-}
-
 function Get-OpensslVersion {
     $opensslVersion = $(dpkg-query -W -f '${Version}' openssl)
     return $opensslVersion

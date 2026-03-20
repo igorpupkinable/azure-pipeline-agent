@@ -36,10 +36,6 @@ $languageAndRuntime.AddToolVersionsListInline("Clang-format", $(Get-ClangToolVer
 $languageAndRuntime.AddToolVersionsListInline("Clang-tidy", $(Get-ClangTidyVersions), "^\d+")
 $languageAndRuntime.AddToolVersion("Dash", $(Get-DashVersion))
 $languageAndRuntime.AddToolVersionsListInline("GNU C++", $(Get-CPPVersions), "^\d+")
-if (-not $(Test-IsUbuntu24)) {
-    $languageAndRuntime.AddToolVersion("Mono", $(Get-MonoVersion))
-    $languageAndRuntime.AddToolVersion("MSBuild", $(Get-MsbuildVersion))
-}
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 $languageAndRuntime.AddToolVersion("Python", $(Get-PythonVersion))
 
@@ -47,9 +43,6 @@ $languageAndRuntime.AddToolVersion("Python", $(Get-PythonVersion))
 $packageManagement = $installedSoftware.AddHeader("Package Management")
 $packageManagement.AddToolVersion("cpan", $(Get-CpanVersion))
 $packageManagement.AddToolVersion("Homebrew", $(Get-HomebrewVersion))
-if (-not $(Test-IsUbuntu24)) {
-    $packageManagement.AddToolVersion("NuGet", $(Get-NuGetVersion))
-}
 $packageManagement.AddHeader("Homebrew note").AddNote(@'
 Location: /home/linuxbrew
 Note: Homebrew is pre-installed on image but not added to PATH.

@@ -85,20 +85,6 @@ Describe "gcc" {
     }
 }
 
-Describe "Mono" -Skip:(Test-IsUbuntu24) {
-    It "mono" {
-        "mono --version" | Should -ReturnZeroExitCode
-    }
-
-    It "msbuild" {
-        "msbuild -version" | Should -ReturnZeroExitCode
-    }
-
-    It "nuget" {
-        "nuget" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Git" {
     It "git" {
         "git --version" | Should -ReturnZeroExitCode
