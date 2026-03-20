@@ -6,7 +6,7 @@
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-Import-Module "$env:HELPER_SCRIPTS/../tests/Helpers.psm1"
+Import-Module "$env:HELPER_SCRIPTS/../helpers/Common.Helpers.psm1"
 
 # Get modules content from toolset
 $modules = (Get-ToolsetContent).azureModules
