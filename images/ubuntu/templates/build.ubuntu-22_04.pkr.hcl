@@ -27,11 +27,6 @@ build {
     ]
   }
 
-  provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    script          = "${path.root}/../scripts/build/configure-limits.sh"
-  }
-
   provisioner "file" {
     destination = "${var.installer_script_folder}"
     source      = "${path.root}/../scripts/build"
