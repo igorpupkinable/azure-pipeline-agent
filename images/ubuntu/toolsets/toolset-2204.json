@@ -6,8 +6,5 @@
             "tar",
             "wget"
         ]
-    },
-    "pwsh": {
-        "version": "7.4"
     }
 }
