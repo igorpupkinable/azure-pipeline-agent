@@ -9,12 +9,6 @@ Describe "azcopy" {
     }
 }
 
-Describe "Bicep" {
-    It "Bicep" {
-        "bicep --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Docker" {
     It "docker client" {
         $version=(Get-ToolsetContent).docker.components | Where-Object { $_.package -eq 'docker-ce-cli' } | Select-Object -ExpandProperty version

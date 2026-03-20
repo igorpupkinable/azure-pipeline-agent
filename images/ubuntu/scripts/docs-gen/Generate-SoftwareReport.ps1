@@ -53,7 +53,6 @@ if (Test-IsUbuntu22) {
     $tools.AddToolVersion("apt-fast", $(Get-AptFastVersion))
 }
 $tools.AddToolVersion("AzCopy", $(Get-AzCopyVersion))
-$tools.AddToolVersion("Bicep", $(Get-BicepVersion))
 $tools.AddToolVersion("Docker Compose v2", $(Get-DockerComposeV2Version))
 $tools.AddToolVersion("Docker-Buildx", $(Get-DockerBuildxVersion))
 $tools.AddToolVersion("Docker Client", $(Get-DockerClientVersion))

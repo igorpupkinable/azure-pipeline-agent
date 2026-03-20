@@ -9,11 +9,6 @@ function Get-AzCopyVersion {
     return "$azcopyVersion - available by ``azcopy`` and ``azcopy10`` aliases"
 }
 
-function Get-BicepVersion {
-    (bicep --version | Out-String) -match  "bicep cli version (?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.Version
-}
-
 function Get-DockerComposeV2Version {
     $composeVersion = docker compose version | Get-StringPart -Part 3 | Get-StringPart -Part 0 -Delimiter "v"
     return $composeVersion
