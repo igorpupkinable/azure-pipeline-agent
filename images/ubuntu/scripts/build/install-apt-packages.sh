@@ -5,12 +5,4 @@
 ################################################################################
 
 apt-get update
-# apt-get install apt-transport-https ca-certificates curl software-properties-common
-apt-get --yes install curl
-apt-get --yes install apt-transport-https
-apt-get --yes install software-properties-common
-
-# Install vital packages if missing
-apt-get --yes install wget
-
-# apt-get dist-upgrade
+apt-get --yes install apt-utils curl apt-transport-https software-properties-common
