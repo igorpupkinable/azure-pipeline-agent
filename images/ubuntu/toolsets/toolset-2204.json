@@ -15,20 +15,10 @@
     ],
     "apt": {
         "vital_packages": [
-            "bzip2",
             "curl",
-            "g++",
-            "gcc",
-            "make",
             "jq",
             "tar",
-            "unzip",
             "wget"
-        ]
-    },
-    "gcc": {
-        "versions": [
-            "g++-12"
         ]
     },
     "pwsh": {

@@ -9,14 +9,6 @@ Describe "azcopy" {
     }
 }
 
-Describe "gcc" {
-    $testCases = (Get-ToolsetContent).gcc.Versions | ForEach-Object { @{GccVersion = $_} }
-
-    It "gcc <GccVersion>" -TestCases $testCases {
-        "$GccVersion --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "Git" {
     It "git" {
         "git --version" | Should -ReturnZeroExitCode
