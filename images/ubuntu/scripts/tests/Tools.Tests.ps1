@@ -59,12 +59,6 @@ Describe "Docker" {
     }
 }
 
-Describe "Cmake" {
-    It "cmake" {
-        "cmake --version" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "gcc" {
     $testCases = (Get-ToolsetContent).gcc.Versions | ForEach-Object { @{GccVersion = $_} }
 

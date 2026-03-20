@@ -14,11 +14,6 @@ function Get-BicepVersion {
     return $Matches.Version
 }
 
-function Get-CMakeVersion {
-    $cmakeVersion = cmake --version | Select-Object -First 1 | Get-StringPart -Part 2
-    return $cmakeVersion
-}
-
 function Get-DockerComposeV2Version {
     $composeVersion = docker compose version | Get-StringPart -Part 3 | Get-StringPart -Part 0 -Delimiter "v"
     return $composeVersion

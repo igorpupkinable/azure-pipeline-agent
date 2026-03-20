@@ -54,7 +54,6 @@ if (Test-IsUbuntu22) {
 }
 $tools.AddToolVersion("AzCopy", $(Get-AzCopyVersion))
 $tools.AddToolVersion("Bicep", $(Get-BicepVersion))
-$tools.AddToolVersion("CMake", $(Get-CMakeVersion))
 $tools.AddToolVersion("Docker Compose v2", $(Get-DockerComposeV2Version))
 $tools.AddToolVersion("Docker-Buildx", $(Get-DockerBuildxVersion))
 $tools.AddToolVersion("Docker Client", $(Get-DockerClientVersion))
