@@ -97,7 +97,7 @@ function Get-CachedDockerImagesTableData {
 function Get-AptPackages {
     $apt = (Get-ToolsetContent).Apt
     $output = @()
-    ForEach ($pkg in ($apt.vital_packages + $apt.common_packages + $apt.cmd_packages)) {
+    ForEach ($pkg in ($apt.vital_packages + $apt.common_packages)) {
         $version = $(dpkg-query -W -f '${Version}' $pkg)
         if ($null -eq $version) {
             $version = $(dpkg-query -W -f '${Version}' "$pkg*")

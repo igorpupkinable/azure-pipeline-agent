@@ -59,25 +59,6 @@
             "rpm",
             "tk",
             "tzdata"
-        ],
-        "cmd_packages": [
-            "acl",
-            "binutils",
-            "libnss3-tools",
-            "coreutils",
-            "file",
-            "findutils",
-            "net-tools",
-            "parallel",
-            "pass",
-            "rsync",
-            "shellcheck",
-            "ssh",
-            "sshpass",
-            "sudo",
-            "systemd-coredump",
-            "time",
-            "zip"
         ]
     },
     "brew": [
