@@ -75,7 +75,6 @@ $tools.AddToolVersion("Git LFS", $(Get-GitLFSVersion))
 $tools.AddToolVersion("Git-ftp", $(Get-GitFTPVersion))
 $tools.AddToolVersion("Haveged", $(Get-HavegedVersion))
 $tools.AddToolVersion("jq", $(Get-JqVersion))
-$tools.AddToolVersion("MediaInfo", $(Get-MediainfoVersion))
 $tools.AddToolVersion("OpenSSL", $(Get-OpensslVersion))
 
 # CLI Tools
