@@ -7,9 +7,7 @@ Describe "Apt" {
     It "<toolName> is available" -TestCases $testCases {
         switch ($toolName) {
             "acl"               { $toolName = "getfacl"; break }
-            "aria2"             { $toolName = "aria2c"; break }
             "libnss3-tools"     { $toolName = "certutil"; break }
-            "p7zip-full"        { $toolName = "p7zip"; break }
             "binutils"          { $toolName = "strings"; break }
             "coreutils"         { $toolName = "tr"; break }
             "net-tools"         { $toolName = "netstat"; break }

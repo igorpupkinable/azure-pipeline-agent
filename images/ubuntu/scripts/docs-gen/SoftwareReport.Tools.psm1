@@ -40,11 +40,6 @@ function Get-GitLFSVersion {
     return $gitlfsversion
 }
 
-function Get-GitFTPVersion {
-    $gitftpVersion = git-ftp --version | Get-StringPart -Part 2
-    return $gitftpVersion
-}
-
 function Get-HavegedVersion {
     $havegedVersion = dpkg-query --showformat='${Version}' --show haveged | Get-StringPart -Part 0 -Delimiter "-"
     return $havegedVersion

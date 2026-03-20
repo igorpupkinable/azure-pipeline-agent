@@ -1,7 +1,7 @@
 #!/bin/bash -e
 ################################################################################
 ##  File:  install-git.sh
-##  Desc:  Install Git and Git-FTP
+##  Desc:  Install Git
 ################################################################################
 
 # Source the helpers for use with the script
@@ -19,9 +19,6 @@ cat <<EOF >> /etc/gitconfig
 [safe]
         directory = *
 EOF
-
-# Install git-ftp
-apt-get install git-ftp
 
 # Remove source repo's
 add-apt-repository --remove $GIT_REPO

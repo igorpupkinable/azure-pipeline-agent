@@ -65,10 +65,6 @@ Describe "Git" {
     It "git" {
         "git --version" | Should -ReturnZeroExitCode
     }
-
-    It "git-ftp" {
-        "git-ftp --version" | Should -ReturnZeroExitCode
-    }
 }
 
 Describe "Git-lfs" {
