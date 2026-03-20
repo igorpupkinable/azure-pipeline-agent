@@ -40,10 +40,10 @@ EOF
 apt-get purge unattended-upgrades
 
 echo 'APT sources'
-if ! is_ubuntu24; then
-    cat /etc/apt/sources.list
-else
+if is_ubuntu24; then
     cat /etc/apt/sources.list.d/ubuntu.sources
+else
+    cat /etc/apt/sources.list
 fi
 
 apt-get update
