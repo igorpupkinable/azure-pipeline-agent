@@ -34,7 +34,6 @@ $languageAndRuntime.AddToolVersion("Bash", $(Get-BashVersion))
 $languageAndRuntime.AddToolVersion("Dash", $(Get-DashVersion))
 $languageAndRuntime.AddToolVersionsListInline("GNU C++", $(Get-CPPVersions), "^\d+")
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
-$languageAndRuntime.AddToolVersion("Python", $(Get-PythonVersion))
 
 # Package Management
 $packageManagement = $installedSoftware.AddHeader("Package Management")
@@ -68,10 +67,6 @@ $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
 $netCoreTools = $installedSoftware.AddHeader(".NET Tools")
 $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotNetCoreSdkVersions), "^\d+\.\d+\.\d")
 $netCoreTools.AddNodes($(Get-DotnetTools))
-
-# Cached Tools
-$cachedTools = $installedSoftware.AddHeader("Cached Tools")
-$cachedTools.AddToolVersionsList("Python", $(Get-ToolcachePythonVersions), "^\d+\.\d+")
 
 # PowerShell Tools
 $powerShellTools = $installedSoftware.AddHeader("PowerShell Tools")

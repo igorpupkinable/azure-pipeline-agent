@@ -26,12 +26,6 @@ function Get-PerlVersion {
     return $version
 }
 
-function Get-PythonVersion {
-    $result = Get-CommandResult "python --version"
-    $version = $result.Output | Get-StringPart -Part 1
-    return $version
-}
-
 function Get-PowershellVersion {
     $pwshVersion = $(pwsh --version) | Get-StringPart -Part 1
     return $pwshVersion

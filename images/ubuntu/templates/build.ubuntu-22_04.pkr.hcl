@@ -107,8 +107,7 @@ build {
       "${path.root}/../scripts/build/install-gcc-compilers.sh",
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-git-lfs.sh",
-      "${path.root}/../scripts/build/configure-dpkg.sh",
-      "${path.root}/../scripts/build/install-python.sh"
+      "${path.root}/../scripts/build/configure-dpkg.sh"
     ]
   }
 

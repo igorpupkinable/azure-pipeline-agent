@@ -1,16 +1,5 @@
 {
-    "toolcache": [
-        {
-            "name": "Python",
-            "url" : "https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json",
-            "platform" : "linux",
-            "platform_version": "22.04",
-            "arch": "x64",
-            "versions": [
-                "3.14.*"
-            ]
-        }
-    ],
+    "toolcache": [],
     "powershellModules": [
         {"name": "MarkdownPS"},
         {"name": "Microsoft.Graph"},
@@ -68,7 +57,6 @@
             "locales",
             "openssh-client",
             "pkg-config",
-            "python-is-python3",
             "rpm",
             "tk",
             "tzdata"

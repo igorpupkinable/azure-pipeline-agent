@@ -78,11 +78,3 @@ Describe "Homebrew" {
         "/home/linuxbrew/.linuxbrew/bin/brew --version" | Should -ReturnZeroExitCode
     }
 }
-
-Describe "Python" {
-    $testCases = @("python", "python3") | ForEach-Object { @{PythonCommand = $_} }
-
-    It "<PythonCommand>" -TestCases $testCases {
-        "$PythonCommand --version" | Should -ReturnZeroExitCode
-    }
-}
