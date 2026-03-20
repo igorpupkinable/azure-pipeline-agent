@@ -25,12 +25,6 @@ Dpkg::Options {
 }
 EOF
 
-# hide information about packages that are no longer required
-cat <<EOF >> /etc/apt/apt.conf.d/10apt-autoremove
-APT::Get::AutomaticRemove "0";
-APT::Get::HideAutoRemove "1";
-EOF
-
 # Install libicu70 package for Ubuntu 24
 if  is_ubuntu24 ; then
   wget https://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu70_70.1-2_amd64.deb

@@ -22,17 +22,10 @@ set_etc_environment_variable "XDG_CONFIG_HOME" '$HOME/.config'
 # Change waagent entries to use /mnt for swap file
 sed -i 's/ResourceDisk.Format=n/ResourceDisk.Format=y/g' /etc/waagent.conf
 sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
-sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=4096/g' /etc/waagent.conf
+sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=1024/g' /etc/waagent.conf
 
 # Add localhost alias to ::1 IPv6
 sed -i 's/::1 ip6-localhost ip6-loopback/::1     localhost ip6-localhost ip6-loopback/g' /etc/hosts
-
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
-# https://www.suse.com/support/kb/doc/?id=000016692
-echo 'vm.max_map_count=262144' | tee -a /etc/sysctl.conf
-
-# https://github.com/actions/runner-images/issues/9491
-echo 'vm.mmap_rnd_bits=28' | tee -a /etc/sysctl.conf
 
 # https://github.com/actions/runner-images/pull/7860
 netfilter_rule='/etc/udev/rules.d/50-netfilter.rules'

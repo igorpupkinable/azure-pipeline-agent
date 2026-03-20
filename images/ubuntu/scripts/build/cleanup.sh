@@ -22,15 +22,7 @@ fi
 # delete all .gz and rotated file
 find /var/log -type f -regex ".*\.gz$" -delete
 find /var/log -type f -regex ".*\.[0-9]$" -delete
-
-# wipe log files
 find /var/log/ -type f -exec cp /dev/null {} \;
-
-# remove apt mock
-prefix=/usr/local/bin
-for tool in apt apt-get apt-key;do
-    sudo rm -f $prefix/$tool
-done
 
 # after cleanup
 after=$(df / -Pm | awk 'NR==2{print $4}')
