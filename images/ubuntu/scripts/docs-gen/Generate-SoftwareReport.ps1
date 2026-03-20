@@ -34,10 +34,6 @@ $languageAndRuntime.AddToolVersion("Dash", $(Get-DashVersion))
 $languageAndRuntime.AddToolVersionsListInline("GNU C++", $(Get-CPPVersions), "^\d+")
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 
-# Package Management
-$packageManagement = $installedSoftware.AddHeader("Package Management")
-$packageManagement.AddToolVersion("cpan", $(Get-CpanVersion))
-
 # Tools
 $tools = $installedSoftware.AddHeader("Tools")
 $tools.AddToolVersion("AzCopy", $(Get-AzCopyVersion))

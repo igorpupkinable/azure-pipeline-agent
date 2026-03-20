@@ -31,12 +31,6 @@ function Get-PowershellVersion {
     return $pwshVersion
 }
 
-function Get-CpanVersion {
-    $result = Get-CommandResult "cpan --version" -ExpectedExitCode @(25, 255)
-    $result.Output -match "version (?<version>\d+\.\d+) " | Out-Null
-    return $Matches.version
-}
-
 function Get-GemVersion {
     $result = Get-CommandResult "gem --version"
     $result.Output -match "(?<version>\d+\.\d+\.\d+)" | Out-Null
