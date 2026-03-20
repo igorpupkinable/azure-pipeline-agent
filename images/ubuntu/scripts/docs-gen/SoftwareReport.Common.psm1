@@ -3,11 +3,6 @@ function Get-BashVersion {
     return $version
 }
 
-function Get-DashVersion {
-    $version = dpkg-query -W -f '${Version}' dash
-    return $version
-}
-
 function Get-CPPVersions {
     $result = Get-CommandResult "apt list --installed" -Multiline
     $cppVersions = $result.Output | Where-Object { $_ -match "g\+\+-\d\d\/" } | ForEach-Object {
@@ -29,17 +24,6 @@ function Get-PerlVersion {
 function Get-PowershellVersion {
     $pwshVersion = $(pwsh --version) | Get-StringPart -Part 1
     return $pwshVersion
-}
-
-function Get-GemVersion {
-    $result = Get-CommandResult "gem --version"
-    $result.Output -match "(?<version>\d+\.\d+\.\d+)" | Out-Null
-    return $Matches.version
-}
-
-function Get-HelmVersion {
-    $(helm version) -match 'Version:"v(?<version>\d+\.\d+\.\d+)"' | Out-Null
-    return $Matches.version
 }
 
 function Get-GHCVersion {

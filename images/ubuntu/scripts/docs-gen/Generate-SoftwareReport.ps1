@@ -30,7 +30,6 @@ $installedSoftware = $softwareReport.Root.AddHeader("Installed Software")
 # Language and Runtime
 $languageAndRuntime = $installedSoftware.AddHeader("Language and Runtime")
 $languageAndRuntime.AddToolVersion("Bash", $(Get-BashVersion))
-$languageAndRuntime.AddToolVersion("Dash", $(Get-DashVersion))
 $languageAndRuntime.AddToolVersionsListInline("GNU C++", $(Get-CPPVersions), "^\d+")
 $languageAndRuntime.AddToolVersion("Perl", $(Get-PerlVersion))
 
