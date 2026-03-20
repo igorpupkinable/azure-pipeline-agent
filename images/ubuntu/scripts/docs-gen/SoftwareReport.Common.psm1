@@ -76,21 +76,6 @@ function Get-PowerShellModules {
     return $result
 }
 
-function Get-DotNetCoreSdkVersions {
-    $dotNetCoreSdkVersion = dotnet --list-sdks list | ForEach-Object { $_ | Get-StringPart -Part 0 }
-    return $dotNetCoreSdkVersion
-}
-
-function Get-DotnetTools {
-    $env:PATH = "/etc/skel/.dotnet/tools:$($env:PATH)"
-    $dotnetTools = (Get-ToolsetContent).dotnet.tools
-
-    return $dotnetTools | ForEach-Object {
-        $version = Invoke-Expression $_.getversion
-        return [ToolVersionNode]::new($_.name, $version)
-    }
-}
-
 function Get-CachedDockerImages {
     $toolsetJson = Get-ToolsetContent
     $images = $toolsetJson.docker.images

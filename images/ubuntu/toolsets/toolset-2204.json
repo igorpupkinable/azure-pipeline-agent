@@ -110,14 +110,6 @@
             }
         ]
     },
-    "dotnet": {
-        "versions": [
-            "10.0"
-        ],
-        "tools": [
-            { "name": "nbgv", "test": "nbgv --version", "getversion" : "nbgv --version" }
-        ]
-    },
     "gcc": {
         "versions": [
             "g++-12"

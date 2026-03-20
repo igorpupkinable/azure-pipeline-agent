@@ -143,15 +143,6 @@ Describe "Nodes.UnitTests" {
             It "Patch version regex - non-unique versions" {
                 { [ToolVersionsListNode]::new("MyTool", @("2.1.3", "2.1.4", "2.1.4"), "^\d+\.\d+\.\d+", "List") } | Should -Throw "Multiple versions from list * return the same result from regex *"
             }
-
-            It ".NET Core version regex - unique versions" {
-                $node = [ToolVersionsListNode]::new("MyTool", @("2.1.100", "2.1.205", "2.1.303"), "^\d+\.\d+\.\d", "List")
-                $node.Versions | Should -BeArray @("2.1.100", "2.1.205", "2.1.303")
-            }
-
-            It ".NET Core version regex - non-unique versions" {
-                { [ToolVersionsListNode]::new("MyTool", @("2.1.100", "2.1.205", "2.1.230", "3.1.0"), "^\d+\.\d+\.\d", "List") } | Should -Throw "Multiple versions from list * return the same result from regex *"
-            }
         }
     }
 

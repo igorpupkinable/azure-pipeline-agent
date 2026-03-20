@@ -62,11 +62,6 @@ $cliTools = $installedSoftware.AddHeader("CLI Tools")
 $cliTools.AddToolVersion("Azure CLI", $(Get-AzureCliVersion))
 $cliTools.AddToolVersion("Azure CLI (azure-devops)", $(Get-AzureDevopsVersion))
 
-# .NET Tools
-$netCoreTools = $installedSoftware.AddHeader(".NET Tools")
-$netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotNetCoreSdkVersions), "^\d+\.\d+\.\d")
-$netCoreTools.AddNodes($(Get-DotnetTools))
-
 # PowerShell Tools
 $powerShellTools = $installedSoftware.AddHeader("PowerShell Tools")
 $powerShellTools.AddToolVersion("PowerShell", $(Get-PowershellVersion))
