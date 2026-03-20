@@ -11,6 +11,6 @@ apt-get update
 apt-get install apt-transport-https ca-certificates curl software-properties-common
 
 # Install vital packages if missing
-apt-get jq wget
+apt-get install jq wget
 
 # apt-get dist-upgrade
