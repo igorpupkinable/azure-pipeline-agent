@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    azure = {
+      source  = "github.com/hashicorp/azure"
+      version = "~> 2.2"
+    }
+  }
+}
+
 build {
   sources = ["source.azure-arm.image"]
   name = "ubuntu-22_04"
