@@ -44,6 +44,7 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 sleep 10
 docker info
 
+echo "DOCKERHUB_LOGIN=$DOCKERHUB_LOGIN"
 # Cache Docker images, i.e. DOCKERHUB_IMAGES=("node:trixie" "dhi.io/node:22-alpine3.23")
 # if [[ ${#DOCKERHUB_IMAGES[@]} != 0 ]]; then
 #     if [[ "${DOCKERHUB_LOGIN}" ]] && [[ "${DOCKERHUB_PASSWORD}" ]]; then
