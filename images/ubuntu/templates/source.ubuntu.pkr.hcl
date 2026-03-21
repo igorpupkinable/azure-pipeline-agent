@@ -2,7 +2,6 @@ source "azure-arm" "image" {
   # Authentication parameters
   client_cert_password                   = var.client_cert_password
   client_cert_path                       = var.client_cert_path
-  client_cert_token_timeout              = "1h" # Microsoft-hosted Free tier agents are limited to 60 minutes per run
   client_id                              = var.client_id
   object_id                              = var.object_id
   subscription_id                        = var.subscription_id
