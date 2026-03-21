@@ -57,3 +57,6 @@ docker info
 
 #     docker logout
 # else
+
+ls -al /etc/docker/
+cat /etc/docker/daemon.json
