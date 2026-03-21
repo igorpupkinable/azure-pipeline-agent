@@ -1,40 +1,28 @@
 // Authentication related variables
-variable "client_cert_path" {
+variable "client_cert_password" {
+  default = "${env("ARM_CLIENT_CERT_PASSWORD")}"
+  sensitive = true
   type    = string
+}
+variable "client_cert_path" {
   default = "${env("ARM_CLIENT_CERT_PATH")}"
+  type    = string
 }
 variable "client_id" {
-  type    = string
   default = "${env("ARM_CLIENT_ID")}"
-}
-variable "client_secret" {
-  type      = string
-  default   = "${env("ARM_CLIENT_SECRET")}"
-  sensitive = true
+  type    = string
 }
 variable "object_id" {
-  type    = string
   default = "${env("ARM_OBJECT_ID")}"
-}
-variable "oidc_request_token" {
   type    = string
-  default = ""
-}
-variable "oidc_request_url" {
-  type    = string
-  default = ""
 }
 variable "subscription_id" {
-  type    = string
   default = "${env("ARM_SUBSCRIPTION_ID")}"
+  type    = string
 }
 variable "tenant_id" {
-  type    = string
   default = "${env("ARM_TENANT_ID")}"
-}
-variable "use_azure_cli_auth" {
-  type    = bool
-  default = false
+  type    = string
 }
 
 // Azure environment related variables
