@@ -30,13 +30,11 @@ EOF
 # Reload systemd-tmpfiles to apply the new configuration
 systemd-tmpfiles --create /etc/tmpfiles.d/docker.conf
 
-cat <<EOF > /etc/docker/daemon.json
-{
-  "log-driver": "journald"
-}
-EOF
-
-cat /etc/docker/daemon.json
+# cat <<EOF > /etc/docker/daemon.json
+# {
+#   "log-driver": "journald"
+# }
+# EOF
 
 # Enable docker.service
 systemctl is-active --quiet docker.service || systemctl start docker.service
@@ -47,15 +45,15 @@ sleep 10
 docker info
 
 # Cache Docker images, i.e. DOCKERHUB_IMAGES=("node:trixie" "dhi.io/node:22-alpine3.23")
-if [[ ${#DOCKERHUB_IMAGES[@]} != 0 ]]; then
-    if [[ "${DOCKERHUB_LOGIN}" ]] && [[ "${DOCKERHUB_PASSWORD}" ]]; then
-        docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}"
-        docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}" dhi.io
-    fi
+# if [[ ${#DOCKERHUB_IMAGES[@]} != 0 ]]; then
+#     if [[ "${DOCKERHUB_LOGIN}" ]] && [[ "${DOCKERHUB_PASSWORD}" ]]; then
+#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}"
+#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}" dhi.io
+#     fi
 
-    for image in "${DOCKERHUB_IMAGES[@]}"; do
-        docker pull "$image"
-    done
+#     for image in "${DOCKERHUB_IMAGES[@]}"; do
+#         docker pull "$image"
+#     done
 
-    docker logout
-else
+#     docker logout
+# else
