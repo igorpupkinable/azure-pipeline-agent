@@ -6,11 +6,6 @@ if [[ ! -v ARM_CLIENT_ID ]]; then
   exit 1
 fi
 
-if [[ ! -v ARM_OBJECT_ID ]]; then
-  echo "ARM_OBJECT_ID is unset. Aborting..."
-  exit 1
-fi
-
 if [[ ! -v ARM_RESOURCE_GROUP ]]; then
   echo "ARM_RESOURCE_GROUP is unset. Aborting..."
   exit 1
