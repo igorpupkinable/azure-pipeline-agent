@@ -1,4 +1,5 @@
-TEMPLATES_DIR='images/ubuntu/templates'
+#!/bin/bash
+TEMPLATES_DIR=${TEMPLATES_DIR:-'images/ubuntu/templates'}
 
 if [[ ! -v ARM_CLIENT_ID ]]; then
   echo "ARM_CLIENT_ID is unset. Aborting..."
