@@ -16,7 +16,8 @@ os_codename=$(lsb_release -cs)
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o $GPG_KEY
 echo "deb [arch=amd64 signed-by=$GPG_KEY] $REPO_URL ${os_codename} stable" > $REPO_PATH
 apt-get update
-apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get --yes --no-install-recommends --no-install-suggests install \
+  docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # docker from official repo introduced different GID generation: https://github.com/actions/runner-images/issues/8157
 gid=$(cut -d ":" -f 3 /etc/group | grep "^1..$" | sort -n | tail -n 1 | awk '{ print $1+1 }')

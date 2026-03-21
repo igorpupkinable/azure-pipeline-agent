@@ -11,7 +11,8 @@ add-apt-repository "ppa:git-core/ppa" -y
 curl -fsSL https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 
 apt-get update
-apt-get install git git-lfs
+apt-get --yes --no-install-recommends --no-install-suggests install \
+  git git-lfs
 
 # Git version 2.35.2 introduces security fix that breaks action\checkout https://github.com/actions/checkout/issues/760
 cat <<EOF >> /etc/gitconfig

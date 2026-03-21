@@ -5,4 +5,5 @@
 ################################################################################
 
 apt-get update
-apt-get --yes install apt-utils curl apt-transport-https software-properties-common
+apt-get --yes --no-install-recommends --no-install-suggests install \
+  apt-utils curl apt-transport-https software-properties-common
