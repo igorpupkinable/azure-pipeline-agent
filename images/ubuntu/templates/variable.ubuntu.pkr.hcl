@@ -74,10 +74,6 @@ variable "image_os_type" {
   type    = string
   default = "Linux"
 }
-variable "location" {
-  type    = string
-  default = ""
-}
 variable "managed_image_name" {
   type    = string
   default = ""
@@ -86,17 +82,13 @@ variable "managed_image_resource_group_name" {
   type    = string
   default = "${env("ARM_RESOURCE_GROUP")}"
 }
-variable "managed_image_storage_account_type" {
-  type    = string
-  default = "Premium_LRS"
-}
 variable "private_virtual_network_with_public_ip" {
   type    = bool
   default = false
 }
 variable "os_disk_size_gb" {
   type    = number
-  default = null
+  default = 30
 }
 variable "source_image_version" {
   type    = string
@@ -105,10 +97,6 @@ variable "source_image_version" {
 variable "ssh_clear_authorized_keys" {
   type    = bool
   default = true
-}
-variable "temp_resource_group_name" {
-  type    = string
-  default = "${env("TEMP_RESOURCE_GROUP_NAME")}"
 }
 variable "virtual_network_name" {
   type    = string
@@ -154,7 +142,7 @@ variable "image_folder" {
 }
 variable "image_os" {
   type    = string
-  default = ""
+  default = "ubuntu22"
 }
 variable "image_version" {
   type    = string
