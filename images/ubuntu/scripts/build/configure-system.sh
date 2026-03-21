@@ -13,8 +13,6 @@ echo "chmod -R 777 /usr/share"
 chmod -R 777 /usr/share
 echo "chmod -R 777 /opt"
 chmod -R 777 /opt
-echo "Setting sticky bit on hostedtoolcache Ruby directories due to the changes in Ruby 4.0; see issue: https://github.com/actions/runner-images/issues/13647"
-find /opt/hostedtoolcache/Ruby -type d -exec chmod +t {} +
 
 chmod 755 $IMAGE_FOLDER
 
@@ -24,15 +22,6 @@ ENVPATH=${ENVPATH#"\""}
 ENVPATH=${ENVPATH%"\""}
 replace_etc_environment_variable "PATH" "${ENVPATH}"
 echo "Updated /etc/environment: $(cat /etc/environment)"
-
-# Clean yarn and npm cache
-if yarn --version > /dev/null; then
-    yarn cache clean
-fi
-
-if npm --version; then
-    npm cache clean --force
-fi
 
 if is_ubuntu24; then
 # Prevent needrestart from restarting the provisioner service.

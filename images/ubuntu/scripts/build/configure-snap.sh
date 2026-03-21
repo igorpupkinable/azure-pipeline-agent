@@ -9,13 +9,12 @@ source $HELPER_SCRIPTS/etc-environment.sh
 
 # Update /etc/environment to include /snap/bin in PATH
 # because /etc/profile.d is ignored by `--norc` shell launch option
-
 prepend_etc_environment_path "/snap/bin"
 
 # Put snapd auto refresh on hold
 # as it may generate too much traffic on Canonical's snap server
 # when they are rolling a new major update out.
-# Hold is calculated as today's date + 60 days
+# Hold is calculated as today's date + maximum 90 days
 
 # snapd is started automatically, but during image generation
 # a unix socket may die, restart snapd.service (and therefore snapd.socket)
@@ -23,4 +22,4 @@ prepend_etc_environment_path "/snap/bin"
 
 systemctl restart snapd.socket
 systemctl restart snapd
-snap set system refresh.hold="$(date --date='today+60 days' +%Y-%m-%dT%H:%M:%S%:z)"
+snap set system refresh.hold="$(date --date='today+90 days' +%Y-%m-%dT%H:%M:%S%:z)"

@@ -1,7 +1,7 @@
 #!/bin/bash -e
 ################################################################################
 ##  File:  configure-apt.sh
-##  Desc:  Configure apt, install jq and apt-fast packages.
+##  Desc:  Configure apt.
 ################################################################################
 
 source $HELPER_SCRIPTS/os.sh
@@ -14,6 +14,10 @@ systemctl stop apt-daily-upgrade.timer
 systemctl disable apt-daily-upgrade.timer
 systemctl disable apt-daily-upgrade.service
 
+# Do not consider recommended packages as a dependency for installing
+echo "APT::Install-Recommends \"false\";" > /etc/apt/apt.conf.d/30install-suggests
+echo "APT::Install-Suggests \"false\";" > /etc/apt/apt.conf.d/30install-suggests
+
 # Enable retry logic for apt up to 10 times
 echo "APT::Acquire::Retries \"10\";" > /etc/apt/apt.conf.d/80-retries
 
@@ -21,8 +25,8 @@ echo "APT::Acquire::Retries \"10\";" > /etc/apt/apt.conf.d/80-retries
 echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 # APT understands a field called Phased-Update-Percentage which can be used to control the rollout of a new version. It is an integer between 0 and 100.
-# In case you have multiple systems that you want to receive the same set of updates, 
-# you can set APT::Machine-ID to a UUID such that they all phase the same, 
+# In case you have multiple systems that you want to receive the same set of updates,
+# you can set APT::Machine-ID to a UUID such that they all phase the same,
 # or set APT::Get::Never-Include-Phased-Updates or APT::Get::Always-Include-Phased-Updates to true such that APT will never/always consider phased updates.
 # apt-cache policy pkgname
 echo 'APT::Get::Always-Include-Phased-Updates "true";' > /etc/apt/apt.conf.d/99-phased-updates
@@ -40,18 +44,10 @@ EOF
 apt-get purge unattended-upgrades
 
 echo 'APT sources'
-if ! is_ubuntu24; then
-    cat /etc/apt/sources.list
-else
+if is_ubuntu24; then
     cat /etc/apt/sources.list.d/ubuntu.sources
+else
+    cat /etc/apt/sources.list
 fi
 
 apt-get update
-# Install jq
-apt-get install jq
-
-if ! is_ubuntu24; then
-    # Install apt-fast using quick-install.sh
-    # https://github.com/ilikenwf/apt-fast
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ilikenwf/apt-fast/master/quick-install.sh)"
-fi

@@ -1,11 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 enum ImageType {
-    Windows2022         = 1
-    Windows2025         = 2
-    Windows2025_vs2026  = 3
     Ubuntu2204          = 4
-    Ubuntu2404          = 5
 }
 
 Function Get-PackerTemplate {
@@ -18,25 +14,9 @@ Function Get-PackerTemplate {
 
     switch ($ImageType) {
         # Note: Double Join-Path is required to support PowerShell 5.1
-        ([ImageType]::Windows2022) {
-            $relativeTemplatePath = Join-Path (Join-Path "windows" "templates") "build.windows-2022.pkr.hcl"
-            $imageOS = "win22"
-        }
-        ([ImageType]::Windows2025) {
-            $relativeTemplatePath = Join-Path (Join-Path "windows" "templates") "build.windows-2025.pkr.hcl"
-            $imageOS = "win25"
-        }
-        ([ImageType]::Windows2025_vs2026) {
-            $relativeTemplatePath = Join-Path (Join-Path "windows" "templates") "build.windows-2025-vs2026.pkr.hcl"
-            $imageOS = "win25-vs2026"
-        }
         ([ImageType]::Ubuntu2204) {
             $relativeTemplatePath = Join-Path (Join-Path "ubuntu" "templates") "build.ubuntu-22_04.pkr.hcl"
             $imageOS = "ubuntu22"
-        }
-        ([ImageType]::Ubuntu2404) {
-            $relativeTemplatePath = Join-Path (Join-Path "ubuntu" "templates") "build.ubuntu-24_04.pkr.hcl"
-            $imageOS = "ubuntu24"
         }
         default { throw "Unknown type of image" }
     }
@@ -140,7 +120,7 @@ Function GenerateResourcesAndImage {
         .PARAMETER OidcRequestUrl
             GitHub Actions OIDC request URL.
         .PARAMETER RestrictToAgentIpAddress
-            If set, access to the VM used by packer to generate the image is restricted to the public IP address this script is run from. 
+            If set, access to the VM used by packer to generate the image is restricted to the public IP address this script is run from.
             This parameter cannot be used in combination with the virtual_network_name packer parameter.
         .PARAMETER OnError
             Specify how packer handles an error during image creation.
