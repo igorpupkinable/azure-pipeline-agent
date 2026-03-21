@@ -22,6 +22,12 @@ apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 gid=$(cut -d ":" -f 3 /etc/group | grep "^1..$" | sort -n | tail -n 1 | awk '{ print $1+1 }')
 groupmod -g "$gid" docker
 
+cat <<EOF > /etc/docker/daemon.json
+{
+  "log-driver": "journald"
+}
+EOF
+
 # Create systemd-tmpfiles configuration for Docker
 cat <<EOF | sudo tee /etc/tmpfiles.d/docker.conf
 L /run/docker.sock - - - - root docker 0770
@@ -29,12 +35,6 @@ EOF
 
 # Reload systemd-tmpfiles to apply the new configuration
 systemd-tmpfiles --create /etc/tmpfiles.d/docker.conf
-
-# cat <<EOF > /etc/docker/daemon.json
-# {
-#   "log-driver": "journald"
-# }
-# EOF
 
 # Enable docker.service
 systemctl is-active --quiet docker.service || systemctl start docker.service
@@ -57,6 +57,3 @@ docker info
 
 #     docker logout
 # else
-
-ls -al /etc/docker/
-cat /etc/docker/daemon.json
