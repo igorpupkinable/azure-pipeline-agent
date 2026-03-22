@@ -71,13 +71,10 @@ jobs:
     name: agentBuilderCertificate
     inputs:
       secureFile: "${{ variables.secureFileGuid }}"
-  - bash: echo "$(AGENT_IMAGE_OS) $(AGENT_OSDISK_SIZE) $(AGENT_VM_SIZE) $(BUILD_NAME)"
+  - bash: echo "$(DOCKERHUB_IMAGES)"
     displayName: 'Run a one-line script'
   - bash: |
-      echo "Docker images to cache: $(DOCKERHUB_IMAGES)"
-      echo "Resulting image name: $(RESULTING_IMAGE_NAME)"
       echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
-      echo "Group variables: $(ARM_TENANT_ID) $(ARM_RESOURCE_GROUP) $(BUILD_RG_NAME)"
     displayName: 'Run a multi-line script'
   variables:
   - group: agent-builder-auth
