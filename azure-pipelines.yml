@@ -14,7 +14,7 @@ parameters:
   values:
   - ubuntu-22_04
 - name: agentImageName
-  default: '$(Build.BuildId)-$(Build.SourceVersion)'
+  default: ''
   displayName: Resulting Agent image name
   type: string
 - name: agentOs
@@ -50,37 +50,51 @@ parameters:
   default: ''
   displayName: Space separated list of Docker Hub images to cache
   type: string
-pool:
-  vmImage: ${{ parameters.poolImage }}
 trigger:
 - main
 variables:
-- group: agent-builder-auth
-- group: agent-builder-build
-- name: AGENT_IMAGE_OS
-  value: ${{ parameters.agentOs }}
-- name: AGENT_OSDISK_SIZE
-  value: ${{ parameters.agentOsDiskSize }}
-- name: AGENT_VM_SIZE
-  value: ${{ parameters.agentVmSize }}
-- name: BUILD_NAME
-  value: ${{ parameters.buildName }}
-- name: DOCKERHUB_IMAGES
-  value: ${{ parameters.dockerImagesToCache }}
-- name: RESULTING_IMAGE_NAME
-  value: ${{ parameters.agentImageName }}
+- group: agent-builder-secure
 
-steps:
-- task: DownloadSecureFile@1
-  displayName: 'Download certificate'
-  name: agentBuilderCertificate
-  inputs:
-    secureFile: $SECURE_FILE_GUID
-- bash: echo $AGENT_IMAGE_OS $AGENT_OSDISK_SIZE $AGENT_VM_SIZE $BUILD_NAME $SECURE_FILE_GUID
-  displayName: 'Run a one-line script'
-- bash: |
-    echo "Docker images to cache: $DOCKERHUB_IMAGES"
-    echo "Resulting image name: $RESULTING_IMAGE_NAME"
-    echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
-    echo "Group variables: $ARM_TENANT_ID $ARM_RESOURCE_GROUP $BUILD_RG_NAME"
-  displayName: 'Run a multi-line script'
+jobs:
+- job: build
+  displayName: Build
+  pool:
+    vmImage: ${{ parameters.poolImage }}
+  steps:
+  - task: DownloadSecureFile@1
+    displayName: 'Download certificate'
+    name: agentBuilderCertificate
+    inputs:
+      secureFile: $(SECURE_FILE_GUID)
+  - bash: echo "$(AGENT_IMAGE_OS) $(AGENT_OSDISK_SIZE) $(AGENT_VM_SIZE) $(BUILD_NAME) $(SECURE_FILE_GUID)"
+    displayName: 'Run a one-line script'
+  - bash: |
+      echo "Docker images to cache: $(DOCKERHUB_IMAGES)"
+      echo "Resulting image name: $(RESULTING_IMAGE_NAME)"
+      echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
+      echo "Group variables: $(ARM_TENANT_ID) $(ARM_RESOURCE_GROUP) $(BUILD_RG_NAME)"
+    displayName: 'Run a multi-line script'
+  variables:
+  - group: agent-builder-auth
+  - group: agent-builder-build
+  - name: AGENT_IMAGE_OS
+    readonly: true
+    value: ${{ parameters.agentOs }}
+  - name: AGENT_OSDISK_SIZE
+    readonly: true
+    value: ${{ parameters.agentOsDiskSize }}
+  - name: AGENT_VM_SIZE
+    readonly: true
+    value: ${{ parameters.agentVmSize }}
+  - name: BUILD_NAME
+    readonly: true
+    value: ${{ parameters.buildName }}
+  - name: DOCKERHUB_IMAGES
+    readonly: true
+    value: ${{ parameters.dockerImagesToCache }}
+  - name: RESULTING_IMAGE_NAME
+    readonly: true
+    ${{ if eq(parameters.agentImageName, '') }}:
+      value: $(Build.BuildId)
+    ${{ else }}:
+      value: ${{ parameters.agentImageName }}
