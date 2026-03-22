@@ -71,7 +71,7 @@ jobs:
     name: agentBuilderCertificate
     inputs:
       secureFile: "${{ variables.secureFileGuid }}"
-  - bash: echo "$(DOCKERHUB_IMAGES)"
+  - bash: echo "|$(DOCKERHUB_IMAGES)|"
     displayName: 'Run a one-line script'
   - bash: |
       echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
@@ -91,9 +91,11 @@ jobs:
   - name: BUILD_NAME
     readonly: true
     value: ${{ parameters.buildName }}
-  - ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
-    - name: DOCKERHUB_IMAGES
-      readonly: true
+  - name: DOCKERHUB_IMAGES
+    readonly: true
+    ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
+      value: ''
+    ${{ else }}:
       value: ${{ parameters.dockerImagesToCache }}
   - name: RESULTING_IMAGE_NAME
     readonly: true

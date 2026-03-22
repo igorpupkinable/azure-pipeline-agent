@@ -45,7 +45,9 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 sleep 10
 docker info
 
-# Cache images of provided
+# Cache images of provided tags
+echo "Image tags provided: $@"
+
 [[ $DOCKERHUB_LOGIN && $DOCKERHUB_PAT ]] && DOCKERHUB_CREDENTIALS_PROVIDED=true
 DOCKERHUB_IMAGES=("$@")
 
