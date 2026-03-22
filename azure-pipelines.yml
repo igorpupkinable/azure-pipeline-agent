@@ -1,5 +1,5 @@
 parameters:
-- name: certGuid
+- name: certGuid # TODO: Remove workaround once https://github.com/microsoft/azure-pipelines-tasks/issues/6885 is fixed
   default: '00000000-0000-0000-0000-000000000000'
   displayName: Agent Builder certificate GUID
   type: string
@@ -70,9 +70,6 @@ jobs:
       secureFile: ${{ parameters.certGuid }}
   - bash: echo "|$(DOCKERHUB_IMAGES)|"
     displayName: 'Run a one-line script'
-  - bash: |
-      echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
-    displayName: 'Run a multi-line script'
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
