@@ -68,8 +68,10 @@ jobs:
     name: agentBuilderCertificate
     inputs:
       secureFile: ${{ parameters.certGuid }}
-  - bash: echo $(RESULTING_IMAGE_NAME)
-    displayName: 'Run a one-line script'
+  - task: Bash@3
+    displayName: 'Build agent'
+    inputs:
+      filePath: ./build-agent.sh
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
