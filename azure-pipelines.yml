@@ -65,7 +65,7 @@ jobs:
     displayName: 'Download certificate'
     name: agentBuilderCertificate
     inputs:
-      secureFile: $(SECURE_FILE_GUID)
+      secureFile: "${{ variables['SECURE_FILE_GUID'] }}"
   - bash: echo "$(AGENT_IMAGE_OS) $(AGENT_OSDISK_SIZE) $(AGENT_VM_SIZE) $(BUILD_NAME) $(SECURE_FILE_GUID)"
     displayName: 'Run a one-line script'
   - bash: |
