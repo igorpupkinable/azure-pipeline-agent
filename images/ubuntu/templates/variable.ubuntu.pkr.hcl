@@ -12,10 +12,6 @@ variable "client_id" {
   default = "${env("ARM_CLIENT_ID")}"
   type    = string
 }
-variable "object_id" {
-  default = "${env("ARM_OBJECT_ID")}"
-  type    = string
-}
 variable "subscription_id" {
   default = "${env("ARM_SUBSCRIPTION_ID")}"
   type    = string

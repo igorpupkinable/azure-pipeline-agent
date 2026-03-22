@@ -3,7 +3,6 @@ source "azure-arm" "image" {
   client_cert_password                   = var.client_cert_password
   client_cert_path                       = var.client_cert_path
   client_id                              = var.client_id
-  object_id                              = var.object_id
   subscription_id                        = var.subscription_id
   tenant_id                              = var.tenant_id
 
