@@ -67,7 +67,7 @@ jobs:
     displayName: 'Download certificate'
     name: agentBuilderCertificate
     inputs:
-      secureFile: "${{ parameters.certGuid }}"
+      secureFile: ${{ parameters.certGuid }}
   - bash: echo "|$(DOCKERHUB_IMAGES)|"
     displayName: 'Run a one-line script'
   - bash: |
