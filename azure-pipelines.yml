@@ -19,7 +19,7 @@ parameters:
   - ubuntu-22_04
 - name: agentImageName
   default: BuildId
-  displayName: Resulting Agent image name
+  displayName: Resulting Agent image name (default: BuildId)
   type: string
 - name: agentOs
   default: ubuntuMinimal22
@@ -31,7 +31,7 @@ parameters:
   - ubuntu24
 - name: agentOsDiskSize
   default: 30
-  displayName: Resulting Agent OS Disk size in GB
+  displayName: Resulting Agent OS Disk size in GB (default: 30)
   type: number
   values:
   - 4
@@ -52,7 +52,7 @@ parameters:
   - Standard_D4s_v4
 - name: dockerImagesToCache
   default: none
-  displayName: Space separated list of Docker Hub images to cache
+  displayName: Space separated list of Docker Hub images to cache (default: none)
   type: string
 trigger:
 - main
