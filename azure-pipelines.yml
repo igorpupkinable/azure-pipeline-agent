@@ -65,9 +65,9 @@ jobs:
   steps:
   - task: DownloadSecureFile@1
     displayName: 'Download certificate'
-    name: agentBuilderCertificate
     inputs:
       secureFile: ${{ parameters.certGuid }}
+    name: agentBuilderCertificate
   - task: Bash@3
     displayName: 'Build agent'
     env:
