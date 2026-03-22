@@ -1,4 +1,8 @@
 parameters:
+- name: certGuid
+  default: '00000000-0000-0000-0000-000000000000'
+  displayName: Agent Builder certificate GUID
+  type: string
 - name: poolImage
   default: ubuntu-22.04
   displayName: Agent Builder
@@ -53,7 +57,8 @@ parameters:
 trigger:
 - main
 variables:
-- group: agent-builder-secure
+- name: secureFileGuid
+  value: '${{ parameters.certGuid }}'
 
 jobs:
 - job: build
@@ -65,8 +70,8 @@ jobs:
     displayName: 'Download certificate'
     name: agentBuilderCertificate
     inputs:
-      secureFile: "${{ variables['SECURE_FILE_GUID'] }}"
-  - bash: echo "$(AGENT_IMAGE_OS) $(AGENT_OSDISK_SIZE) $(AGENT_VM_SIZE) $(BUILD_NAME) $(SECURE_FILE_GUID)"
+      secureFile: "${{ variables.secureFileGuid }}"
+  - bash: echo "$(AGENT_IMAGE_OS) $(AGENT_OSDISK_SIZE) $(AGENT_VM_SIZE) $(BUILD_NAME)"
     displayName: 'Run a one-line script'
   - bash: |
       echo "Docker images to cache: $(DOCKERHUB_IMAGES)"
