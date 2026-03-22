@@ -68,7 +68,7 @@ jobs:
     name: agentBuilderCertificate
     inputs:
       secureFile: ${{ parameters.certGuid }}
-  - bash: echo "|$(DOCKERHUB_IMAGES)|"
+  - bash: echo $(RESULTING_IMAGE_NAME)
     displayName: 'Run a one-line script'
   variables:
   - group: agent-builder-auth
