@@ -1,13 +1,65 @@
+parameters:
+- name: poolImage
+  default: ubuntu-22.04
+  displayName: Agent Builder Image
+  type: string
+  values:
+  - ubuntu-22.04
+  - ubuntu-24.04
+  - ubuntu-latest
+- name: buildName
+  default: ubuntu-22_04
+  displayName: Packer build name
+  type: string
+  values:
+  - ubuntu-22_04
+- name: agentOs
+  default: ubuntuMinimal22
+  displayName: Resulting Agent OS
+  type: string
+  values:
+  - ubuntu22
+  - ubuntuMinimal22
+  - ubuntu24
+- name: agentOsDiskSize
+  default: 30
+  displayName: Resulting Agent OS Disk size in GB
+  type: number
+  values:
+  - 4
+  - 8
+  - 16
+  - 30
+  - 32
+  - 64
+  - 128
+  - 256
+  - 512
+- name: agentVmSize
+  default: Standard_B2als_v2
+  displayName: Resulting Agent VM size
+  type: string
+  values:
+  - Standard_B2als_v2
+  - Standard_D4s_v4
+pool:
+  vmImage: ${{ parameters.poolImage }}
 trigger:
 - main
+variables:
+ - name: AGENT_IMAGE_OS
+   value: ${{ parameters.agentOs }}
+ - name: AGENT_OSDISK_SIZE
+   value: ${{ parameters.agentOsDiskSize }}
+ - name: AGENT_VM_SIZE
+   value: ${{ parameters.agentVmSize }}
+ - name: BUILD_NAME
+   value: ${{ parameters.buildName }}
 
-pool:
-  vmImage: ubuntu-22.04
 
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
