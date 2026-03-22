@@ -46,23 +46,23 @@ sleep 10
 docker info
 
 # Cache images of provided tags
-echo "Image tags provided: $@"
-
 [[ $DOCKERHUB_LOGIN && $DOCKERHUB_PAT ]] && DOCKERHUB_CREDENTIALS_PROVIDED=true
-DOCKERHUB_IMAGES=("$@")
+DOCKERHUB_IMAGES=($DOCKERHUB_IMAGES)
+LENGTH=${#DOCKERHUB_IMAGES[@]}
 
-if [ ${#DOCKERHUB_IMAGES[@]} -eq 0 ]; then
-  echo 'No image tags provided. Skip caching'
+echo "$LENGTH image tags provided"
+
+if [ $LENGTH -eq 0 ]; then
+  echo 'Skip caching'
 else
   if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
-  else
-    echo 'No credentials provided. Skip login'
   fi
 
   echo 'Caching images'
   for image in ${DOCKERHUB_IMAGES[@]}; do
+    echo "Pulling $image..."
     docker pull $image
   done
 
