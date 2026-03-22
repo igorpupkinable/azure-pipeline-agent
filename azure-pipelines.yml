@@ -73,6 +73,8 @@ jobs:
     env:
       ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
       ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
+      DOCKERHUB_LOGIN: $(DOCKERHUB_LOGIN)
+      DOCKERHUB_PAT: $(DOCKERHUB_PAT)
     inputs:
       filePath: ./build-agent.sh
   variables:
