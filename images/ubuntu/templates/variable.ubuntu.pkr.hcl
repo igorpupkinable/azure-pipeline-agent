@@ -106,9 +106,9 @@ variable "dockerhub_login" {
   type    = string
   default = "${env("DOCKERHUB_LOGIN")}"
 }
-variable "dockerhub_password" {
+variable "dockerhub_pat" {
   type    = string
-  default = "${env("DOCKERHUB_PASSWORD")}"
+  default = "${env("DOCKERHUB_PAT")}"
 }
 variable "vm_size" {
   type    = string
