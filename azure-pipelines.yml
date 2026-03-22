@@ -13,6 +13,10 @@ parameters:
   type: string
   values:
   - ubuntu-22_04
+- name: agentImageName
+  default: '$(Build.BuildId)-$(Build.SourceVersion)'
+  displayName: Resulting Agent image name
+  type: string
 - name: agentOs
   default: ubuntuMinimal22
   displayName: Resulting Agent OS
@@ -42,25 +46,38 @@ parameters:
   values:
   - Standard_B2als_v2
   - Standard_D4s_v4
+- name: dockerImagesToCache
+  default: ''
+  displayName: Space separated list of Docker Hub images to cache
+  type: string
 pool:
   vmImage: ${{ parameters.poolImage }}
 trigger:
 - main
 variables:
- - name: AGENT_IMAGE_OS
-   value: ${{ parameters.agentOs }}
- - name: AGENT_OSDISK_SIZE
-   value: ${{ parameters.agentOsDiskSize }}
- - name: AGENT_VM_SIZE
-   value: ${{ parameters.agentVmSize }}
- - name: BUILD_NAME
-   value: ${{ parameters.buildName }}
-
+- name: AGENT_IMAGE_OS
+  value: ${{ parameters.agentOs }}
+- name: AGENT_OSDISK_SIZE
+  value: ${{ parameters.agentOsDiskSize }}
+- name: AGENT_VM_SIZE
+  value: ${{ parameters.agentVmSize }}
+- name: BUILD_NAME
+  value: ${{ parameters.buildName }}
+- name: DOCKERHUB_IMAGES
+  value: ${{ parameters.dockerImagesToCache }}
+- name: RESULTING_IMAGE_NAME
+  value: ${{ parameters.agentImageName }}
 
 steps:
-- script: echo Hello, world!
+- task: DownloadSecureFile@1
+  displayName: 'Download certificate'
+  name: agentBuilderCertificate
+  inputs:
+    secureFile: 96134ed7-3fce-4488-a47d-46dd0725d0b0
+- bash: echo $AGENT_IMAGE_OS $AGENT_OSDISK_SIZE $AGENT_VM_SIZE $BUILD_NAME
   displayName: 'Run a one-line script'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+- bash: |
+    echo "Docker images to cache: $DOCKERHUB_IMAGES"
+    echo "Resulting image name: $RESULTING_IMAGE_NAME"
+    echo "ARM_CLIENT_CERT_PATH=$(agentBuilderCertificate.secureFilePath)"
   displayName: 'Run a multi-line script'
