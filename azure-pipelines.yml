@@ -71,6 +71,7 @@ jobs:
   - task: Bash@3
     displayName: 'Build agent'
     env:
+      ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
       ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
     inputs:
       filePath: ./build-agent.sh
