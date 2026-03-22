@@ -70,6 +70,8 @@ jobs:
       secureFile: ${{ parameters.certGuid }}
   - task: Bash@3
     displayName: 'Build agent'
+    env:
+      ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
     inputs:
       filePath: ./build-agent.sh
   variables:
