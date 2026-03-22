@@ -45,17 +45,27 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 sleep 10
 docker info
 
-echo "DOCKERHUB_LOGIN=$DOCKERHUB_LOGIN"
-# Cache Docker images, i.e. DOCKERHUB_IMAGES=("node:trixie" "dhi.io/node:22-alpine3.23")
-# if [[ ${#DOCKERHUB_IMAGES[@]} != 0 ]]; then
-#     if [[ "${DOCKERHUB_LOGIN}" ]] && [[ "${DOCKERHUB_PASSWORD}" ]]; then
-#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}"
-#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}" dhi.io
-#     fi
+# Cache images of provided
+[[ $DOCKERHUB_LOGIN && $DOCKERHUB_PAT ]] && DOCKERHUB_CREDENTIALS_PROVIDED=true
+DOCKERHUB_IMAGES=("$@")
 
-#     for image in "${DOCKERHUB_IMAGES[@]}"; do
-#         docker pull "$image"
-#     done
+if [ ${#DOCKERHUB_IMAGES[@]} -eq 0 ]; then
+  echo 'No image tags provided. Skip caching'
+else
+  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
+    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
+    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
+  else
+    echo 'No credentials provided. Skip login'
+  fi
 
-#     docker logout
-# else
+  echo 'Caching images'
+  for image in ${DOCKERHUB_IMAGES[@]}; do
+    docker pull $image
+  done
+
+  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
+    docker logout
+    docker logout dhi.io
+  fi
+fi
