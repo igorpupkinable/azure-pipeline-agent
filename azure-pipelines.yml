@@ -1,7 +1,7 @@
 parameters:
 - name: poolImage
   default: ubuntu-22.04
-  displayName: Agent Builder Image
+  displayName: Agent Builder
   type: string
   values:
   - ubuntu-22.04
@@ -9,12 +9,12 @@ parameters:
   - ubuntu-latest
 - name: buildName
   default: ubuntu-22_04
-  displayName: Packer build name
+  displayName: Packer build
   type: string
   values:
   - ubuntu-22_04
 - name: agentImageName
-  default: ''
+  default: BuildId
   displayName: Resulting Agent image name
   type: string
 - name: agentOs
@@ -47,7 +47,7 @@ parameters:
   - Standard_B2als_v2
   - Standard_D4s_v4
 - name: dockerImagesToCache
-  default: ''
+  default: none
   displayName: Space separated list of Docker Hub images to cache
   type: string
 trigger:
@@ -89,12 +89,13 @@ jobs:
   - name: BUILD_NAME
     readonly: true
     value: ${{ parameters.buildName }}
-  - name: DOCKERHUB_IMAGES
-    readonly: true
-    value: ${{ parameters.dockerImagesToCache }}
+  - ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
+    - name: DOCKERHUB_IMAGES
+      readonly: true
+      value: ${{ parameters.dockerImagesToCache }}
   - name: RESULTING_IMAGE_NAME
     readonly: true
-    ${{ if eq(parameters.agentImageName, '') }}:
+    ${{ if eq(parameters.agentImageName, 'BuildId') }}:
       value: $(Build.BuildId)
     ${{ else }}:
       value: ${{ parameters.agentImageName }}
