@@ -1,21 +1,20 @@
 source "azure-arm" "image" {
-  # Authentication parameters
+  # Authentication
   client_cert_password                   = var.client_cert_password
   client_cert_path                       = var.client_cert_path
   client_id                              = var.client_id
   subscription_id                        = var.subscription_id
   tenant_id                              = var.tenant_id
 
-  # Required parameters
+  # Source
   image_publisher                        = split(":", local.source_image_marketplace_sku)[0]
   image_offer                            = split(":", local.source_image_marketplace_sku)[1]
   image_sku                              = split(":", local.source_image_marketplace_sku)[2]
 
+  # Build
   allowed_inbound_ip_addresses           = var.allowed_inbound_ip_addresses
   build_resource_group_name              = var.build_resource_group_name
   image_version                          = var.source_image_version
-  managed_image_name                     = var.managed_image_name
-  managed_image_resource_group_name      = var.managed_image_resource_group_name
   os_disk_size_gb                        = var.os_disk_size_gb
   os_type                                = var.image_os_type
   private_virtual_network_with_public_ip = var.private_virtual_network_with_public_ip
@@ -25,6 +24,10 @@ source "azure-arm" "image" {
   virtual_network_subnet_name            = var.virtual_network_subnet_name
   vm_size                                = var.vm_size
   winrm_username                         = var.winrm_username
+
+  # Artifact
+  managed_image_name                     = var.managed_image_name
+  managed_image_resource_group_name      = var.managed_image_resource_group_name
 
   shared_image_gallery_destination {
     gallery_name                         = var.gallery_name
