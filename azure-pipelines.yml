@@ -11,12 +11,6 @@ parameters:
   - ubuntu-22.04
   - ubuntu-24.04
   - ubuntu-latest
-- name: buildName
-  default: ubuntu-22_04
-  displayName: Packer build
-  type: string
-  values:
-  - ubuntu-22_04
 - name: agentImageName
   default: BuildId
   displayName: Resulting Agent image name
@@ -103,9 +97,6 @@ jobs:
   - name: AGENT_VM_SIZE
     readonly: true
     value: ${{ parameters.agentVmSize }}
-  - name: BUILD_NAME
-    readonly: true
-    value: ${{ parameters.buildName }}
   - name: DOCKERHUB_IMAGES
     readonly: true
     ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
