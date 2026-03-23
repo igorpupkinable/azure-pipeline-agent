@@ -33,6 +33,10 @@ parameters:
   - ubuntu-24_04-lts:server
   - ubuntu-26_04-lts-daily:minimal
   - ubuntu-26_04-lts-daily:server
+- name: agentImageVersion
+  default: latest
+  displayName: Resulting Agent OS image version
+  type: string
 - name: agentOsDiskSize
   default: 30
   displayName: Resulting Agent OS Disk size in GB
@@ -90,6 +94,9 @@ jobs:
       value: '$(BUILD_CUSTOM_IMAGE_SKU)'
     ${{ else }}:
       value: ${{ parameters.agentImageSku }}
+  - name: AGENT_IMAGE_VERSION
+    readonly: true
+    value: ${{ parameters.agentImageVersion }}
   - name: AGENT_OSDISK_SIZE
     readonly: true
     value: ${{ parameters.agentOsDiskSize }}
