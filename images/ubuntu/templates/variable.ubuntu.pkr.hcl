@@ -78,10 +78,6 @@ variable "source_image_version" {
   type    = string
   default = "latest"
 }
-variable "ssh_clear_authorized_keys" {
-  type    = bool
-  default = true
-}
 variable "virtual_network_name" {
   type    = string
   default = "${env("VNET_NAME")}"
@@ -124,9 +120,9 @@ variable "image_folder" {
   type    = string
   default = "/imagegeneration"
 }
-variable "image_os" {
+variable "source_image_sku" {
   type    = string
-  default = "ubuntu22"
+  default = "Canonical:0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2"
 }
 variable "image_version" {
   type    = string

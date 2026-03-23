@@ -11,24 +11,26 @@ parameters:
   - ubuntu-22.04
   - ubuntu-24.04
   - ubuntu-latest
-- name: buildName
-  default: ubuntu-22_04
-  displayName: Packer build
-  type: string
-  values:
-  - ubuntu-22_04
 - name: agentImageName
   default: BuildId
   displayName: Resulting Agent image name
   type: string
-- name: agentOs
-  default: ubuntuMinimal22
-  displayName: Resulting Agent OS
+- name: agentImageSku
+  default: custom
+  displayName: Resulting Agent OS image
   type: string
-  values:
-  - ubuntu22
-  - ubuntuMinimal22
-  - ubuntu24
+  values: # az vm image list-skus --location switzerlandnorth --publisher Canonical --offer ubuntu-26_04-lts | jq '.[].id'
+  - custom
+  - 0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2
+  - 0001-com-ubuntu-server-jammy:22_04-lts-gen2
+  - ubuntu-24_04-lts:minimal
+  - ubuntu-24_04-lts:server
+  - ubuntu-26_04-lts-daily:minimal
+  - ubuntu-26_04-lts-daily:server
+- name: agentImageVersion
+  default: latest
+  displayName: Resulting Agent OS image version
+  type: string
 - name: agentOsDiskSize
   default: 30
   displayName: Resulting Agent OS Disk size in GB
@@ -80,18 +82,21 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: AGENT_IMAGE_OS
+  - name: AGENT_IMAGE_SKU
     readonly: true
-    value: ${{ parameters.agentOs }}
+    ${{ if eq(parameters.agentImageSku, 'custom') }}:
+      value: '$(BUILD_CUSTOM_IMAGE_SKU)'
+    ${{ else }}:
+      value: ${{ parameters.agentImageSku }}
+  - name: AGENT_IMAGE_VERSION
+    readonly: true
+    value: ${{ parameters.agentImageVersion }}
   - name: AGENT_OSDISK_SIZE
     readonly: true
     value: ${{ parameters.agentOsDiskSize }}
   - name: AGENT_VM_SIZE
     readonly: true
     value: ${{ parameters.agentVmSize }}
-  - name: BUILD_NAME
-    readonly: true
-    value: ${{ parameters.buildName }}
   - name: DOCKERHUB_IMAGES
     readonly: true
     ${{ if eq(parameters.dockerImagesToCache, 'none') }}:

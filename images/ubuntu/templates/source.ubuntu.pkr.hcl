@@ -7,9 +7,10 @@ source "azure-arm" "image" {
   tenant_id                              = var.tenant_id
 
   # Source
-  image_publisher                        = split(":", local.source_image_marketplace_sku)[0]
-  image_offer                            = split(":", local.source_image_marketplace_sku)[1]
-  image_sku                              = split(":", local.source_image_marketplace_sku)[2]
+  # https://developer.hashicorp.com/packer/integrations/hashicorp/azure/latest/components/builder/arm#required:
+  image_publisher                        = "Canonical"
+  image_offer                            = split(":", var.source_image_sku)[0]
+  image_sku                              = split(":", var.source_image_sku)[1]
 
   # Build
   allowed_inbound_ip_addresses           = var.allowed_inbound_ip_addresses
@@ -18,7 +19,7 @@ source "azure-arm" "image" {
   os_disk_size_gb                        = var.os_disk_size_gb
   os_type                                = var.image_os_type
   private_virtual_network_with_public_ip = var.private_virtual_network_with_public_ip
-  ssh_clear_authorized_keys              = var.ssh_clear_authorized_keys
+  ssh_clear_authorized_keys              = true
   virtual_network_name                   = var.virtual_network_name
   virtual_network_resource_group_name    = var.virtual_network_resource_group_name
   virtual_network_subnet_name            = var.virtual_network_subnet_name
