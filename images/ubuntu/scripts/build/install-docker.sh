@@ -16,7 +16,8 @@ os_codename=$(lsb_release -cs)
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o $GPG_KEY
 echo "deb [arch=amd64 signed-by=$GPG_KEY] $REPO_URL ${os_codename} stable" > $REPO_PATH
 apt-get update
-apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get --yes install \
+  docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # docker from official repo introduced different GID generation: https://github.com/actions/runner-images/issues/8157
 gid=$(cut -d ":" -f 3 /etc/group | grep "^1..$" | sort -n | tail -n 1 | awk '{ print $1+1 }')
@@ -44,16 +45,29 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 sleep 10
 docker info
 
-# Cache Docker images, i.e. DOCKERHUB_IMAGES=("node:trixie" "dhi.io/node:22-alpine3.23")
-# if [[ ${#DOCKERHUB_IMAGES[@]} != 0 ]]; then
-#     if [[ "${DOCKERHUB_LOGIN}" ]] && [[ "${DOCKERHUB_PASSWORD}" ]]; then
-#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}"
-#         docker login --username "${DOCKERHUB_LOGIN}" --password "${DOCKERHUB_PASSWORD}" dhi.io
-#     fi
+# Cache images of provided tags
+[[ $DOCKERHUB_LOGIN && $DOCKERHUB_PAT ]] && DOCKERHUB_CREDENTIALS_PROVIDED=true
+DOCKERHUB_IMAGES=($DOCKERHUB_IMAGES)
+LENGTH=${#DOCKERHUB_IMAGES[@]}
 
-#     for image in "${DOCKERHUB_IMAGES[@]}"; do
-#         docker pull "$image"
-#     done
+echo "$LENGTH image tags provided"
 
-#     docker logout
-# else
+if [ $LENGTH -eq 0 ]; then
+  echo 'Skip caching'
+else
+  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
+    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
+    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
+  fi
+
+  echo 'Caching images'
+  for image in ${DOCKERHUB_IMAGES[@]}; do
+    echo "Pulling $image..."
+    docker pull $image
+  done
+
+  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
+    docker logout
+    docker logout dhi.io
+  fi
+fi

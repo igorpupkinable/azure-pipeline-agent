@@ -1,40 +1,24 @@
 // Authentication related variables
-variable "client_cert_path" {
+variable "client_cert_password" {
+  default = "${env("ARM_CLIENT_CERT_PASSWORD")}"
+  sensitive = true
   type    = string
+}
+variable "client_cert_path" {
   default = "${env("ARM_CLIENT_CERT_PATH")}"
+  type    = string
 }
 variable "client_id" {
-  type    = string
   default = "${env("ARM_CLIENT_ID")}"
-}
-variable "client_secret" {
-  type      = string
-  default   = "${env("ARM_CLIENT_SECRET")}"
-  sensitive = true
-}
-variable "object_id" {
   type    = string
-  default = "${env("ARM_OBJECT_ID")}"
-}
-variable "oidc_request_token" {
-  type    = string
-  default = ""
-}
-variable "oidc_request_url" {
-  type    = string
-  default = ""
 }
 variable "subscription_id" {
-  type    = string
   default = "${env("ARM_SUBSCRIPTION_ID")}"
+  type    = string
 }
 variable "tenant_id" {
-  type    = string
   default = "${env("ARM_TENANT_ID")}"
-}
-variable "use_azure_cli_auth" {
-  type    = bool
-  default = false
+  type    = string
 }
 
 // Azure environment related variables
@@ -74,10 +58,6 @@ variable "image_os_type" {
   type    = string
   default = "Linux"
 }
-variable "location" {
-  type    = string
-  default = ""
-}
 variable "managed_image_name" {
   type    = string
   default = ""
@@ -86,17 +66,13 @@ variable "managed_image_resource_group_name" {
   type    = string
   default = "${env("ARM_RESOURCE_GROUP")}"
 }
-variable "managed_image_storage_account_type" {
-  type    = string
-  default = "Premium_LRS"
-}
 variable "private_virtual_network_with_public_ip" {
   type    = bool
   default = false
 }
 variable "os_disk_size_gb" {
   type    = number
-  default = null
+  default = 30
 }
 variable "source_image_version" {
   type    = string
@@ -105,10 +81,6 @@ variable "source_image_version" {
 variable "ssh_clear_authorized_keys" {
   type    = bool
   default = true
-}
-variable "temp_resource_group_name" {
-  type    = string
-  default = "${env("TEMP_RESOURCE_GROUP_NAME")}"
 }
 variable "virtual_network_name" {
   type    = string
@@ -130,9 +102,9 @@ variable "dockerhub_login" {
   type    = string
   default = "${env("DOCKERHUB_LOGIN")}"
 }
-variable "dockerhub_password" {
+variable "dockerhub_pat" {
   type    = string
-  default = "${env("DOCKERHUB_PASSWORD")}"
+  default = "${env("DOCKERHUB_PAT")}"
 }
 variable "vm_size" {
   type    = string
@@ -154,7 +126,7 @@ variable "image_folder" {
 }
 variable "image_os" {
   type    = string
-  default = ""
+  default = "ubuntu22"
 }
 variable "image_version" {
   type    = string

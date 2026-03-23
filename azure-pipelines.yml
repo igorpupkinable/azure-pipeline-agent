@@ -1,0 +1,106 @@
+parameters:
+- name: certGuid # TODO: Remove workaround once https://github.com/microsoft/azure-pipelines-tasks/issues/6885 is fixed
+  default: '00000000-0000-0000-0000-000000000000'
+  displayName: Agent Builder certificate GUID
+  type: string
+- name: poolImage
+  default: ubuntu-22.04
+  displayName: Agent Builder
+  type: string
+  values:
+  - ubuntu-22.04
+  - ubuntu-24.04
+  - ubuntu-latest
+- name: buildName
+  default: ubuntu-22_04
+  displayName: Packer build
+  type: string
+  values:
+  - ubuntu-22_04
+- name: agentImageName
+  default: BuildId
+  displayName: Resulting Agent image name
+  type: string
+- name: agentOs
+  default: ubuntuMinimal22
+  displayName: Resulting Agent OS
+  type: string
+  values:
+  - ubuntu22
+  - ubuntuMinimal22
+  - ubuntu24
+- name: agentOsDiskSize
+  default: 30
+  displayName: Resulting Agent OS Disk size in GB
+  type: number
+  values:
+  - 4
+  - 8
+  - 16
+  - 30
+  - 32
+  - 64
+  - 128
+  - 256
+  - 512
+- name: agentVmSize
+  default: Standard_B2als_v2
+  displayName: Resulting Agent VM size
+  type: string
+  values:
+  - Standard_B2als_v2
+  - Standard_D4s_v4
+- name: dockerImagesToCache
+  default: none
+  displayName: Space separated list of Docker Hub images to cache
+  type: string
+trigger:
+- main
+
+jobs:
+- job: build
+  displayName: Build
+  pool:
+    vmImage: ${{ parameters.poolImage }}
+  steps:
+  - task: DownloadSecureFile@1
+    displayName: 'Download certificate'
+    inputs:
+      secureFile: ${{ parameters.certGuid }}
+    name: agentBuilderCertificate
+  - task: Bash@3
+    displayName: 'Build agent'
+    env:
+      ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
+      ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
+      DOCKERHUB_LOGIN: $(DOCKERHUB_LOGIN)
+      DOCKERHUB_PAT: $(DOCKERHUB_PAT)
+    inputs:
+      filePath: ./build-agent.sh
+  variables:
+  - group: agent-builder-auth
+  - group: agent-builder-build
+  - name: AGENT_IMAGE_OS
+    readonly: true
+    value: ${{ parameters.agentOs }}
+  - name: AGENT_OSDISK_SIZE
+    readonly: true
+    value: ${{ parameters.agentOsDiskSize }}
+  - name: AGENT_VM_SIZE
+    readonly: true
+    value: ${{ parameters.agentVmSize }}
+  - name: BUILD_NAME
+    readonly: true
+    value: ${{ parameters.buildName }}
+  - name: DOCKERHUB_IMAGES
+    readonly: true
+    ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
+      value: ''
+    ${{ else }}:
+      value: ${{ parameters.dockerImagesToCache }}
+  - name: RESULTING_IMAGE_NAME
+    readonly: true
+    ${{ if eq(parameters.agentImageName, 'BuildId') }}:
+      value: $(Build.BuildId)
+    ${{ else }}:
+      value: ${{ parameters.agentImageName }}

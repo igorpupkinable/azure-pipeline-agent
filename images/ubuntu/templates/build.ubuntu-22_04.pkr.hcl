@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    azure = {
+      source  = "github.com/hashicorp/azure"
+      version = "~> 2.2"
+    }
+  }
+}
+
 build {
   sources = ["source.azure-arm.image"]
   name = "ubuntu-22_04"
@@ -62,12 +71,12 @@ build {
     environment_vars = [
       "DOCKERHUB_IMAGES=${var.dockerhub_images}",
       "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PASSWORD=${var.dockerhub_password}",
+      "DOCKERHUB_PAT=${var.dockerhub_pat}",
       "HELPER_SCRIPTS=${var.helper_script_folder}",
       "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"
     ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/install-docker.sh"]
+    script           = "${path.root}/../scripts/build/install-docker.sh"
   }
 
   provisioner "shell" {
