@@ -78,10 +78,6 @@ variable "source_image_version" {
   type    = string
   default = "latest"
 }
-variable "ssh_clear_authorized_keys" {
-  type    = bool
-  default = true
-}
 variable "virtual_network_name" {
   type    = string
   default = "${env("VNET_NAME")}"
