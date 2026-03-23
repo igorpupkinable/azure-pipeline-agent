@@ -13,16 +13,16 @@ build {
 
   provisioner "shell" {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    inline          = ["mkdir ${var.image_folder}", "chmod 777 ${var.image_folder}"]
+    inline          = ["mkdir ${local.image_folder}", "chmod 777 ${local.image_folder}"]
   }
 
   provisioner "file" {
-    destination = "${var.helper_script_folder}"
+    destination = "${local.helper_script_folder}"
     source      = "${path.root}/../scripts/helpers"
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}","DEBIAN_FRONTEND=noninteractive"]
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}","DEBIAN_FRONTEND=noninteractive"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = [
       "${path.root}/../scripts/build/install-ms-repos.sh",
@@ -33,12 +33,12 @@ build {
   }
 
   provisioner "file" {
-    destination = "${var.installer_script_folder}"
+    destination = "${local.installer_script_folder}"
     source      = "${path.root}/../scripts/build"
   }
 
   provisioner "file" {
-    destination = "${var.image_folder}"
+    destination = "${local.image_folder}"
     sources     = [
       "${path.root}/../assets/post-gen"
     ]
@@ -47,18 +47,18 @@ build {
   provisioner "shell" {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     inline          = [
-      "mv ${var.image_folder}/post-gen ${var.image_folder}/post-generation"
+      "mv ${local.image_folder}/post-gen ${local.image_folder}/post-generation"
     ]
   }
 
   provisioner "shell" {
-    environment_vars = ["IMAGE_VERSION=${var.image_version}", "IMAGE_OS=${var.source_image_sku}", "HELPER_SCRIPTS=${var.helper_script_folder}"]
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/configure-environment.sh"]
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "DEBIAN_FRONTEND=noninteractive"]
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}", "DEBIAN_FRONTEND=noninteractive"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = [
       "${path.root}/../scripts/build/install-azure-cli.sh",
@@ -72,15 +72,15 @@ build {
       "DOCKERHUB_IMAGES=${var.dockerhub_images}",
       "DOCKERHUB_LOGIN=${var.dockerhub_login}",
       "DOCKERHUB_PAT=${var.dockerhub_pat}",
-      "HELPER_SCRIPTS=${var.helper_script_folder}",
-      "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"
+      "HELPER_SCRIPTS=${local.helper_script_folder}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
     ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     script           = "${path.root}/../scripts/build/install-docker.sh"
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}"]
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
   }
@@ -98,13 +98,13 @@ build {
 
   provisioner "shell" {
     execute_command     = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    pause_before        = "3m0s"
+    pause_before        = "3m"
     scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
-    start_retry_timeout = "10m"
+    start_retry_timeout = "3m"
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
+    environment_vars = ["HELPER_SCRIPT_FOLDER=${local.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}", "IMAGE_FOLDER=${local.image_folder}"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
   }
@@ -120,7 +120,7 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}"]
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/post-build-validation.sh"]
   }

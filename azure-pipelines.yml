@@ -1,8 +1,4 @@
 parameters:
-- name: certGuid # TODO: Remove workaround once https://github.com/microsoft/azure-pipelines-tasks/issues/6885 is fixed
-  default: '00000000-0000-0000-0000-000000000000'
-  displayName: Agent Builder certificate GUID
-  type: string
 - name: poolImage
   default: ubuntu-22.04
   displayName: Agent Builder
@@ -40,18 +36,6 @@ parameters:
   - 8
   - 16
   - 30
-  - 32
-  - 64
-  - 128
-  - 256
-  - 512
-- name: agentVmSize
-  default: Standard_B2als_v2
-  displayName: Resulting Agent VM size
-  type: string
-  values:
-  - Standard_B2als_v2
-  - Standard_D4s_v4
 - name: dockerImagesToCache
   default: none
   displayName: Space separated list of Docker Hub images to cache
@@ -68,7 +52,7 @@ jobs:
   - task: DownloadSecureFile@1
     displayName: 'Download certificate'
     inputs:
-      secureFile: ${{ parameters.certGuid }}
+      secureFile: 96134ed7-3fce-4488-a47d-46dd0725d0b0
     name: agentBuilderCertificate
   - task: Bash@3
     displayName: 'Build agent'
@@ -94,9 +78,6 @@ jobs:
   - name: AGENT_OSDISK_SIZE
     readonly: true
     value: ${{ parameters.agentOsDiskSize }}
-  - name: AGENT_VM_SIZE
-    readonly: true
-    value: ${{ parameters.agentVmSize }}
   - name: DOCKERHUB_IMAGES
     readonly: true
     ${{ if eq(parameters.dockerImagesToCache, 'none') }}:

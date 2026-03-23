@@ -13,18 +13,13 @@ source "azure-arm" "image" {
   image_sku                              = split(":", var.source_image_sku)[1]
 
   # Build
-  allowed_inbound_ip_addresses           = var.allowed_inbound_ip_addresses
   build_resource_group_name              = var.build_resource_group_name
   image_version                          = var.source_image_version
   os_disk_size_gb                        = var.os_disk_size_gb
-  os_type                                = var.image_os_type
-  private_virtual_network_with_public_ip = var.private_virtual_network_with_public_ip
+  os_type                                = "Linux"
+  private_virtual_network_with_public_ip = false
   ssh_clear_authorized_keys              = true
-  virtual_network_name                   = var.virtual_network_name
-  virtual_network_resource_group_name    = var.virtual_network_resource_group_name
-  virtual_network_subnet_name            = var.virtual_network_subnet_name
-  vm_size                                = var.vm_size
-  winrm_username                         = var.winrm_username
+  vm_size                                = "Standard_B2als_v2"
 
   # Artifact
   managed_image_name                     = var.managed_image_name

@@ -8,10 +8,6 @@
 source $HELPER_SCRIPTS/os.sh
 source $HELPER_SCRIPTS/etc-environment.sh
 
-# Set ImageVersion and ImageOS env variables
-set_etc_environment_variable "ImageVersion" "${IMAGE_VERSION}"
-set_etc_environment_variable "ImageOS" "${IMAGE_OS}"
-
 # Set the ACCEPT_EULA variable to Y value to confirm your acceptance of the End-User Licensing Agreement
 set_etc_environment_variable "ACCEPT_EULA" "Y"
 
