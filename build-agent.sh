@@ -6,11 +6,6 @@ if [[ ! -v ARM_CLIENT_ID ]]; then
   exit 1
 fi
 
-if [[ ! -v ARM_RESOURCE_GROUP ]]; then
-  echo "ARM_RESOURCE_GROUP is unset. Aborting..."
-  exit 1
-fi
-
 if [[ ! -v ARM_SUBSCRIPTION_ID ]]; then
   echo "ARM_SUBSCRIPTION_ID is unset. Aborting..."
   exit 1
@@ -31,13 +26,28 @@ if [[ ! -v ARM_CLIENT_CERT_PATH ]]; then
   exit 1
 fi
 
+if [[ ! -v BUILD_GALLERY_IMAGE_NAME ]]; then
+  echo "BUILD_GALLERY_IMAGE_NAME is unset. Aborting..."
+  exit 1
+fi
+
+if [[ ! -v BUILD_GALLERY_NAME ]]; then
+  echo "BUILD_GALLERY_NAME is unset. Aborting..."
+  exit 1
+fi
+
+if [[ ! -v BUILD_RESOURCE_GROUP ]]; then
+  echo "BUILD_RESOURCE_GROUP is unset. Aborting..."
+  exit 1
+fi
+
 if [[ ! -v BUILD_RG_NAME ]]; then
   echo "BUILD_RG_NAME is unset. Aborting..."
   exit 1
 fi
 
-if [[ ! -v RESULTING_IMAGE_NAME ]]; then
-  echo "RESULTING_IMAGE_NAME is unset. Aborting..."
+if [[ ! -v DESTINATION_IMAGE_VERSION ]]; then
+  echo "DESTINATION_IMAGE_VERSION is unset. Aborting..."
   exit 1
 fi
 
@@ -49,9 +59,14 @@ PKR_VAR_client_id=$ARM_CLIENT_ID
 PKR_VAR_subscription_id=$ARM_SUBSCRIPTION_ID
 PKR_VAR_tenant_id=$ARM_TENANT_ID
 
+# Source and destination
+PKR_VAR_gallery_name=$BUILD_GALLERY_NAME
+PKR_VAR_gallery_image_name=$BUILD_GALLERY_IMAGE_NAME
+PKR_VAR_resource_group_name=$BUILD_RESOURCE_GROUP
+
 # Source image for Packer
-PKR_VAR_source_image_sku=${AGENT_IMAGE_SKU:-0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2}
-PKR_VAR_source_image_version=${AGENT_IMAGE_VERSION:-latest}
+PKR_VAR_source_image_sku=${SOURCE_IMAGE_SKU:-0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2}
+PKR_VAR_source_image_version=${SOURCE_IMAGE_VERSION:-latest}
 
 # Build stage VM
 PKR_VAR_dockerhub_images=$DOCKERHUB_IMAGES
@@ -60,9 +75,9 @@ PKR_VAR_dockerhub_pat="$DOCKERHUB_PAT"
 
 # Destination image for Packer
 PKR_VAR_build_resource_group_name=$BUILD_RG_NAME
-PKR_VAR_managed_image_name="Azure-Pipeline-Agent-$RESULTING_IMAGE_NAME"
-PKR_VAR_managed_image_resource_group_name=$ARM_RESOURCE_GROUP
-PKR_VAR_os_disk_size_gb=${AGENT_OSDISK_SIZE:-30}
+PKR_VAR_os_disk_size_gb=${DESTINATION_OSDISK_SIZE:-30}
+PKR_VAR_destination_image_version=$DESTINATION_IMAGE_VERSION
+PKR_VAR_destination_image_storage=${DESTINATION_IMAGE_STORAGE:-Standard_LRS}
 
 packer init -upgrade "$TEMPLATES_DIR/build.ubuntu-22_04.pkr.hcl"
 packer build -only "${BUILD_NAME:-ubuntu-22_04}.azure-arm.image" $TEMPLATES_DIR

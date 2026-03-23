@@ -17,13 +17,24 @@ variable "tenant_id" {
   type    = string
 }
 
+# Source and destination
+variable "gallery_name" {
+  type    = string
+}
+variable "gallery_image_name" {
+  type    = string
+}
+variable "resource_group_name" {
+  type    = string
+}
+
 # Source image
 variable "source_image_sku" {
   type    = string
 }
 variable "source_image_version" {
-  type    = string
   default = "latest"
+  type    = string
 }
 
 # Build stage VM
@@ -47,35 +58,14 @@ variable "azure_tags" {
 variable "build_resource_group_name" {
   type    = string
 }
-variable "managed_image_name" {
+variable "destination_image_storage" {
+  default = "Standard_LRS"
   type    = string
 }
-variable "managed_image_resource_group_name" {
+variable "destination_image_version" {
   type    = string
 }
 variable "os_disk_size_gb" {
-  type    = number
   default = 30
-}
-
-// Azure environment related variables
-variable "gallery_image_name" {
-  type    = string
-  default = "${env("GALLERY_IMAGE_NAME")}"
-}
-variable "gallery_image_version" {
-  type    = string
-  default = "${env("GALLERY_IMAGE_VERSION")}"
-}
-variable "gallery_name" {
-  type    = string
-  default = "${env("GALLERY_NAME")}"
-}
-variable "gallery_resource_group_name" {
-  type    = string
-  default = "${env("GALLERY_RG_NAME")}"
-}
-variable "gallery_storage_account_type" {
-  type    = string
-  default = "${env("GALLERY_STORAGE_ACCOUNT_TYPE")}"
+  type    = number
 }

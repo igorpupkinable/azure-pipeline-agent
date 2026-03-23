@@ -22,17 +22,17 @@ source "azure-arm" "image" {
   vm_size                                = "Standard_B2als_v2"
 
   # Artifact
-  managed_image_name                     = var.managed_image_name
-  managed_image_resource_group_name      = var.managed_image_resource_group_name
-
   shared_image_gallery_destination {
     gallery_name                         = var.gallery_name
     image_name                           = var.gallery_image_name
-    image_version                        = var.gallery_image_version
-    resource_group                       = var.gallery_resource_group_name
-    storage_account_type                 = var.gallery_storage_account_type
+    image_version                        = var.destination_image_version
+    resource_group                       = var.resource_group_name
+    storage_account_type                 = var.destination_image_storage
     subscription                         = var.subscription_id
   }
+
+  shared_gallery_image_version_end_of_life_date = "2032-04-21T00:00:00.00Z"
+  shared_gallery_image_version_exclude_from_latest = true
 
   dynamic "azure_tag" {
     content {

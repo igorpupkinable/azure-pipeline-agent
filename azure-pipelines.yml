@@ -1,19 +1,15 @@
 parameters:
 - name: poolImage
   default: ubuntu-22.04
-  displayName: Agent Builder
+  displayName: Builder
   type: string
   values:
   - ubuntu-22.04
   - ubuntu-24.04
   - ubuntu-latest
-- name: agentImageName
-  default: BuildId
-  displayName: Resulting Agent image name
-  type: string
-- name: agentImageSku
-  default: custom
-  displayName: Resulting Agent OS image
+- name: sourceImageSku
+  default: 0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2
+  displayName: Agent base image
   type: string
   values: # az vm image list-skus --location switzerlandnorth --publisher Canonical --offer ubuntu-26_04-lts | jq '.[].id'
   - custom
@@ -23,22 +19,27 @@ parameters:
   - ubuntu-24_04-lts:server
   - ubuntu-26_04-lts-daily:minimal
   - ubuntu-26_04-lts-daily:server
-- name: agentImageVersion
+- name: sourceImageVersion
   default: latest
-  displayName: Resulting Agent OS image version
+  displayName: Agent base image version
   type: string
-- name: agentOsDiskSize
+- name: destinationImageVersion
+  default: BuildId
+  displayName: Agent image Gallery version (e.g. 1.23.450)
+  type: string
+- name: destinationOsDiskSize
   default: 30
-  displayName: Resulting Agent OS Disk size in GB
+  displayName: Agent OS Disk size in GB
   type: number
   values:
   - 4
   - 8
   - 16
   - 30
+  - 32
 - name: dockerImagesToCache
   default: none
-  displayName: Space separated list of Docker Hub images to cache
+  displayName: Space separated list of Docker Hub image tags to cache
   type: string
 trigger:
 - main
@@ -66,27 +67,31 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: AGENT_IMAGE_SKU
+  - name: SOURCE_IMAGE_SKU
     readonly: true
-    ${{ if eq(parameters.agentImageSku, 'custom') }}:
+    ${{ if eq(parameters.sourceImageSku, 'custom') }}:
       value: '$(BUILD_CUSTOM_IMAGE_SKU)'
     ${{ else }}:
-      value: ${{ parameters.agentImageSku }}
-  - name: AGENT_IMAGE_VERSION
+      value: ${{ parameters.sourceImageSku }}
+  - name: SOURCE_IMAGE_VERSION
     readonly: true
-    value: ${{ parameters.agentImageVersion }}
-  - name: AGENT_OSDISK_SIZE
+    value: ${{ parameters.sourceImageVersion }}
+  - name: DESTINATION_IMAGE_STORAGE
     readonly: true
-    value: ${{ parameters.agentOsDiskSize }}
+    ${{ if ne(parameters.destinationImageVersion, 'BuildId') }}:
+      value: Standard_ZRS
+  - name: DESTINATION_IMAGE_VERSION
+    readonly: true
+    ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:
+      value: '0.0.$(Build.BuildId)'
+    ${{ else }}:
+      value: ${{ parameters.destinationImageVersion }}
+  - name: DESTINATION_OSDISK_SIZE
+    readonly: true
+    value: ${{ parameters.destinationOsDiskSize }}
   - name: DOCKERHUB_IMAGES
     readonly: true
     ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
       value: ''
     ${{ else }}:
       value: ${{ parameters.dockerImagesToCache }}
-  - name: RESULTING_IMAGE_NAME
-    readonly: true
-    ${{ if eq(parameters.agentImageName, 'BuildId') }}:
-      value: $(Build.BuildId)
-    ${{ else }}:
-      value: ${{ parameters.agentImageName }}
