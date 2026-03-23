@@ -7,9 +7,10 @@ source "azure-arm" "image" {
   tenant_id                              = var.tenant_id
 
   # Source
-  image_publisher                        = split(":", local.source_image_marketplace_sku)[0]
-  image_offer                            = split(":", local.source_image_marketplace_sku)[1]
-  image_sku                              = split(":", local.source_image_marketplace_sku)[2]
+  # https://developer.hashicorp.com/packer/integrations/hashicorp/azure/latest/components/builder/arm#required:
+  image_publisher                        = "Canonical"
+  image_offer                            = split(":", var.source_image_sku)[0]
+  image_sku                              = split(":", var.source_image_sku)[1]
 
   # Build
   allowed_inbound_ip_addresses           = var.allowed_inbound_ip_addresses

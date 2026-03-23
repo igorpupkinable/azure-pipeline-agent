@@ -42,4 +42,4 @@ if [[ ! -v RESULTING_IMAGE_NAME ]]; then
 fi
 
 packer init -upgrade "$TEMPLATES_DIR/build.ubuntu-22_04.pkr.hcl"
-packer build -only "${BUILD_NAME:-ubuntu-22_04}.azure-arm.image" -var "image_os=${AGENT_IMAGE_OS:-ubuntu22}" -var "managed_image_name=Azure-Pipeline-Agent-$RESULTING_IMAGE_NAME" -var "os_disk_size_gb=${AGENT_OSDISK_SIZE:-30}" -var "vm_size=${AGENT_VM_SIZE:-Standard_D4s_v4}" $TEMPLATES_DIR
+packer build -only "${BUILD_NAME:-ubuntu-22_04}.azure-arm.image" -var "source_image_sku=${AGENT_IMAGE_SKU:-ubuntu-22_04-lts:ubuntu-minimal}" -var "managed_image_name=Azure-Pipeline-Agent-$RESULTING_IMAGE_NAME" -var "os_disk_size_gb=${AGENT_OSDISK_SIZE:-30}" -var "vm_size=${AGENT_VM_SIZE:-Standard_D4s_v4}" $TEMPLATES_DIR
