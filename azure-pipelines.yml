@@ -14,11 +14,9 @@ parameters:
   values:
   - azure_ubuntuminimalpro22.04.1x64gen2tl.vhd
 - name: sourceImageVersion
-  default: 1.0.0
+  default: 1.0.1
   displayName: Agent base image version
   type: string
-  values:
-  - 1.0.0
 - name: destinationImageVersion
   default: BuildId
   displayName: Agent image Gallery version (e.g. 1.23.405)
