@@ -29,9 +29,6 @@ variable "resource_group_name" {
 }
 
 # Source image
-variable "source_image_sku" {
-  type    = string
-}
 variable "source_image_version" {
   default = "latest"
   type    = string
@@ -57,6 +54,10 @@ variable "azure_tags" {
 }
 variable "build_resource_group_name" {
   type    = string
+}
+variable "destination_image_shallow_replication" {
+  default = true
+  type    = bool
 }
 variable "destination_image_storage" {
   default = "Standard_LRS"

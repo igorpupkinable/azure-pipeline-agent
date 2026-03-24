@@ -7,19 +7,24 @@ source "azure-arm" "image" {
   tenant_id                              = var.tenant_id
 
   # Source
-  # https://developer.hashicorp.com/packer/integrations/hashicorp/azure/latest/components/builder/arm#required:
-  image_publisher                        = "Canonical"
-  image_offer                            = split(":", var.source_image_sku)[0]
-  image_sku                              = split(":", var.source_image_sku)[1]
+  shared_image_gallery {
+    gallery_name                         = var.gallery_name
+    image_name                           = var.gallery_image_name
+    image_version                        = var.source_image_version
+    resource_group                       = var.resource_group_name
+    subscription                         = var.subscription_id
+  }
 
   # Build
   build_resource_group_name              = var.build_resource_group_name
-  image_version                          = var.source_image_version
   os_disk_size_gb                        = var.os_disk_size_gb
   os_type                                = "Linux"
   private_virtual_network_with_public_ip = false
+  secure_boot_enabled                    = true
+  security_type                          = "TrustedLaunch"
   ssh_clear_authorized_keys              = true
   vm_size                                = "Standard_B2als_v2"
+  vtpm_enabled                           = true
 
   # Artifact
   shared_image_gallery_destination {
@@ -29,9 +34,10 @@ source "azure-arm" "image" {
     resource_group                       = var.resource_group_name
     storage_account_type                 = var.destination_image_storage
     subscription                         = var.subscription_id
+    use_shallow_replication              = var.destination_image_shallow_replication
   }
 
-  shared_gallery_image_version_end_of_life_date = "2032-04-21T00:00:00.00Z"
+  shared_gallery_image_version_end_of_life_date    = "2032-04-21T00:00:00.00Z"
   shared_gallery_image_version_exclude_from_latest = true
 
   dynamic "azure_tag" {

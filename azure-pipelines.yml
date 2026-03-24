@@ -1,35 +1,31 @@
 parameters:
 - name: poolImage
   default: ubuntu-22.04
-  displayName: Builder
+  displayName: Agent builder
   type: string
   values:
   - ubuntu-22.04
   - ubuntu-24.04
   - ubuntu-latest
-- name: sourceImageSku
-  default: 0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2
+- name: imageName
+  default: azure_ubuntuminimalpro22.04.1x64gen2tl.vhd
   displayName: Agent base image
   type: string
-  values: # az vm image list-skus --location switzerlandnorth --publisher Canonical --offer ubuntu-26_04-lts | jq '.[].id'
-  - custom
-  - 0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2
-  - 0001-com-ubuntu-server-jammy:22_04-lts-gen2
-  - ubuntu-24_04-lts:minimal
-  - ubuntu-24_04-lts:server
-  - ubuntu-26_04-lts-daily:minimal
-  - ubuntu-26_04-lts-daily:server
+  values:
+  - azure_ubuntuminimalpro22.04.1x64gen2tl.vhd
 - name: sourceImageVersion
-  default: latest
+  default: 1.0.0
   displayName: Agent base image version
   type: string
+  values:
+  - 1.0.0
 - name: destinationImageVersion
   default: BuildId
-  displayName: Agent image Gallery version (e.g. 1.23.450)
+  displayName: Agent image Gallery version (e.g. 1.23.405)
   type: string
 - name: destinationOsDiskSize
-  default: 30
-  displayName: Agent OS Disk size in GB
+  default: 4
+  displayName: Agent OS disk size in GB
   type: number
   values:
   - 4
@@ -56,6 +52,7 @@ jobs:
       secureFile: 96134ed7-3fce-4488-a47d-46dd0725d0b0
     name: agentBuilderCertificate
   - task: Bash@3
+    continueOnError: false
     displayName: 'Build agent'
     env:
       ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
@@ -67,19 +64,12 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: SOURCE_IMAGE_SKU
+  - name: IMAGE_NAME
     readonly: true
-    ${{ if eq(parameters.sourceImageSku, 'custom') }}:
-      value: '$(BUILD_CUSTOM_IMAGE_SKU)'
-    ${{ else }}:
-      value: ${{ parameters.sourceImageSku }}
+    value: ${{ parameters.imageName }}
   - name: SOURCE_IMAGE_VERSION
     readonly: true
     value: ${{ parameters.sourceImageVersion }}
-  - name: DESTINATION_IMAGE_STORAGE
-    readonly: true
-    ${{ if ne(parameters.destinationImageVersion, 'BuildId') }}:
-      value: Standard_ZRS
   - name: DESTINATION_IMAGE_VERSION
     readonly: true
     ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:

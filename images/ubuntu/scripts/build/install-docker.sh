@@ -50,19 +50,17 @@ docker info
 DOCKERHUB_IMAGES=($DOCKERHUB_IMAGES)
 LENGTH=${#DOCKERHUB_IMAGES[@]}
 
-echo "$LENGTH image tags provided"
-
 if [ $LENGTH -eq 0 ]; then
-  echo 'Skip caching'
+  echo "No image tags provided. Skip caching"
 else
   if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
   fi
 
-  echo 'Caching images'
+  echo "$LENGTH images to cache"
   for image in ${DOCKERHUB_IMAGES[@]}; do
-    echo "Pulling $image..."
+    echo "Downloading $image ..."
     docker pull $image
   done
 
