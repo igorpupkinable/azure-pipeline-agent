@@ -19,7 +19,7 @@ DOCKERHUB_IMAGES=($DOCKERHUB_IMAGES)
 LENGTH=${#DOCKERHUB_IMAGES[@]}
 
 if (( $LENGTH > 0 )); then
-  if [[ -v $DOCKERHUB_CREDENTIALS_PROVIDED ]]; then
+  if [[ -v DOCKERHUB_CREDENTIALS_PROVIDED ]]; then
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
     echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
   fi
@@ -30,7 +30,7 @@ if (( $LENGTH > 0 )); then
     docker pull $image
   done
 
-  if [[ -v $DOCKERHUB_CREDENTIALS_PROVIDED ]]; then
+  if [[ -v DOCKERHUB_CREDENTIALS_PROVIDED ]]; then
     docker logout
     docker logout dhi.io
   fi
