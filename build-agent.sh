@@ -68,7 +68,8 @@ PKR_VAR_resource_group_name=$BUILD_RESOURCE_GROUP
 PKR_VAR_source_image_version=${SOURCE_IMAGE_VERSION:-latest}
 
 # Build stage VM
-PKR_VAR_dockerhub_images=$DOCKERHUB_IMAGES
+PKR_VAR_build_number=${BUILD_NUMBER:-'00000000.0'}
+PKR_VAR_dockerhub_images="$DOCKERHUB_IMAGES"
 PKR_VAR_dockerhub_login=$DOCKERHUB_LOGIN
 PKR_VAR_dockerhub_pat="$DOCKERHUB_PAT"
 

@@ -35,7 +35,12 @@ variable "source_image_version" {
 }
 
 # Build stage VM
+variable "build_number" {
+  default = null
+  type    = string
+}
 variable "dockerhub_images" {
+  default = null
   type    = string
 }
 variable "dockerhub_login" {
@@ -46,12 +51,20 @@ variable "dockerhub_pat" {
   sensitive = true
   type    = string
 }
-
-# Destination image
-variable "azure_tags" {
-  default = {}
+variable "tags_build_number_empty" {
+  default = {
+    BuildNumber = "00000000.0"
+  }
   type    = map(string)
 }
+variable "tags_docker_images_empty" {
+  default = {
+    DockerImages = "none"
+  }
+  type    = map(string)
+}
+
+# Destination image
 variable "build_resource_group_name" {
   type    = string
 }
@@ -69,4 +82,13 @@ variable "destination_image_version" {
 variable "os_disk_size_gb" {
   default = 30
   type    = number
+}
+variable "tags_default" {
+  default = {
+    CreatedBy   = "Azure Pipeline"
+    Environment = "DevOps"
+    State       = "Configured"
+    Type        = "Pipeline Agent"
+  }
+  type    = map(string)
 }

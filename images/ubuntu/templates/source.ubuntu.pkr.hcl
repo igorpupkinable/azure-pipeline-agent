@@ -6,6 +6,9 @@ source "azure-arm" "image" {
   subscription_id                        = var.subscription_id
   tenant_id                              = var.tenant_id
 
+  # Common
+  azure_tags                             = local.tags
+
   # Source
   shared_image_gallery {
     gallery_name                         = var.gallery_name
@@ -27,25 +30,16 @@ source "azure-arm" "image" {
   vtpm_enabled                           = true
 
   # Artifact
-  shared_image_gallery_destination {
-    gallery_name                         = var.gallery_name
-    image_name                           = var.gallery_image_name
-    image_version                        = var.destination_image_version
-    resource_group                       = var.resource_group_name
-    storage_account_type                 = var.destination_image_storage
-    subscription                         = var.subscription_id
-    use_shallow_replication              = var.destination_image_shallow_replication
-  }
-
   shared_gallery_image_version_end_of_life_date    = "2032-04-21T00:00:00.00Z"
   shared_gallery_image_version_exclude_from_latest = true
 
-  dynamic "azure_tag" {
-    content {
-      name  = azure_tag.key
-      value = azure_tag.value
-    }
-
-    for_each = var.azure_tags
+  shared_image_gallery_destination {
+    gallery_name            = var.gallery_name
+    image_name              = var.gallery_image_name
+    image_version           = var.destination_image_version
+    resource_group          = var.resource_group_name
+    storage_account_type    = var.destination_image_storage
+    subscription            = var.subscription_id
+    use_shallow_replication = var.destination_image_shallow_replication
   }
 }

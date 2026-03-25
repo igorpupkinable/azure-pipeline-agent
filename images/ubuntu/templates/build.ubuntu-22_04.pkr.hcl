@@ -58,7 +58,11 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}", "DEBIAN_FRONTEND=noninteractive"]
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "HELPER_SCRIPTS=${local.helper_script_folder}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = [
       "${path.root}/../scripts/build/install-azure-cli.sh",
@@ -69,14 +73,22 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKERHUB_IMAGES=${var.dockerhub_images}",
-      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PAT=${var.dockerhub_pat}",
       "HELPER_SCRIPTS=${local.helper_script_folder}",
       "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
     ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     script           = "${path.root}/../scripts/build/install-docker.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
+      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
+      "DOCKERHUB_PAT=${var.dockerhub_pat}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    script           = "${path.root}/../scripts/build/configure-docker.sh"
   }
 
   provisioner "shell" {
@@ -104,7 +116,11 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPT_FOLDER=${local.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}", "IMAGE_FOLDER=${local.image_folder}"]
+    environment_vars = [
+      "HELPER_SCRIPT_FOLDER=${local.helper_script_folder}",
+      "IMAGE_FOLDER=${local.image_folder}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
   }
