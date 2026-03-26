@@ -54,7 +54,7 @@ parameters:
   - Standard_D4s_v4
 - name: dockerImagesToCache
   default: none
-  displayName: Space separated list of Docker Hub images to cache
+  displayName: Space separated list of Docker Hub image tags to cache
   type: string
 trigger:
 - main
@@ -99,9 +99,7 @@ jobs:
     value: ${{ parameters.agentVmSize }}
   - name: DOCKERHUB_IMAGES
     readonly: true
-    ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
-      value: ''
-    ${{ else }}:
+    ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
       value: ${{ parameters.dockerImagesToCache }}
   - name: RESULTING_IMAGE_NAME
     readonly: true

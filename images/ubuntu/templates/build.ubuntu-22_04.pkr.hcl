@@ -80,6 +80,17 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = [
+      "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
+      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
+      "DOCKERHUB_PAT=${var.dockerhub_pat}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    script           = "${path.root}/../scripts/build/configure-docker.sh"
+  }
+
+  provisioner "shell" {
     environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
