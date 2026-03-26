@@ -5,7 +5,7 @@ parameters:
   type: string
 - name: poolImage
   default: ubuntu-22.04
-  displayName: Agent Builder
+  displayName: Agent builder
   type: string
   values:
   - ubuntu-22.04
@@ -33,7 +33,7 @@ parameters:
   type: string
 - name: agentOsDiskSize
   default: 30
-  displayName: Resulting Agent OS Disk size in GB
+  displayName: Agent OS disk size in GB
   type: number
   values:
   - 4
@@ -71,6 +71,7 @@ jobs:
       secureFile: ${{ parameters.certGuid }}
     name: agentBuilderCertificate
   - task: Bash@3
+    continueOnError: false
     displayName: 'Build agent'
     env:
       ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
@@ -99,9 +100,7 @@ jobs:
     value: ${{ parameters.agentVmSize }}
   - name: DOCKERHUB_IMAGES
     readonly: true
-    ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
-      value: ''
-    ${{ else }}:
+    ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
       value: ${{ parameters.dockerImagesToCache }}
   - name: RESULTING_IMAGE_NAME
     readonly: true

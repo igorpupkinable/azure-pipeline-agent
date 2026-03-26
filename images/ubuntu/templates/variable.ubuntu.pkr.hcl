@@ -10,6 +10,7 @@ variable "client_cert_path" {
 }
 variable "client_id" {
   default = "${env("ARM_CLIENT_ID")}"
+  sensitive = true
   type    = string
 }
 variable "subscription_id" {
