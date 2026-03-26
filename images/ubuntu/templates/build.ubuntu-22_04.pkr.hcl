@@ -69,14 +69,22 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "DOCKERHUB_IMAGES=${var.dockerhub_images}",
-      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PAT=${var.dockerhub_pat}",
       "HELPER_SCRIPTS=${var.helper_script_folder}",
       "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"
     ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     script           = "${path.root}/../scripts/build/install-docker.sh"
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
+      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
+      "DOCKERHUB_PAT=${var.dockerhub_pat}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    script           = "${path.root}/../scripts/build/configure-docker.sh"
   }
 
   provisioner "shell" {
@@ -98,9 +106,9 @@ build {
 
   provisioner "shell" {
     execute_command     = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    pause_before        = "3m0s"
+    pause_before        = "3m"
     scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
-    start_retry_timeout = "10m"
+    start_retry_timeout = "3m"
   }
 
   provisioner "shell" {

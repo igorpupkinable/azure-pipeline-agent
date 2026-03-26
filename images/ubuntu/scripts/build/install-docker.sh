@@ -23,6 +23,8 @@ apt-get --yes install \
 gid=$(cut -d ":" -f 3 /etc/group | grep "^1..$" | sort -n | tail -n 1 | awk '{ print $1+1 }')
 groupmod -g "$gid" docker
 
+# This configuration changes will not be reported in Docker info below
+# However it does take effect later
 cat <<EOF > /etc/docker/daemon.json
 {
   "log-driver": "journald"
@@ -44,30 +46,3 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 # Docker daemon takes time to come up after installing
 sleep 10
 docker info
-
-# Cache images of provided tags
-[[ $DOCKERHUB_LOGIN && $DOCKERHUB_PAT ]] && DOCKERHUB_CREDENTIALS_PROVIDED=true
-DOCKERHUB_IMAGES=($DOCKERHUB_IMAGES)
-LENGTH=${#DOCKERHUB_IMAGES[@]}
-
-echo "$LENGTH image tags provided"
-
-if [ $LENGTH -eq 0 ]; then
-  echo 'Skip caching'
-else
-  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
-    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin
-    echo $DOCKERHUB_PAT | docker login --username $DOCKERHUB_LOGIN --password-stdin dhi.io
-  fi
-
-  echo 'Caching images'
-  for image in ${DOCKERHUB_IMAGES[@]}; do
-    echo "Pulling $image..."
-    docker pull $image
-  done
-
-  if [ $DOCKERHUB_CREDENTIALS_PROVIDED ]; then
-    docker logout
-    docker logout dhi.io
-  fi
-fi

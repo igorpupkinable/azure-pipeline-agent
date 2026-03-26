@@ -10,6 +10,7 @@ variable "client_cert_path" {
 }
 variable "client_id" {
   default = "${env("ARM_CLIENT_ID")}"
+  sensitive = true
   type    = string
 }
 variable "subscription_id" {
@@ -91,16 +92,16 @@ variable "virtual_network_subnet_name" {
   default = "${env("VNET_SUBNET")}"
 }
 variable "dockerhub_images" {
+  default = null
   type    = string
-  default = "${env("DOCKERHUB_IMAGES")}"
 }
 variable "dockerhub_login" {
+  sensitive = true
   type    = string
-  default = "${env("DOCKERHUB_LOGIN")}"
 }
 variable "dockerhub_pat" {
+  sensitive = true
   type    = string
-  default = "${env("DOCKERHUB_PAT")}"
 }
 variable "vm_size" {
   type    = string

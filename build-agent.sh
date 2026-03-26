@@ -41,5 +41,11 @@ if [[ ! -v RESULTING_IMAGE_NAME ]]; then
   exit 1
 fi
 
+set -a
+PKR_VAR_dockerhub_images="$DOCKERHUB_IMAGES"
+PKR_VAR_dockerhub_login=$DOCKERHUB_LOGIN
+PKR_VAR_dockerhub_pat="$DOCKERHUB_PAT"
+
 packer init -upgrade "$TEMPLATES_DIR/build.ubuntu-22_04.pkr.hcl"
 packer build -only "${BUILD_NAME:-ubuntu-22_04}.azure-arm.image" -var "source_image_sku=${AGENT_IMAGE_SKU:-0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2}" -var "source_image_version=${AGENT_IMAGE_VERSION:-latest}" -var "managed_image_name=Azure-Pipeline-Agent-$RESULTING_IMAGE_NAME" -var "os_disk_size_gb=${AGENT_OSDISK_SIZE:-30}" -var "vm_size=${AGENT_VM_SIZE:-Standard_D4s_v4}" $TEMPLATES_DIR
+set +a
