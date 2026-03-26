@@ -99,7 +99,9 @@ jobs:
     value: ${{ parameters.agentVmSize }}
   - name: DOCKERHUB_IMAGES
     readonly: true
-    ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
+    ${{ if eq(parameters.dockerImagesToCache, 'none') }}:
+      value: ''
+    ${{ else }}:
       value: ${{ parameters.dockerImagesToCache }}
   - name: RESULTING_IMAGE_NAME
     readonly: true
