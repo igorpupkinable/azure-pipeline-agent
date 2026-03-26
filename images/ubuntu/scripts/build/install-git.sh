@@ -16,8 +16,11 @@ apt-get --yes install \
 
 # Git version 2.35.2 introduces security fix that breaks action\checkout https://github.com/actions/checkout/issues/760
 cat <<EOF >> /etc/gitconfig
+[advice]
+  defaultBranchName = false
+  detachedHead = false
 [safe]
-        directory = *
+  directory = *
 EOF
 
 # Add well-known SSH host keys to known_hosts
