@@ -11,6 +11,7 @@ These "reduced" agents are:
 Tested with Azure Managed DevOps Pools and Ubuntu 22 LTS only using 1 vCPU and 2GB RAM VM.
 
 Make sure to provide the following environment variables to Azure Pipeline:
+- PKR_VAR_build_number
 - PKR_VAR_build_resource_group_name
 - PKR_VAR_client_cert_password
 - PKR_VAR_client_cert_path via secure file
@@ -21,6 +22,7 @@ Make sure to provide the following environment variables to Azure Pipeline:
 - PKR_VAR_dockerhub_pat
 - PKR_VAR_gallery_image_name
 - PKR_VAR_gallery_name
+- PKR_VAR_os_disk_size_gb
 - PKR_VAR_resource_group_name
 - PKR_VAR_source_image_version
 - PKR_VAR_subscription_id

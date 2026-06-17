@@ -69,7 +69,7 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: BUILD_NUMBER
+  - name: PKR_VAR_build_number
     readonly: true
     value: $(Build.BuildNumber)
   - name: PKR_VAR_gallery_image_name
@@ -81,7 +81,7 @@ jobs:
       value: '0.0.$(Build.BuildId)'
     ${{ else }}:
       value: ${{ parameters.destinationImageVersion }}
-  - name: DESTINATION_OSDISK_SIZE
+  - name: PKR_VAR_os_disk_size_gb
     readonly: true
     value: ${{ parameters.destinationOsDiskSize }}
   - name: PKR_VAR_dockerhub_images
