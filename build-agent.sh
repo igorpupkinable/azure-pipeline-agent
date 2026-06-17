@@ -46,6 +46,9 @@ PKR_VAR_client_cert_path=$ARM_CLIENT_CERT_PATH
 PKR_VAR_client_id=$ARM_CLIENT_ID
 PKR_VAR_subscription_id=$ARM_SUBSCRIPTION_ID
 PKR_VAR_tenant_id=$ARM_TENANT_ID
+TEMPLATES_DIR=$TEMPLATES_DIR
+PKR_VAR_gallery_name=$PKR_VAR_gallery_name
+PKR_VAR_resource_group_name=$PKR_VAR_resource_group_name
 
 # Source and destination
 PKR_VAR_gallery_image_name=$IMAGE_NAME
