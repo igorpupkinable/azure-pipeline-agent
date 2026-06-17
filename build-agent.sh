@@ -1,34 +1,4 @@
 #!/bin/bash
-if [[ ! -v ARM_CLIENT_ID ]]; then
-  echo "ARM_CLIENT_ID is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v ARM_SUBSCRIPTION_ID ]]; then
-  echo "ARM_SUBSCRIPTION_ID is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v ARM_TENANT_ID ]]; then
-  echo "ARM_TENANT_ID is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v ARM_CLIENT_CERT_PASSWORD ]]; then
-  echo "ARM_CLIENT_CERT_PASSWORD is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v ARM_CLIENT_CERT_PATH ]]; then
-  echo "ARM_CLIENT_CERT_PATH is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v BUILD_RG_NAME ]]; then
-  echo "BUILD_RG_NAME is unset. Aborting..."
-  exit 1
-fi
-
 if [[ ! -v DESTINATION_IMAGE_VERSION ]]; then
   echo "DESTINATION_IMAGE_VERSION is unset. Aborting..."
   exit 1
@@ -40,13 +10,6 @@ if [[ ! -v IMAGE_NAME ]]; then
 fi
 
 set -a
-# Packer authentication
-PKR_VAR_client_cert_password=$ARM_CLIENT_CERT_PASSWORD
-PKR_VAR_client_cert_path=$ARM_CLIENT_CERT_PATH
-PKR_VAR_client_id=$ARM_CLIENT_ID
-PKR_VAR_subscription_id=$ARM_SUBSCRIPTION_ID
-PKR_VAR_tenant_id=$ARM_TENANT_ID
-
 # Source and destination
 PKR_VAR_gallery_image_name=$IMAGE_NAME
 
@@ -61,7 +24,6 @@ PKR_VAR_dockerhub_pat="$DOCKERHUB_PAT"
 
 # Destination image for Packer
 [[ $DESTINATION_IMAGE_VERSION == 0.0.* ]] && GALLERY_STORAGE_CONFIG=(true LRS) || GALLERY_STORAGE_CONFIG=(false ZRS)
-PKR_VAR_build_resource_group_name=$BUILD_RG_NAME
 PKR_VAR_destination_image_shallow_replication=${GALLERY_STORAGE_CONFIG[0]}
 PKR_VAR_destination_image_storage="Standard_${GALLERY_STORAGE_CONFIG[1]}"
 PKR_VAR_destination_image_version=$DESTINATION_IMAGE_VERSION

@@ -53,12 +53,16 @@ jobs:
     continueOnError: false
     displayName: 'Build agent'
     env:
-      ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
-      ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
       DOCKERHUB_LOGIN: $(DOCKERHUB_LOGIN)
       DOCKERHUB_PAT: $(DOCKERHUB_PAT)
+      PKR_VAR_build_resource_group_name: $(PKR_VAR_build_resource_group_name)
+      PKR_VAR_client_cert_password: $(PKR_VAR_client_cert_password)
+      PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
+      PKR_VAR_client_id: $(PKR_VAR_client_id)
       PKR_VAR_gallery_name: $(PKR_VAR_gallery_name)
       PKR_VAR_resource_group_name: $(PKR_VAR_resource_group_name)
+      PKR_VAR_subscription_id: $(PKR_VAR_subscription_id)
+      PKR_VAR_tenant_id: $(PKR_VAR_tenant_id)
     inputs:
       failOnStderr: true
       filePath: ./build-agent.sh
