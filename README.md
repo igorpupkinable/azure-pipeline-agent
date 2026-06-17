@@ -15,6 +15,7 @@ Make sure to provide the following environment variables to Azure Pipeline:
 - PKR_VAR_client_cert_password
 - PKR_VAR_client_cert_path via secure file
 - PKR_VAR_client_id
+- PKR_VAR_destination_image_version
 - PKR_VAR_dockerhub_images
 - PKR_VAR_dockerhub_login
 - PKR_VAR_dockerhub_pat

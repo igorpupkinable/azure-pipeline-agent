@@ -75,7 +75,7 @@ jobs:
   - name: PKR_VAR_gallery_image_name
     readonly: true
     value: ${{ parameters.imageName }}
-  - name: DESTINATION_IMAGE_VERSION
+  - name: PKR_VAR_destination_image_version
     readonly: true
     ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:
       value: '0.0.$(Build.BuildId)'
