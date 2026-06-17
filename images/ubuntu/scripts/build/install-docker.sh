@@ -8,13 +8,22 @@
 source $HELPER_SCRIPTS/install.sh
 source $HELPER_SCRIPTS/os.sh
 
+if is_x64; then
+  docker_arch="amd64"
+elif is_arm64; then
+  docker_arch="arm64"
+else
+  echo "Unsupported architecture"
+  exit 1
+fi
+
 REPO_URL="https://download.docker.com/linux/ubuntu"
 GPG_KEY="/usr/share/keyrings/docker.gpg"
 REPO_PATH="/etc/apt/sources.list.d/docker.list"
 os_codename=$(lsb_release -cs)
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o $GPG_KEY
-echo "deb [arch=amd64 signed-by=$GPG_KEY] $REPO_URL ${os_codename} stable" > $REPO_PATH
+echo "deb [arch=$docker_arch signed-by=$GPG_KEY] $REPO_URL ${os_codename} stable" > $REPO_PATH
 apt-get update
 apt-get --yes install \
   docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
