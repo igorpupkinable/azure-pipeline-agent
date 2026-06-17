@@ -91,11 +91,11 @@ build {
   #   script           = "${path.root}/../scripts/build/configure-docker.sh"
   # }
 
-  # provisioner "shell" {
-  #   environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
-  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-  #   scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
-  # }
+  provisioner "shell" {
+    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
+  }
 
   # provisioner "shell" {
   #   execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
