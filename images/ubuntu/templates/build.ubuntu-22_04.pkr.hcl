@@ -89,6 +89,7 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = ["FILEPATH=${var.installed_packages_filepath}"]
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     script          = "${path.root}/../scripts/build/list-dpkg.sh"
   }
