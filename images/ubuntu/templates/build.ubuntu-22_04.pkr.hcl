@@ -88,10 +88,10 @@ build {
     scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
   }
 
-  # provisioner "shell" {
-  #   execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-  #   script          = "${path.root}/../scripts/build/list-dpkg.sh"
-  # }
+  provisioner "shell" {
+    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    script          = "${path.root}/../scripts/build/list-dpkg.sh"
+  }
 
   provisioner "shell" {
     execute_command   = "sudo sh -c '{{ .Vars }} {{ .Path }}'"

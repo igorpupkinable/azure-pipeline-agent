@@ -5,4 +5,5 @@
 ################################################################################
 
 echo "Listing all installed dpkg packages:"
-dpkg-query -W -f='${Package} ${Version}\n' | sort
+# dpkg-query -W -f='${Package} ${Version}\n' | sort
+dpkg-query --help
