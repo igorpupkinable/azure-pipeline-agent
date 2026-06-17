@@ -51,6 +51,10 @@ variable "dockerhub_pat" {
   sensitive = true
   type    = string
 }
+variable "installed_packages_filepath" {
+  default = "/tmp/dpkg-query.txt"
+  type    = string
+}
 variable "tags_build_number_empty" {
   default = {
     BuildNumber = "00000000.0"
