@@ -53,6 +53,8 @@ jobs:
   - task: DownloadSecureFile@1
     continueOnError: false
     displayName: 'Download certificate'
+    env:
+      ARM_CLIENT_CERTIFICATE_PATH: $(ARM_CLIENT_CERTIFICATE_PATH)
     inputs:
       secureFile: $(ARM_CLIENT_CERTIFICATE_PATH)
     name: agentBuilderCertificate
