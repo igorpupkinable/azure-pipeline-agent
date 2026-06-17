@@ -46,7 +46,7 @@ jobs:
   steps:
   - task: Bash@3
     continueOnError: false
-    displayName: 'Init Packer'
+    displayName: 'Initialize Packer'
     inputs:
       script: packer init .
       targetType: inline
@@ -59,7 +59,7 @@ jobs:
     continueOnError: false
     displayName: 'Build agent'
     env:
-      PKR_VAR_build_number: $(PKR_VAR_build_number)
+      PKR_VAR_build_number: $(Build.BuildNumber)
       PKR_VAR_build_resource_group_name: $(PKR_VAR_build_resource_group_name)
       PKR_VAR_client_cert_password: $(PKR_VAR_client_cert_password)
       PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
@@ -68,11 +68,11 @@ jobs:
       PKR_VAR_dockerhub_images: $(PKR_VAR_dockerhub_images)
       PKR_VAR_dockerhub_login: $(PKR_VAR_dockerhub_login)
       PKR_VAR_dockerhub_pat: $(PKR_VAR_dockerhub_pat)
-      PKR_VAR_gallery_image_name: $(PKR_VAR_gallery_image_name)
+      PKR_VAR_gallery_image_name: ${{ parameters.imageName }}
       PKR_VAR_gallery_name: $(PKR_VAR_gallery_name)
-      PKR_VAR_os_disk_size_gb: $(PKR_VAR_os_disk_size_gb)
+      PKR_VAR_os_disk_size_gb: ${{ parameters.destinationOsDiskSize }}
       PKR_VAR_resource_group_name: $(PKR_VAR_resource_group_name)
-      PKR_VAR_source_image_version: $(PKR_VAR_source_image_version)
+      PKR_VAR_source_image_version: ${{ parameters.sourceImageVersion }}
       PKR_VAR_subscription_id: $(PKR_VAR_subscription_id)
       PKR_VAR_tenant_id: $(PKR_VAR_tenant_id)
     inputs:
@@ -81,28 +81,16 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: PKR_VAR_build_number
-    readonly: true
-    value: $(Build.BuildNumber)
-  - name: PKR_VAR_gallery_image_name
-    readonly: true
-    value: ${{ parameters.imageName }}
   - name: PKR_VAR_destination_image_version
     readonly: true
     ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:
       value: '0.0.$(Build.BuildId)'
     ${{ else }}:
       value: ${{ parameters.destinationImageVersion }}
-  - name: PKR_VAR_os_disk_size_gb
-    readonly: true
-    value: ${{ parameters.destinationOsDiskSize }}
   - name: PKR_VAR_dockerhub_images
     readonly: true
     ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
       value: ${{ parameters.dockerImagesToCache }}
-  - name: PKR_VAR_source_image_version
-    readonly: true
-    value: ${{ parameters.sourceImageVersion }}
   - name: TEMPLATES_DIR
     readonly: true
     value: images/ubuntu/templates
