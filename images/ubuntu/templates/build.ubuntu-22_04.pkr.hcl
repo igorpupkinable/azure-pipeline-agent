@@ -71,14 +71,14 @@ build {
     ]
   }
 
-  # provisioner "shell" {
-  #   environment_vars = [
-  #     "HELPER_SCRIPTS=${local.helper_script_folder}",
-  #     "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
-  #   ]
-  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-  #   script           = "${path.root}/../scripts/build/install-docker.sh"
-  # }
+  provisioner "shell" {
+    environment_vars = [
+      "HELPER_SCRIPTS=${local.helper_script_folder}",
+      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+    ]
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    script           = "${path.root}/../scripts/build/install-docker.sh"
+  }
 
   # provisioner "shell" {
   #   environment_vars = [
