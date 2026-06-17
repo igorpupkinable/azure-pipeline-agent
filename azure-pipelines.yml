@@ -51,12 +51,12 @@ jobs:
       script: packer init .
       targetType: inline
   - task: DownloadSecureFile@1
+    continueOnError: false
     displayName: 'Download certificate'
     inputs:
       secureFile: $(ARM_CLIENT_CERTIFICATE_PATH)
     name: agentBuilderCertificate
   - task: Bash@3
-    continueOnError: false
     displayName: 'Build agent'
     env:
       PKR_VAR_build_number: $(Build.BuildNumber)
