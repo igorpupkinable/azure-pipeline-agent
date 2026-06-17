@@ -64,8 +64,9 @@ jobs:
       PKR_VAR_client_cert_password: $(ARM_CLIENT_CERTIFICATE_PASSWORD)
       PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
       PKR_VAR_destination_image_version: $(PKR_VAR_destination_image_version)
-      PKR_VAR_dockerhub_images: $(PKR_VAR_dockerhub_images)
       PKR_VAR_client_id: $(ARM_CLIENT_ID)
+      ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
+        PKR_VAR_dockerhub_images: ${{ parameters.dockerImagesToCache }}
       PKR_VAR_dockerhub_login: $(DOCKERHUB_LOGIN)
       PKR_VAR_dockerhub_pat: $(DOCKERHUB_PAT)
       PKR_VAR_gallery_image_name: ${{ parameters.imageName }}
@@ -87,10 +88,7 @@ jobs:
       value: '0.0.$(Build.BuildId)'
     ${{ else }}:
       value: ${{ parameters.destinationImageVersion }}
-  - name: PKR_VAR_dockerhub_images
     readonly: true
-    ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
-      value: ${{ parameters.dockerImagesToCache }}
   - name: TEMPLATES_DIR
     readonly: true
     value: images/ubuntu/templates

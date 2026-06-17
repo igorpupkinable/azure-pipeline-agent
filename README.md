@@ -13,7 +13,6 @@ Tested with Azure Managed DevOps Pools and Ubuntu 22 LTS only using 1 vCPU and 2
 Make sure to provide the following environment variables to Azure Pipeline:
 - PKR_VAR_build_number
 - PKR_VAR_destination_image_version
-- PKR_VAR_dockerhub_images
 - PKR_VAR_gallery_image_name
 - PKR_VAR_os_disk_size_gb
 - PKR_VAR_source_image_version
