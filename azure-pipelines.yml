@@ -85,3 +85,6 @@ jobs:
   - name: SOURCE_IMAGE_VERSION
     readonly: true
     value: ${{ parameters.sourceImageVersion }}
+  - name: TEMPLATES_DIR
+    readonly: true
+    value: images/ubuntu/templates

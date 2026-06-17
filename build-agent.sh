@@ -1,6 +1,4 @@
 #!/bin/bash
-TEMPLATES_DIR=${TEMPLATES_DIR:-'images/ubuntu/templates'}
-
 if [[ ! -v ARM_CLIENT_ID ]]; then
   echo "ARM_CLIENT_ID is unset. Aborting..."
   exit 1
@@ -23,16 +21,6 @@ fi
 
 if [[ ! -v ARM_CLIENT_CERT_PATH ]]; then
   echo "ARM_CLIENT_CERT_PATH is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v BUILD_GALLERY_NAME ]]; then
-  echo "BUILD_GALLERY_NAME is unset. Aborting..."
-  exit 1
-fi
-
-if [[ ! -v BUILD_RESOURCE_GROUP ]]; then
-  echo "BUILD_RESOURCE_GROUP is unset. Aborting..."
   exit 1
 fi
 
@@ -60,9 +48,7 @@ PKR_VAR_subscription_id=$ARM_SUBSCRIPTION_ID
 PKR_VAR_tenant_id=$ARM_TENANT_ID
 
 # Source and destination
-PKR_VAR_gallery_name=$BUILD_GALLERY_NAME
 PKR_VAR_gallery_image_name=$IMAGE_NAME
-PKR_VAR_resource_group_name=$BUILD_RESOURCE_GROUP
 
 # Source image for Packer
 PKR_VAR_source_image_version=${SOURCE_IMAGE_VERSION:-latest}
