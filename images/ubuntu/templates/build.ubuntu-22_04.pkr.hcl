@@ -57,50 +57,50 @@ build {
     scripts          = ["${path.root}/../scripts/build/configure-environment.sh"]
   }
 
-  provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive",
-      "HELPER_SCRIPTS=${local.helper_script_folder}",
-      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
-    ]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = [
-      "${path.root}/../scripts/build/install-azure-cli.sh",
-      "${path.root}/../scripts/build/install-git.sh",
-      "${path.root}/../scripts/build/configure-dpkg.sh"
-    ]
-  }
+  # provisioner "shell" {
+  #   environment_vars = [
+  #     "DEBIAN_FRONTEND=noninteractive",
+  #     "HELPER_SCRIPTS=${local.helper_script_folder}",
+  #     "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+  #   ]
+  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   scripts          = [
+  #     "${path.root}/../scripts/build/install-azure-cli.sh",
+  #     "${path.root}/../scripts/build/install-git.sh",
+  #     "${path.root}/../scripts/build/configure-dpkg.sh"
+  #   ]
+  # }
 
-  provisioner "shell" {
-    environment_vars = [
-      "HELPER_SCRIPTS=${local.helper_script_folder}",
-      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
-    ]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    script           = "${path.root}/../scripts/build/install-docker.sh"
-  }
+  # provisioner "shell" {
+  #   environment_vars = [
+  #     "HELPER_SCRIPTS=${local.helper_script_folder}",
+  #     "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+  #   ]
+  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   script           = "${path.root}/../scripts/build/install-docker.sh"
+  # }
 
-  provisioner "shell" {
-    environment_vars = [
-      "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
-      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PAT=${var.dockerhub_pat}",
-      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
-    ]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    script           = "${path.root}/../scripts/build/configure-docker.sh"
-  }
+  # provisioner "shell" {
+  #   environment_vars = [
+  #     "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
+  #     "DOCKERHUB_LOGIN=${var.dockerhub_login}",
+  #     "DOCKERHUB_PAT=${var.dockerhub_pat}",
+  #     "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+  #   ]
+  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   script           = "${path.root}/../scripts/build/configure-docker.sh"
+  # }
 
-  provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
-  }
+  # provisioner "shell" {
+  #   environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
+  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
+  # }
 
-  provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    script          = "${path.root}/../scripts/build/list-dpkg.sh"
-  }
+  # provisioner "shell" {
+  #   execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   script          = "${path.root}/../scripts/build/list-dpkg.sh"
+  # }
 
   provisioner "shell" {
     execute_command   = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
