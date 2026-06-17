@@ -93,6 +93,12 @@ build {
     script          = "${path.root}/../scripts/build/list-dpkg.sh"
   }
 
+  provisioner "file" {
+    source = "/tmp/installed-packages.txt"
+    destination = "/tmp/installed-packages.txt"
+    direction = "download"
+  }
+
   provisioner "shell" {
     execute_command   = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     expect_disconnect = true
