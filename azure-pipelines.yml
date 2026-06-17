@@ -53,28 +53,28 @@ jobs:
   - task: DownloadSecureFile@1
     displayName: 'Download certificate'
     inputs:
-      secureFile: 96134ed7-3fce-4488-a47d-46dd0725d0b0
+      secureFile: $(ARM_CLIENT_CERTIFICATE_PATH)
     name: agentBuilderCertificate
   - task: Bash@3
     continueOnError: false
     displayName: 'Build agent'
     env:
       PKR_VAR_build_number: $(Build.BuildNumber)
-      PKR_VAR_build_resource_group_name: $(PKR_VAR_build_resource_group_name)
-      PKR_VAR_client_cert_password: $(PKR_VAR_client_cert_password)
+      PKR_VAR_build_resource_group_name: $(BUILD_RESOURCE_GROUP_NAME)
+      PKR_VAR_client_cert_password: $(ARM_CLIENT_CERTIFICATE_PASSWORD)
       PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
-      PKR_VAR_client_id: $(PKR_VAR_client_id)
       PKR_VAR_destination_image_version: $(PKR_VAR_destination_image_version)
       PKR_VAR_dockerhub_images: $(PKR_VAR_dockerhub_images)
-      PKR_VAR_dockerhub_login: $(PKR_VAR_dockerhub_login)
-      PKR_VAR_dockerhub_pat: $(PKR_VAR_dockerhub_pat)
+      PKR_VAR_client_id: $(ARM_CLIENT_ID)
+      PKR_VAR_dockerhub_login: $(DOCKERHUB_LOGIN)
+      PKR_VAR_dockerhub_pat: $(DOCKERHUB_PAT)
       PKR_VAR_gallery_image_name: ${{ parameters.imageName }}
-      PKR_VAR_gallery_name: $(PKR_VAR_gallery_name)
+      PKR_VAR_gallery_name: $(BUILD_GALLERY_NAME)
       PKR_VAR_os_disk_size_gb: ${{ parameters.destinationOsDiskSize }}
-      PKR_VAR_resource_group_name: $(PKR_VAR_resource_group_name)
+      PKR_VAR_resource_group_name: $(BUILD_RESOURCE_GROUP)
       PKR_VAR_source_image_version: ${{ parameters.sourceImageVersion }}
-      PKR_VAR_subscription_id: $(PKR_VAR_subscription_id)
-      PKR_VAR_tenant_id: $(PKR_VAR_tenant_id)
+      PKR_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+      PKR_VAR_tenant_id: $(ARM_TENANT_ID)
     inputs:
       failOnStderr: true
       filePath: ./build-agent.sh
