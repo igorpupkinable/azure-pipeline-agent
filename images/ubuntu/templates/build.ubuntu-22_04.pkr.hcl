@@ -94,9 +94,9 @@ build {
   }
 
   provisioner "file" {
-    source = "/tmp/installed-packages.txt"
-    destination = "/tmp/installed-packages.txt"
+    destination = var.installed_packages_filepath
     direction = "download"
+    source = var.installed_packages_filepath
   }
 
   provisioner "shell" {
