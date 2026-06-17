@@ -1,8 +1,4 @@
 #!/bin/bash
-echo "TEMPLATES_DIR=$TEMPLATES_DIR"
-echo "PKR_VAR_gallery_name=$PKR_VAR_gallery_name"
-echo "PKR_VAR_resource_group_name=$PKR_VAR_resource_group_name"
-
 if [[ ! -v ARM_CLIENT_ID ]]; then
   echo "ARM_CLIENT_ID is unset. Aborting..."
   exit 1
@@ -50,9 +46,6 @@ PKR_VAR_client_cert_path=$ARM_CLIENT_CERT_PATH
 PKR_VAR_client_id=$ARM_CLIENT_ID
 PKR_VAR_subscription_id=$ARM_SUBSCRIPTION_ID
 PKR_VAR_tenant_id=$ARM_TENANT_ID
-TEMPLATES_DIR=$TEMPLATES_DIR
-PKR_VAR_gallery_name=$PKR_VAR_gallery_name
-PKR_VAR_resource_group_name=$PKR_VAR_resource_group_name
 
 # Source and destination
 PKR_VAR_gallery_image_name=$IMAGE_NAME
@@ -73,10 +66,6 @@ PKR_VAR_destination_image_shallow_replication=${GALLERY_STORAGE_CONFIG[0]}
 PKR_VAR_destination_image_storage="Standard_${GALLERY_STORAGE_CONFIG[1]}"
 PKR_VAR_destination_image_version=$DESTINATION_IMAGE_VERSION
 PKR_VAR_os_disk_size_gb=${DESTINATION_OSDISK_SIZE:-30}
-
-echo "TEMPLATES_DIR=$TEMPLATES_DIR"
-echo "PKR_VAR_gallery_name=$PKR_VAR_gallery_name"
-echo "PKR_VAR_resource_group_name=$PKR_VAR_resource_group_name"
 
 packer init -upgrade "$TEMPLATES_DIR/build.ubuntu-22_04.pkr.hcl"
 packer build -only "${BUILD_NAME:-ubuntu-22_04}.azure-arm.image" $TEMPLATES_DIR
