@@ -16,7 +16,7 @@ Make sure to provide the following environment variables to Azure Pipeline:
 - PKR_VAR_os_disk_size_gb
 - PKR_VAR_source_image_version
 - ARM_CLIENT_CERTIFICATE_PASSWORD
-- ARM_CLIENT_CERTIFICATE_PATH via Azure Pipelines Library Secure File
+- ARM_CLIENT_CERTIFICATE using Azure Pipelines Library Secure File
 - ARM_CLIENT_ID
 - ARM_SUBSCRIPTION_ID
 - ARM_TENANT_ID
