@@ -53,12 +53,12 @@ jobs:
     continueOnError: false
     displayName: 'Build agent'
     env:
-      DOCKERHUB_LOGIN: $(DOCKERHUB_LOGIN)
-      DOCKERHUB_PAT: $(DOCKERHUB_PAT)
       PKR_VAR_build_resource_group_name: $(PKR_VAR_build_resource_group_name)
       PKR_VAR_client_cert_password: $(PKR_VAR_client_cert_password)
       PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
       PKR_VAR_client_id: $(PKR_VAR_client_id)
+      PKR_VAR_dockerhub_login: $(PKR_VAR_dockerhub_login)
+      PKR_VAR_dockerhub_pat: $(PKR_VAR_dockerhub_pat)
       PKR_VAR_gallery_name: $(PKR_VAR_gallery_name)
       PKR_VAR_resource_group_name: $(PKR_VAR_resource_group_name)
       PKR_VAR_subscription_id: $(PKR_VAR_subscription_id)
@@ -72,7 +72,7 @@ jobs:
   - name: BUILD_NUMBER
     readonly: true
     value: $(Build.BuildNumber)
-  - name: IMAGE_NAME
+  - name: PKR_VAR_gallery_image_name
     readonly: true
     value: ${{ parameters.imageName }}
   - name: DESTINATION_IMAGE_VERSION
@@ -84,11 +84,11 @@ jobs:
   - name: DESTINATION_OSDISK_SIZE
     readonly: true
     value: ${{ parameters.destinationOsDiskSize }}
-  - name: DOCKERHUB_IMAGES
+  - name: PKR_VAR_dockerhub_images
     readonly: true
     ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
       value: ${{ parameters.dockerImagesToCache }}
-  - name: SOURCE_IMAGE_VERSION
+  - name: PKR_VAR_source_image_version
     readonly: true
     value: ${{ parameters.sourceImageVersion }}
   - name: TEMPLATES_DIR
