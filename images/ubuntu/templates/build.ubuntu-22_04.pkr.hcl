@@ -1,12 +1,3 @@
-packer {
-  required_plugins {
-    azure = {
-      source  = "github.com/hashicorp/azure"
-      version = "~> 2"
-    }
-  }
-}
-
 build {
   sources = ["source.azure-arm.image"]
   name = "ubuntu-22_04"
@@ -80,16 +71,16 @@ build {
     script           = "${path.root}/../scripts/build/install-docker.sh"
   }
 
-  provisioner "shell" {
-    environment_vars = [
-      "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
-      "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PAT=${var.dockerhub_pat}",
-      "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
-    ]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    script           = "${path.root}/../scripts/build/configure-docker.sh"
-  }
+  # provisioner "shell" {
+  #   environment_vars = [
+  #     "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
+  #     "DOCKERHUB_LOGIN=${var.dockerhub_login}",
+  #     "DOCKERHUB_PAT=${var.dockerhub_pat}",
+  #     "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
+  #   ]
+  #   execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #   script           = "${path.root}/../scripts/build/configure-docker.sh"
+  # }
 
   provisioner "shell" {
     environment_vars = ["HELPER_SCRIPTS=${local.helper_script_folder}"]
@@ -98,8 +89,15 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = ["FILEPATH=${var.installed_packages_filepath}"]
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     script          = "${path.root}/../scripts/build/list-dpkg.sh"
+  }
+
+  provisioner "file" {
+    destination = var.installed_packages_filepath
+    direction = "download"
+    source = var.installed_packages_filepath
   }
 
   provisioner "shell" {

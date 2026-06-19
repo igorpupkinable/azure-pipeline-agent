@@ -1,3 +1,29 @@
+# Fork description
+This is a fork of original https://github.com/actions/runner-images
+This fork is reduced to building Azure Pipeline Ubuntu Agents only.
+These "reduced" agents are:
+- designed to run Dockerised pipelines only, e.g. [multi-stage builds](https://docs.docker.com/build/building/multi-stage/) + [Docker Compose](https://docs.docker.com/compose/intro/features-uses/)
+- take as little as 4GB of OS disk space
+- ability to [cache](https://docs.docker.com/build/building/best-practices/#leverage-build-cache) required Docker images to speed up pipelines
+- have Azure Pipeline essentials installed to successfully provision [Azure Managed DevOps Pools](https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/?view=azure-devops)
+- pretty much nothing else is installed except Docker itself
+
+Tested with Azure Managed DevOps Pools and Ubuntu 22 LTS only using 1 vCPU and 2GB RAM VM.
+
+Make sure to provide the following environment variables to Azure Pipeline:
+- ARM_CLIENT_CERTIFICATE_PASSWORD
+- ARM_CLIENT_ID
+- ARM_SUBSCRIPTION_ID
+- ARM_TENANT_ID
+- BUILD_GALLERY_NAME
+- BUILD_RESOURCE_GROUP
+- BUILD_RESOURCE_GROUP_NAME
+- DOCKERHUB_LOGIN
+- DOCKERHUB_PAT
+- PKR_VAR_client_cert_path using Azure Pipelines Library Secure File
+
+
+
 # GitHub Actions Runner Images
 
 **Table of Contents**

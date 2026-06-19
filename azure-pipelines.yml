@@ -14,7 +14,7 @@ parameters:
   values:
   - azure_ubuntuminimalpro22.04.1x64gen2tl.vhd
 - name: sourceImageVersion
-  default: 1.100.0
+  default: 1.100.1
   displayName: Agent base image version
   type: string
 - name: destinationImageVersion
@@ -37,6 +37,9 @@ parameters:
   type: string
 trigger:
 - main
+variables:
+  buildName: ubuntu-22_04
+  installedPackagesFilepath: /tmp/installed-packages.txt
 
 jobs:
 - job: build
@@ -44,44 +47,52 @@ jobs:
   pool:
     vmImage: ${{ parameters.poolImage }}
   steps:
+  - task: Bash@3
+    continueOnError: false
+    displayName: 'Initialize Packer'
+    inputs:
+      failOnStderr: true
+      script: packer init .
+      targetType: inline
   - task: DownloadSecureFile@1
+    continueOnError: false
     displayName: 'Download certificate'
     inputs:
-      secureFile: 96134ed7-3fce-4488-a47d-46dd0725d0b0
+      secureFile: azurepipeline-agentbuilder
     name: agentBuilderCertificate
   - task: Bash@3
     continueOnError: false
     displayName: 'Build agent'
     env:
-      ARM_CLIENT_CERT_PASSWORD: $(ARM_CLIENT_CERT_PASSWORD)
-      ARM_CLIENT_CERT_PATH: $(agentBuilderCertificate.secureFilePath)
-      DOCKERHUB_LOGIN: $(DOCKERHUB_LOGIN)
-      DOCKERHUB_PAT: $(DOCKERHUB_PAT)
+      PKR_VAR_build_number: $(Build.BuildNumber)
+      PKR_VAR_build_resource_group_name: $(BUILD_RESOURCE_GROUP_NAME)
+      PKR_VAR_client_cert_password: $(ARM_CLIENT_CERTIFICATE_PASSWORD)
+      PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
+      PKR_VAR_client_id: $(ARM_CLIENT_ID)
+      PKR_VAR_destination_image_shallow_replication: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), 'true', 'false') }}
+      PKR_VAR_destination_image_storage: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), 'Standard_LRS', 'Standard_ZRS') }}
+      PKR_VAR_destination_image_version: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), '0.0.$(Build.BuildId)', parameters.destinationImageVersion) }}
+      ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
+        PKR_VAR_dockerhub_images: ${{ parameters.dockerImagesToCache }}
+      PKR_VAR_dockerhub_login: $(DOCKERHUB_LOGIN)
+      PKR_VAR_dockerhub_pat: $(DOCKERHUB_PAT)
+      PKR_VAR_gallery_image_name: ${{ parameters.imageName }}
+      PKR_VAR_gallery_name: $(BUILD_GALLERY_NAME)
+      PKR_VAR_installed_packages_filepath: ${{ variables.installedPackagesFilepath }}
+      PKR_VAR_os_disk_size_gb: ${{ parameters.destinationOsDiskSize }}
+      PKR_VAR_resource_group_name: $(BUILD_RESOURCE_GROUP)
+      PKR_VAR_source_image_version: ${{ parameters.sourceImageVersion }}
+      PKR_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+      PKR_VAR_tenant_id: $(ARM_TENANT_ID)
     inputs:
       failOnStderr: true
-      filePath: ./build-agent.sh
+      script: packer build -only ${{ variables.buildName }}.azure-arm.image images/ubuntu/templates
+      targetType: inline
+  - task: Bash@3
+    displayName: 'List installed packages'
+    inputs:
+      script: cat ${{ variables.installedPackagesFilepath }}
+      targetType: inline
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: BUILD_NUMBER
-    readonly: true
-    value: $(Build.BuildNumber)
-  - name: IMAGE_NAME
-    readonly: true
-    value: ${{ parameters.imageName }}
-  - name: DESTINATION_IMAGE_VERSION
-    readonly: true
-    ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:
-      value: '0.0.$(Build.BuildId)'
-    ${{ else }}:
-      value: ${{ parameters.destinationImageVersion }}
-  - name: DESTINATION_OSDISK_SIZE
-    readonly: true
-    value: ${{ parameters.destinationOsDiskSize }}
-  - name: DOCKERHUB_IMAGES
-    readonly: true
-    ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
-      value: ${{ parameters.dockerImagesToCache }}
-  - name: SOURCE_IMAGE_VERSION
-    readonly: true
-    value: ${{ parameters.sourceImageVersion }}
