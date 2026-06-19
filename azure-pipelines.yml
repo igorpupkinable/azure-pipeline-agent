@@ -51,6 +51,7 @@ jobs:
     continueOnError: false
     displayName: 'Initialize Packer'
     inputs:
+      failOnStderr: true
       script: packer init .
       targetType: inline
   - task: DownloadSecureFile@1
