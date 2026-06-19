@@ -75,7 +75,7 @@ build {
     environment_vars = [
       "DOCKERHUB_IMAGES='${var.dockerhub_images}'",
       "DOCKERHUB_LOGIN=${var.dockerhub_login}",
-      "DOCKERHUB_PAT=${var.dockerhub_pat}",
+      "DOCKERHUB_PAT='${var.dockerhub_pat}'",
       "INSTALLER_SCRIPT_FOLDER=${local.installer_script_folder}"
     ]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
