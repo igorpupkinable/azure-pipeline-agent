@@ -38,6 +38,7 @@ parameters:
 trigger:
 - main
 variables:
+  buildName: ubuntu-22_04
   installedPackagesFilepath: /tmp/installed-packages.txt
 
 jobs:
@@ -84,7 +85,8 @@ jobs:
       PKR_VAR_tenant_id: $(ARM_TENANT_ID)
     inputs:
       failOnStderr: true
-      filePath: ./build-agent.sh
+      script: packer build -only ${{ variables.buildName }}.azure-arm.image images/ubuntu/templates
+      targetType: inline
   - task: Bash@3
     displayName: 'List installed packages'
     inputs:
@@ -93,6 +95,3 @@ jobs:
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: TEMPLATES_DIR
-    readonly: true
-    value: images/ubuntu/templates
