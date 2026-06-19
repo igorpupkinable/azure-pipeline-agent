@@ -37,6 +37,8 @@ parameters:
   type: string
 trigger:
 - main
+variables:
+  installedPackagesFilepath: /tmp/installed-packages.txt
 
 jobs:
 - job: build
@@ -74,7 +76,7 @@ jobs:
       PKR_VAR_dockerhub_pat: $(DOCKERHUB_PAT)
       PKR_VAR_gallery_image_name: ${{ parameters.imageName }}
       PKR_VAR_gallery_name: $(BUILD_GALLERY_NAME)
-      PKR_VAR_installed_packages_filepath: $(INSTALLED_PACKAGES_FILEPATH)
+      PKR_VAR_installed_packages_filepath: ${{ variables.installedPackagesFilepath }}
       PKR_VAR_os_disk_size_gb: ${{ parameters.destinationOsDiskSize }}
       PKR_VAR_resource_group_name: $(BUILD_RESOURCE_GROUP)
       PKR_VAR_source_image_version: ${{ parameters.sourceImageVersion }}
@@ -86,14 +88,11 @@ jobs:
   - task: Bash@3
     displayName: 'List installed packages'
     inputs:
-      script: cat /tmp/installed-packages.txt
+      script: cat ${{ variables.installedPackagesFilepath }}
       targetType: inline
   variables:
   - group: agent-builder-auth
   - group: agent-builder-build
-  - name: INSTALLED_PACKAGES_FILEPATH
-    readonly: true
-    value: /tmp/installed-packages.txt
   - name: TEMPLATES_DIR
     readonly: true
     value: images/ubuntu/templates
