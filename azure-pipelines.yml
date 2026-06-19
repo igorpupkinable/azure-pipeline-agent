@@ -65,7 +65,7 @@ jobs:
       PKR_VAR_client_cert_password: $(ARM_CLIENT_CERTIFICATE_PASSWORD)
       PKR_VAR_client_cert_path: $(agentBuilderCertificate.secureFilePath)
       PKR_VAR_client_id: $(ARM_CLIENT_ID)
-      PKR_VAR_destination_image_shallow_replication: $(PKR_VAR_destination_image_shallow_replication)
+      PKR_VAR_destination_image_shallow_replication: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), 'true', 'false') }}
       PKR_VAR_destination_image_storage: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), 'Standard_LRS', 'Standard_ZRS') }}
       PKR_VAR_destination_image_version: ${{ iif(eq(parameters.destinationImageVersion, 'BuildId'), '0.0.$(Build.BuildId)', parameters.destinationImageVersion) }}
       ${{ if ne(parameters.dockerImagesToCache, 'none') }}:
@@ -94,12 +94,6 @@ jobs:
   - name: INSTALLED_PACKAGES_FILEPATH
     readonly: true
     value: /tmp/installed-packages.txt
-  - name: PKR_VAR_destination_image_shallow_replication
-    readonly: true
-    ${{ if eq(parameters.destinationImageVersion, 'BuildId') }}:
-      value: true
-    ${{ else }}:
-      value: false
   - name: TEMPLATES_DIR
     readonly: true
     value: images/ubuntu/templates
