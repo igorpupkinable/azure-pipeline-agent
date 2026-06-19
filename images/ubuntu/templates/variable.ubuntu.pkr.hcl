@@ -40,7 +40,7 @@ variable "build_number" {
   type    = string
 }
 variable "dockerhub_images" {
-  default = null
+  default = ""
   type    = string
 }
 variable "dockerhub_login" {
